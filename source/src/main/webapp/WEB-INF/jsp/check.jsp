@@ -12,7 +12,7 @@
     <header class="header">
       <h1>ストレッシュ
       <a href="/webapp/HomeServlet">
-        <img src="/webapp/images/logo.png" alt="ストレッシュロゴ">
+        <img src="/webapp/images/logo.jpg" alt="ストレッシュロゴ">
       </a>
       </h1>
       <div id="menu">メニュー</div>
