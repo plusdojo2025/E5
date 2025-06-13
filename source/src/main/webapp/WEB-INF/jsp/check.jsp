@@ -23,7 +23,7 @@
     <header class="header">
       <h1>ストレッシュ
       <a href="/E5/HomeServlet">
-        <img src="/E5/images/logo.png" alt="ストレッシュロゴ">
+        <img src="/E5/images/logo_white2.png" alt="ストレッシュロゴ">
       </a>
       </h1>
       <div id="menu">メニュー</div>
@@ -212,6 +212,7 @@
             <div class="message"></div><br>
             
             <span class="question">質問8</span>
+            <span>～～～？</span><br>
             <label>
               <input type="radio" name="question8" value="5">
               <span>とてもそう思う</span>
