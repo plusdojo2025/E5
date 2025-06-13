@@ -4,24 +4,27 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ストレッシュ</title>
+  <link rel="stylesheet" href="/E5/css/common.css" />
+  <link rel="stylesheet" href="/E5/css/check.css" />
 </head>
 <body>
   <div>
   <!-- ヘッダー -->
     <header class="header">
       <h1>ストレッシュ
-      <a href="/webapp/HomeServlet">
-        <img src="/webapp/images/logo_1.png" alt="ストレッシュロゴ">
+      <a href="/E5/HomeServlet">
+        <!-- <img src="/E5/images/logo_1.png" alt="ストレッシュロゴ"> -->
       </a>
       </h1>
       <div id="menu">メニュー</div>
       <nav id="nav">
         <ul>
-          <li><a href="/webapp/HomeServlet">ホーム</a>
-          <li><a href="/webapp/CheckServlet">ストレスチェック</a>
-          <li><a href="/webapp/ResultsServlet">統計</a>
-          <li><a href="/webapp/LogoutServlet">ログアウト</a>
+          <li><a href="/E5/HomeServlet">ホーム</a>
+          <li><a href="/E5/CheckServlet">ストレスチェック</a>
+          <li><a href="/E5/ResultsServlet">統計</a>
+          <li><a href="/E5/LogoutServlet">ログアウト</a>
         </ul>
       </nav>
     </header>
@@ -31,7 +34,7 @@
       <div class="contents_center">
         <h2>今日のストレスチェック</h2>
         <div id="check_list">
-          <form action="/webapp/CheckServlet" method="POST">
+          <form action="/E5/CheckServlet" method="POST">
             <span class="question">質問1</span>
             <span>～～～？</span><br>
             <input type="radio" name="question1" value="5">
