@@ -82,7 +82,7 @@ public class CheckServlet extends HttpServlet {
 			stress_Factor = "生活的ストレス";
 		}
 		
-		// 登録処理を行う
+		// 登録処理を行う(登録日の登録はDBで自動で行わせるため、いらない)
 		Check_ResultsDao cDao = new Check_ResultsDao();
 		Check_Results resultData = new Check_Results(
 				userid, 0, stress_Score,
