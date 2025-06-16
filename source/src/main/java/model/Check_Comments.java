@@ -29,6 +29,12 @@ public class Check_Comments {
 		this.min_score = 0;
 		this.max_score = 0;
 	}
+	
+	public Check_Comments(String comments, String advice, String pet_check_comments) {
+		this.comments = comments;
+		this.advice = advice;
+		this.pet_check_comments = pet_check_comments;
+	}
 
 	public int getComments_advice_id() {
 		return comments_advice_id;
