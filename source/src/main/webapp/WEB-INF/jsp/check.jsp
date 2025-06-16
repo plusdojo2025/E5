@@ -307,6 +307,16 @@
             <hr>
             <input type="submit" name="submit" value="登録">
           </form>
+          
+          <div id="confirmModal" class="modal">
+  　         <div class="modal-content">
+              <p id="text_top">本日のチェック内容を</p>
+              <p id="text_bottom">登録してもよろしいですか？</p>
+              <button id="confirmYes">はい</button>
+              <button id="confirmNo">いいえ</button>
+            </div>
+          </div>
+          
         </div>
       </div>
     </main>
@@ -319,5 +329,6 @@
     </footer>
     <!-- フッター（ここまで） -->
   </div>
+  <script src="/E5/js/check.js"></script>
 </body>
 </html>
