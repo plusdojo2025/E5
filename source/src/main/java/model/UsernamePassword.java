@@ -4,31 +4,31 @@ import java.io.Serializable;
 
 public class UsernamePassword implements Serializable{
 	private String username; // ID
-	private String pw; // パスワード
+	private String password; // パスワード
 
-	public String getId() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setId(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
 	public String getPw() {
-		return pw;
+		return password;
 	}
 
 	public void setPw(String pw) {
-		this.pw = pw;
+		this.password = pw;
 	}
 
-	public  UsernamePassword(String username, String pw) {
+	public  UsernamePassword(String username, String password) {
 		this.username = username;
-		this.pw = pw;
+		this.password = password;
 	}
 
 	public  UsernamePassword() {
 		this.username = "";
-		this.pw = "";
+		this.password = "";
 	}
 }
