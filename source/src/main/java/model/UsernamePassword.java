@@ -22,9 +22,8 @@ public class UsernamePassword implements Serializable{
 		this.password = password;
 	}
 
-	public  UsernamePassword(String username, String password) {
+	public  UsernamePassword(String username) {
 		this.username = username;
-		this.password = password;
 	}
 
 	public  UsernamePassword() {
