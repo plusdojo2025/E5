@@ -98,3 +98,45 @@ hr {
   margin-top: 3px;
   margin-bottom: 25px;
 }
+
+/* エラーメッセージ */
+#q1_message {
+  font-size: 125%;
+  color: red;
+}
+#q2_message {
+  font-size: 125%;
+  color: red;
+}
+#q3_message {
+  font-size: 125%;
+  color: red;
+}
+#q4_message {
+  font-size: 125%;
+  color: red;
+}
+#q5_message {
+  font-size: 125%;
+  color: red;
+}
+#q6_message {
+  font-size: 125%;
+  color: red;
+}
+#q7_message {
+  font-size: 125%;
+  color: red;
+}
+#q8_message {
+  font-size: 125%;
+  color: red;
+}
+#q9_message {
+  font-size: 125%;
+  color: red;
+}
+#q10_message {
+  font-size: 125%;
+  color: red;
+}

@@ -68,7 +68,7 @@
               <input type="radio" name="question1" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q1_message"></div><br>
             
             <div class="question-block">
               <span class="question">質問2</span>
@@ -94,7 +94,7 @@
               <input type="radio" name="question2" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q2_message"></div><br>
             
             <div class="question-block">
               <span class="question">質問3</span>
@@ -120,7 +120,7 @@
               <input type="radio" name="question3" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q3_message"></div><br>
             
             <div class="question-block">
               <span class="question">質問4</span>
@@ -146,7 +146,7 @@
               <input type="radio" name="question4" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q4_message"></div><br>
             
             <div class="question-block">
              <span class="question">質問5</span>
@@ -172,7 +172,7 @@
               <input type="radio" name="question5" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q5_message"></div><br>
             
             <div class="question-block">
               <span class="question">質問6</span>
@@ -198,7 +198,7 @@
               <input type="radio" name="question6" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q6_message"></div><br>
             
             <div class="question-block">
               <span class="question">質問7</span>
@@ -224,7 +224,7 @@
               <input type="radio" name="question7" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q7_message"></div><br>
             
             <div class="question-block">
               <span class="question">質問8</span>
@@ -250,7 +250,7 @@
               <input type="radio" name="question8" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q8_message"></div><br>
             
             <div class="question-block">
               <span class="question">質問9</span>
@@ -276,7 +276,7 @@
               <input type="radio" name="question9" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q9_message"></div><br>
             
             <div class="question-block">
               <span class="question">質問10</span>
@@ -302,7 +302,7 @@
               <input type="radio" name="question10" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q10_message"></div><br>
             
             <hr>
             <input type="submit" name="submit" value="登録">
@@ -330,5 +330,8 @@
     <!-- フッター（ここまで） -->
   </div>
   <script src="/E5/js/check.js"></script>
+  <script>
+  
+  </script>
 </body>
 </html>

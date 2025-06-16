@@ -1,19 +1,44 @@
-/* ダイアログ */
+/* ダイアログ・エラーメッセージ */
 const form= document.querySelector("form");
 const modal = document.getElementById("confirmModal");
 const yesBtn = document.getElementById("confirmYes");
 const noBtn = document.getElementById("confirmNo");
    
 form.addEventListener("submit", function(e) {
-  e.preventDefault();
-  modal.style.display = "block";
+  e.preventDefault();	// 一旦送信を止める
+  
+  let isValid = true; // 入力に不備があるかどうかのフラグ
+
+  const questions = 10;
+  for (let i = 1; i <= questions; i++) {
+    const input = document.querySelector(`input[name="question${i}"]:checked`);
+    const messageElem = document.getElementById(`q${i}_message`);
+    messageElem.textContent = ""; // メッセージ初期化
+    if (!input) {
+      messageElem.textContent = "入力をお願いします";
+      isValid = false;
+    }
+  }
+  
+  if(!isValid) {
+	window.scroll({
+      top: 0,	//ページから0pxの位置へ
+      behavior: "smooth",	//スクロールして戻る
+    });
+  }
+  
+  // 入力がすべて揃っている場合のみモーダル表示
+  if (isValid) {
+    modal.style.display = "block";
+  }
 });
    
 yesBtn.addEventListener("click", function() {
   modal.style.display = "none";
-  HTMLFormElement.prototype.submit.call(form);
+  HTMLFormElement.prototype.submit.call(form);	// ユーザーが「はい」を押したら送信
 });
     
 noBtn.addEventListener("click", function() {
  modal.style.display = "none";
+ // 何もしない（フォーム送信されない）
 });
