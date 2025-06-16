@@ -14,12 +14,12 @@ public class UsernamePassword implements Serializable{
 		this.username = username;
 	}
 
-	public String getPw() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPw(String pw) {
-		this.password = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public  UsernamePassword(String username, String password) {
