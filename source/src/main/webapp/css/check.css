@@ -1,1 +1,66 @@
 @charset "UTF-8";
+
+.contents_center {
+  text-align: center;
+}
+
+h2 {
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 10px;
+  border: 1px solid #333333;
+  border-radius: 10px;
+  background-color: #9fdfec;
+  width: 500px;
+}
+
+#check_list {
+ padding: 10px;
+ padding-top: 25px;
+ margin: auto;
+ margin-bottom: 10px;
+ border: 1px solid #333333;
+ border-radius: 50px;
+ width: 600px;
+}
+
+.question {
+  background-color: #9fdfec;
+}
+
+span {
+  font-size: 125%;
+}
+
+.question-block {
+  text-align: left;
+  margin-left: 50px; /* 必要に応じて調整 */
+  margin-bottom: 10px;
+}
+
+.q_text {
+  margin-left: 13px;
+}
+
+.choose {
+  font-size: 50%;
+}
+
+.radio-item {
+  display: inline-flex;
+  flex-direction: column; /* ←テキストを下に */
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 165%;
+}
+
+input[type="radio"] {
+  /* accent-color: #f00; */
+  transform: scale(1.5);
+  margin-bottom: 8px;
+}
+
+hr {
+  width: 90%;
+}

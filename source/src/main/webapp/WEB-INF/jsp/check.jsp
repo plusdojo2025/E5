@@ -16,58 +16,6 @@
       width: 100px;
     }
     
-    .contents_center {
-      text-align: center;
-    }
-    h2 {
-      padding: 10px;
-      margin: auto;
-      margin-bottom: 10px;
-      border: 1px solid #333333;
-      border-radius: 10px;
-      background-color: #9fdfec;
-      width: 500px;
-    }
-    #check_list {
-      padding: 10px;
-      padding-top: 25px;
-      margin: auto;
-      margin-bottom: 10px;
-      border: 1px solid #333333;
-      border-radius: 50px;
-      width: 600px;
-    }
-    .question {
-      background-color: #9fdfec;
-    }
-    span {
-      font-size: 125%;
-    }
-    .question-block {
-      text-align: left;
-      margin-left: 50px; /* 必要に応じて調整 */
-      margin-bottom: 10px;
-    }
-    .choose {
-      font-size: 50%;
-    }
-    .radio-item {
-      display: inline-flex;
-      flex-direction: column; /* ←テキストを下に */
-      align-items: center;
-      margin: 10px;
-      cursor: pointer;
-      font-size: 165%;
-    }
-    input[type="radio"] {
-      /* accent-color: #f00; */
-      transform: scale(1.5);
-      margin-bottom: 8px;
-    }
-    hr {
-      width: 90%;
-    }
-    
   </style>
 </head>
 <body>
@@ -98,7 +46,7 @@
           <form action="/E5/CheckServlet" method="POST">
             <div class="question-block">
               <span class="question">質問1</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question1" value="5">
@@ -124,7 +72,7 @@
             
             <div class="question-block">
               <span class="question">質問2</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question2" value="5">
@@ -150,7 +98,7 @@
             
             <div class="question-block">
               <span class="question">質問3</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question3" value="5">
@@ -176,7 +124,7 @@
             
             <div class="question-block">
               <span class="question">質問4</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question4" value="5">
@@ -202,7 +150,7 @@
             
             <div class="question-block">
              <span class="question">質問5</span>
-             <span>～～～？</span><br>
+             <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question5" value="5">
@@ -228,7 +176,7 @@
             
             <div class="question-block">
               <span class="question">質問6</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question6" value="5">
@@ -254,7 +202,7 @@
             
             <div class="question-block">
               <span class="question">質問7</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question7" value="5">
@@ -280,7 +228,7 @@
             
             <div class="question-block">
               <span class="question">質問8</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question8" value="5">
@@ -306,7 +254,7 @@
             
             <div class="question-block">
               <span class="question">質問9</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question9" value="5">
@@ -332,7 +280,7 @@
             
             <div class="question-block">
               <span class="question">質問10</span>
-              <span>～～～？</span><br>
+              <span class="q_text">～～～？</span><br>
             </div>
             <label class="radio-item">
               <input type="radio" name="question10" value="5">
