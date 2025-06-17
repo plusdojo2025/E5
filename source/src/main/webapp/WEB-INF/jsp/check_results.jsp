@@ -13,7 +13,7 @@
 <body>
 	<main>
 	<h2>ストレスチェック結果</h2>
-<form action="/E5/ResultServlet" method="post">
+<form action="/E5/ResultServlet" method="get">
 	<div class="tab-container">
 		○○の部分はservletからデータを取ってくる
         <input type="radio" name="tabs" id="tab1" class="tab-input" checked>
@@ -27,23 +27,18 @@
 	            <label for="tab3" class="tab-label label3">月</label>
 	        </div>
             <div class="tab-group_right">
-            <label>期間変更</label>
-           		<input type="date" name="calender" label="calender">
+           		<input type="date" name="day" value="期間変更">
+           		<input type="submit" class="period_change" name="submit" value="期間変更">
            	</div>
         </div>
 		<!-- 選択された期間の内容を個別に表示する。 -->
         <div class="tab-content content1">
-        
-            	<input type="hidden" name="number" value="${e.number}" />
-            	<input type="hidden" name="name" value="${e.name}" />
-            	<input type="hidden" name="company" value="${e.company}" />
-                <input type="hidden" name="department" value="${e.department}" />
-                    <h3 class="card_head"><span>${e.company}</span></h3>
-                   	<p><span class="cardlabel">名前：</span><span class="cardvalue">${e.name}</span></p>
-                   	<p><span class="cardlabel">部署：</span><span class="cardvalue">${e.department}</span></p>
-                   	<p><span class="cardlabel">住所：</span><span class="cardvalue">${e.address}</span></p>
-            
-        	<h1 class="check_results">ストレスチェック結果 ○○点</h1>
+        <c:choose>
+          <c:when test="${noData}">
+		  <p>チェックは行いませんでした。</p>
+		  </c:when>
+		  <c:otherwise>
+        	<h1 class="check_results">ストレスチェック結果 ${onedayresult.stress_score}点</h1>
         	<div class="radar-container">
 				<div class="label-column">
 	        	    <label>kkk</label>
@@ -93,12 +88,35 @@
 				<p>アドバイス</p>
 				<p>○○</p>
 			</div>
-			</c:forEach>
 			<a href="/E5/HomeServlet">ホーム</a>
+			</c:otherwise>
+			</c:choose>
         </div>
 		<!-- 週の結果 -->
         <div class="tab-content content2">
-            <p>週の結果をここに表示します。</p>
+            <h1 class="check_results">${weekresult.weekfirst}～${weekresult.weekfinal}の記録</h1>
+            <dl class="bar-chart-1">
+			    <div>
+			        <dt>項目1</dt>
+			        <dd style="width: 50%">50%</dd>
+			    </div>
+			    <div>
+			        <dt>項目2</dt>
+			        <dd style="width: 60%">60%</dd>
+			    </div>
+			    <div>
+			        <dt>項目3</dt>
+			        <dd style="width: 70%">70%</dd>
+			    </div>
+			</dl>
+            
+            <div class="week_comments">
+				<p>週の傾向</p>
+				<p>○○</p>
+				<p>アドバイス</p>
+				<p>○○</p>
+			</div>
+			<a href="/E5/HomeServlet">ホーム</a>
         </div>
 		<!-- 月の結果 -->
         <div class="tab-content content3">

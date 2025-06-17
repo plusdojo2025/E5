@@ -148,3 +148,37 @@ h2 {
 .check_advice {
 	
 }
+
+.bar-chart-1 {
+    font-size: .9em;
+}
+
+.bar-chart-1 > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.bar-chart-1 dt {
+    width: 55px;
+    min-width: 55px;
+}
+
+.bar-chart-1 dd {
+    margin: 0;
+    padding-right: 15px;
+    border-radius: 3px;
+    background-color: #2589d0;
+    color: #fff;
+    font-weight: 600;
+    line-height: 45px;
+    text-align: right;
+    white-space: nowrap;
+    animation: anima-bar-chart-1 1.2s ease;
+}
+
+@keyframes anima-bar-chart-1 {
+    from {
+        width: 0;
+    }
+}
