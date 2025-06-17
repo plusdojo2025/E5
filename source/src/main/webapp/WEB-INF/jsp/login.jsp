@@ -19,7 +19,7 @@
 			<div class="login-item">
 				<label for="username" class="login-label">ユーザーネーム
 					<button class="tooltip">
-						<span class="tooltip-text">半角英字5～30文字</span>
+						<span class="tooltip-text">半角英数字5～30文字</span>
 					i</button>
 				</label><br>
 				<input type="text" name="username">

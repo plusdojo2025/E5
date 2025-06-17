@@ -36,7 +36,7 @@ document.getElementById("registerForm").addEventListener("submit", function(even
       messages.push("パスワードは英数字混合で8文字以上16文字以内で入力してください。");
     }
     
-    // ユーザーネームの半角英数字（5文字以上16文字以内）
+    // ユーザーネームの半角英数字（5文字以上30文字以内）
     const usernameRegex = /^[a-zA-Z0-9\d]{5,30}$/;
     if (username !== "" && !usernameRegex.test(username)) {
       messages.push("ユーザーネームは半角英数字5～30文字で入力してください。");

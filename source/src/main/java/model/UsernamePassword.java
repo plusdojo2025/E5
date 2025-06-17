@@ -3,9 +3,25 @@ package model;
 import java.io.Serializable;
 
 public class UsernamePassword implements Serializable{
-	private String username; // ID
+	private int id; //ID
+	private String username; // ユーザーネーム
 	private String password; // パスワード
+	
+	public  UsernamePassword(int id,String username ,String password) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
 
+	public  UsernamePassword() {
+		this.id = 0;
+		this.username = "";
+		this.password = "";
+	}
+	
+	public int getId() {
+		return id;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -22,14 +38,10 @@ public class UsernamePassword implements Serializable{
 		this.password = password;
 	}
 
+
 	public  UsernamePassword(String username,String password) {
 		this.username = username;
 		this.password = password;
 	
-	}
-
-	public  UsernamePassword() {
-		this.username = "";
-		this.password = "";
 	}
 }

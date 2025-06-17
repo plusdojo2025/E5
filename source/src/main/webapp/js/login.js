@@ -21,7 +21,7 @@ document.getElementById('login-form').onsubmit = function(event) {
 			event.preventDefault();
 			return false;
 		}
-		if (!/^[a-zA-Z]{5,}$/.test(username)) {
+		if (!/^[a-zA-Z0-9]{5,30}$/.test(username)) {
 			errorEl.textContent = '※ユーザーネームは5文字以上の半角英字で入力してください！';
 			event.preventDefault();
 			return false;
