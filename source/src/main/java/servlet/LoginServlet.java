@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", new Users(username));
 			// ホームサーブレットにリダイレクトする
-			response.sendRedirect("/HomeServlet");
+			response.sendRedirect("/E5/HomeServlet");
 		} else {// ログイン失敗
 			// エラーメッセージ付きでlogin.jspへ戻す
 			request.setAttribute("errorMessage", "ユーザーネームもしくはパスワードが間違っています。");
