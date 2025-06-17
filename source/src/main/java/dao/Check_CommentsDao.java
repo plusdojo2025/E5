@@ -5,24 +5,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.Check_Comments;
 
 public class Check_CommentsDao {
 	
-	// 引数card指定された項目で検索して、取得されたデータのリストを返す(最大、最小、傾向で調べたレコードを返す）
-	public List<Check_Comments> select(Check_Comments card) {
+	// 傾向（例：精神的ストレス）とスコア（例：67）からコメント1件取得(最大、最小、傾向で調べたレコードを返す）
+	public Check_Comments selectByScoreAndTrend(int score, String trend) {
 		Connection conn = null;
-		List<Check_Comments> cardList = new ArrayList<Check_Comments>();
+		Check_Comments result = null;
 
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/E5?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -33,11 +31,9 @@ public class Check_CommentsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			// スコア（min/maxどちらもscoreとして使う）、傾向で絞り込み
-			int score = card.getMin_score();  // min_scoreにスコア（例: 67）を格納していると仮定
 			pStmt.setInt(1, score);
 			pStmt.setInt(2, score);
-			pStmt.setString(3, card.getTrends());
+			pStmt.setString(3, trend);
 			
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -48,14 +44,13 @@ public class Check_CommentsDao {
 							   rs.getString("comments"),
 							   rs.getString("advice"),
 							   rs.getString("pet_check_comments"));
-				cardList.add(c);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			cardList = null;
+			//cardList = null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			cardList = null;
+			//cardList = null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -63,13 +58,14 @@ public class Check_CommentsDao {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					cardList = null;
+					//cardList = null;
 				}
 			}
 		}
 
 		// 結果を返す
-		return cardList;
+		//return cardList;
+		return result;
 	}
 
 }
