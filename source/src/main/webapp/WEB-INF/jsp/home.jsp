@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="home.js"></script>
+<script src="/E5/js/home.js"></script>
 <link rel="stylesheet" href="/E5/css/home.css">
+<link rel="stylesheet" href="/E5/css/common.css">
 </head>
 <body>
     <!-- ヘッダー -->
