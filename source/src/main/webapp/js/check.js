@@ -63,3 +63,19 @@ window.addEventListener("scroll", () => {
 		gotop.style.display = "none";
 	}
 });
+
+// IntersectionObserverでfooterとの重なりを検知
+const observer = new IntersectionObserver(entries => {
+	entries.forEach(entry => {
+		if (entry.isIntersecting) {
+			// フッターが見えたらボタンを上に移動
+			gotop.style.bottom = "100px"; // ←フッターの高さ＋余白分
+		} else {
+			// 見えていなければ通常位置に戻す
+			gotop.style.bottom = "20px";
+		}
+	});
+});
+
+// フッターを監視対象にする
+observer.observe(footer);
