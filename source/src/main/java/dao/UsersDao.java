@@ -15,54 +15,49 @@ public class UsersDao {
 	// 引数で指定されたログイン成功ならtrueを返す
 	public boolean isLoginOK(UsernamePassword usernamepassword) {
 		Connection conn = null;
-		boolean loginResult = false;
+	    boolean loginResult = false;
 
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("com.mysql.cj.jdbc.Driver");
+	    try {
+	        // JDBCドライバを読み込む
+	        Class.forName("com.mysql.cj.jdbc.Driver");
 
-			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e5?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+	        // データベースに接続する
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e5?"
+	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	                "root", "password");
 
-			// SELECT文を準備する
-			String sql = "SELECT count(*) FROM users WHERE username=? AND password=?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, usernamepassword.getUsername());
-			
-			// パスワードをハッシュ化して比較
-			String hashedPassword = hashSHA256(usernamepassword.getPassword());
-			pStmt.setString(2, hashedPassword);
+	        // ユーザー名でパスワードのハッシュ値を取得
+	        String sql = "SELECT password FROM users WHERE username = ?";
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setString(1, usernamepassword.getUsername());
+	        ResultSet rs = pStmt.executeQuery();
 
-			// SELECT文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
+	        // 結果が存在する場合は、パスワードを照合
+	        if (rs.next()) {
+	            String storedHashedPassword = rs.getString("password");
 
-			// ユーザーIDとパスワードが一致するユーザーがいれば結果をtrueにする
-			rs.next();
-			if (rs.getInt("count(*)") == 1) {
-				loginResult = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			loginResult = false;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			loginResult = false;
-		} finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					loginResult = false;
-				}
-			}
-		}
+	            // 入力されたパスワードをSHA-256でハッシュ化
+	            String inputHashedPassword = hashSHA256(usernamepassword.getPassword());
 
-		// 結果を返す
-		return loginResult;
+	            // ハッシュ値を比較
+	            if (storedHashedPassword.equals(inputHashedPassword)) {
+	                loginResult = true;
+	            }
+	        }
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        // データベースを切断
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return loginResult;
 	}
 	
 	//ユーザー登録
