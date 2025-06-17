@@ -22,10 +22,27 @@ public class Check_Results implements Serializable{
     private String comments;
     private String advice;
     
-    public Check_Results(int check_results_id, int stress_score, int question1, int question2,
-    		int question3, int question4, int question5, int question6, int question7, int question8,
-    		int question9, int question10, String comments, String advice) {
-    	this.check_results_id = check_results_id;
+
+    public Check_Results(int userid, int check_results_id, int stress_score, int question1, int question2,
+			int question3, int question4, int question5, int question6, int question7, int question8, int question9,
+			int question10, String stress_factor) {
+		this.userid = userid;
+		this.check_results_id = check_results_id;
+		this.stress_score = stress_score;
+		this.question1 = question1;
+		this.question2 = question2;
+		this.question3 = question3;
+		this.question4 = question4;
+		this.question5 = question5;
+		this.question6 = question6;
+		this.question7 = question7;
+		this.question8 = question8;
+		this.question9 = question9;
+		this.question10 = question10;
+		this.stress_factor = stress_factor;
+	}
+
+	public Check_Results(int stress_score, int question1) {
     	this.stress_score = stress_score;
     	this.question1 = question1;
     	this.question2 = question2;

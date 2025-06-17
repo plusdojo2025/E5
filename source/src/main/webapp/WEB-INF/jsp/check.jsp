@@ -15,32 +15,6 @@
     img {
       width: 100px;
     }
-    .choose {
-      font-size: 50%;
-    }
-    .radio-item {
-      display: inline-flex;
-      flex-direction: column; /* ←テキストを下に */
-      align-items: center;
-      margin: 10px;
-      cursor: pointer;
-    }
-    .contents_center {
-      text-align: center;
-    }
-    h2 {
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #333333;
-      border-radius: 10px;
-      background-color: #9fdfec;
-    }
-    #check_list {
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #333333;
-      border-radius: 10px;
-    }
     
   </style>
 </head>
@@ -50,7 +24,7 @@
     <header class="header">
       <h1>ストレッシュ
       <a href="/E5/HomeServlet">
-        <img src="/E5/images/logo_white2.png" alt="ストレッシュロゴ">
+        <img src="/E5/images/logo_w.png" alt="ストレッシュロゴ">
       </a>
       </h1>
       <div id="menu">メニュー</div>
@@ -70,8 +44,10 @@
         <h2>今日のストレスチェック</h2>
         <div id="check_list">
           <form action="/E5/CheckServlet" method="POST">
-            <span class="question">質問1</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問1</span>
+              <span class="q_text">最近、些細なことでイライラしたり、怒りっぽくなっていると感じますか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question1" value="5">
               <span class="choose">とてもそう思う</span>
@@ -92,10 +68,12 @@
               <input type="radio" name="question1" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q1_message"></div><br>
             
-            <span class="question">質問2</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問2</span>
+              <span class="q_text">気分が落ち込んだり、不安な気持ちが長く続くことがありますか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question2" value="5">
               <span class="choose">とてもそう思う</span>
@@ -116,10 +94,12 @@
               <input type="radio" name="question2" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q2_message"></div><br>
             
-            <span class="question">質問3</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問3</span>
+              <span class="q_text">「自分には価値がない」と感じる瞬間が増えましたか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question3" value="5">
               <span class="choose">とてもそう思う</span>
@@ -140,10 +120,12 @@
               <input type="radio" name="question3" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q3_message"></div><br>
             
-            <span class="question">質問4</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問4</span>
+              <span class="q_text">寝つきが悪かったり、夜中に何度も目が覚めることが多いですか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question4" value="5">
               <span class="choose">とてもそう思う</span>
@@ -164,10 +146,12 @@
               <input type="radio" name="question4" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q4_message"></div><br>
             
-            <span class="question">質問5</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+             <span class="question">質問5</span>
+             <span class="q_text">理由もなく体がだるく感じたり、疲れが取れないと感じますか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question5" value="5">
               <span class="choose">とてもそう思う</span>
@@ -188,10 +172,12 @@
               <input type="radio" name="question5" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q5_message"></div><br>
             
-            <span class="question">質問6</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問6</span>
+              <span class="q_text">頭痛や腹痛などの身体的な不調が頻繁にありますか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question6" value="5">
               <span class="choose">とてもそう思う</span>
@@ -212,10 +198,12 @@
               <input type="radio" name="question6" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q6_message"></div><br>
             
-            <span class="question">質問7</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問7</span>
+              <span class="q_text">職場や家庭で、人間関係のストレスを感じることが多いですか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question7" value="5">
               <span class="choose">とてもそう思う</span>
@@ -236,10 +224,12 @@
               <input type="radio" name="question7" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q7_message"></div><br>
             
-            <span class="question">質問8</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問8</span>
+              <span class="q_text">家事や仕事など、やるべきことに追われて休む時間がありませんか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question8" value="5">
               <span class="choose">とてもそう思う</span>
@@ -260,10 +250,12 @@
               <input type="radio" name="question8" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q8_message"></div><br>
             
-            <span class="question">質問9</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問9</span>
+              <span class="q_text">お金や将来の生活について不安を感じることがありますか？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question9" value="5">
               <span class="choose">とてもそう思う</span>
@@ -284,35 +276,47 @@
               <input type="radio" name="question9" value="1">
               <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q9_message"></div><br>
             
-            <span class="question">質問10</span>
-            <span>～～～？</span><br>
+            <div class="question-block">
+              <span class="question">質問10</span>
+              <span class="q_text">～～～？</span><br>
+            </div>
             <label class="radio-item">
               <input type="radio" name="question10" value="5">
-              <span>とてもそう思う</span>
+              <span class="choose">とてもそう思う</span>
             </label>
             <label class="radio-item">
               <input type="radio" name="question10" value="4">
-              <span>そう思う</span>
+              <span class="choose">そう思う</span>
             </label>
             <label class="radio-item">
               <input type="radio" name="question10" value="3">
-              <span>どちらでもない</span>
+              <span class="choose">どちらでもない</span>
             </label>
             <label class="radio-item">
               <input type="radio" name="question10" value="2">
-              <span>あまりそう思わない</span>
+              <span class="choose">あまりそう思わない</span>
             </label>
             <label class="radio-item">
               <input type="radio" name="question10" value="1">
-              <span>思わない</span>
+              <span class="choose">思わない</span>
             </label>
-            <div class="message"></div><br>
+            <div id="q10_message"></div><br>
             
             <hr>
             <input type="submit" name="submit" value="登録">
           </form>
+          
+          <div id="confirmModal" class="modal">
+  　         <div class="modal-content">
+              <p id="text_top">本日のチェック内容を</p>
+              <p id="text_bottom">登録してもよろしいですか？</p>
+              <button id="confirmYes">はい</button>
+              <button id="confirmNo">いいえ</button>
+            </div>
+          </div>
+          
         </div>
       </div>
     </main>
@@ -325,5 +329,9 @@
     </footer>
     <!-- フッター（ここまで） -->
   </div>
+  <script src="/E5/js/check.js"></script>
+  <script>
+  
+  </script>
 </body>
 </html>

@@ -1,1 +1,142 @@
 @charset "UTF-8";
+
+.contents_center {
+  text-align: center;
+}
+
+h2 {
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 10px;
+  border: 1px solid #333333;
+  border-radius: 10px;
+  background-color: #9fdfec;
+  width: 500px;
+}
+
+/* チェック部分　*/
+#check_list {
+ padding: 10px;
+ padding-top: 25px;
+ margin: auto;
+ margin-bottom: 10px;
+ border: 1px solid #333333;
+ border-radius: 50px;
+ width: 800px;
+}
+
+.question {
+  background-color: #9fdfec;
+}
+
+span {
+  font-size: 125%;
+}
+
+.question-block {
+  text-align: left;
+  margin-left: 50px; /* 必要に応じて調整 */
+  margin-bottom: 10px;
+}
+
+.q_text {
+  margin-left: 13px;
+}
+
+.choose {
+  font-size: 50%;
+}
+
+.radio-item {
+  display: inline-flex;
+  flex-direction: column; /* ←テキストを下に */
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 165%;
+}
+
+input[type="radio"] {
+  /* accent-color: #f00; */
+  transform: scale(1.5);
+  margin-bottom: 8px;
+}
+
+hr {
+  width: 90%;
+}
+
+/* ダイアログの部分 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 1em;
+  margin: 0 auto 15% auto;
+  width: 300px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.modal-content button {
+  margin: 0.5em;
+  margin-right: 45px;
+  margin-left: 45px;
+}
+#text_top{
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+#text_bottom{
+  margin-top: 3px;
+  margin-bottom: 25px;
+}
+
+/* エラーメッセージ */
+#q1_message {
+  font-size: 125%;
+  color: red;
+}
+#q2_message {
+  font-size: 125%;
+  color: red;
+}
+#q3_message {
+  font-size: 125%;
+  color: red;
+}
+#q4_message {
+  font-size: 125%;
+  color: red;
+}
+#q5_message {
+  font-size: 125%;
+  color: red;
+}
+#q6_message {
+  font-size: 125%;
+  color: red;
+}
+#q7_message {
+  font-size: 125%;
+  color: red;
+}
+#q8_message {
+  font-size: 125%;
+  color: red;
+}
+#q9_message {
+  font-size: 125%;
+  color: red;
+}
+#q10_message {
+  font-size: 125%;
+  color: red;
+}
