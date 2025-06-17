@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -54,12 +52,9 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		// パスワードをSHA-256でハッシュ化
-		String hashedPassword = hashPassword(password);
-		
 		// ログイン処理を行う		
 		UsersDao uDao = new UsersDao();
-		if (uDao.isLoginOK(new UsernamePassword(username, hashedPassword))) {// ログイン成功
+		if (uDao.isLoginOK(new UsernamePassword(username, password))) {// ログイン成功
 			// セッションスコープにusernameを格納する
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", new Users(username));
@@ -73,19 +68,5 @@ public class LoginServlet extends HttpServlet {
 		}
 	}
 	
-	// SHA-256 ハッシュ関数（ユーティリティメソッド）
-	private String hashPassword(String password) {
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-			byte[] hashedBytes = md.digest(password.getBytes("UTF-8"));
-			StringBuilder sb = new StringBuilder();
-			for (byte b : hashedBytes) {
-				sb.append(String.format("%02x", b));
-			}
-			return sb.toString();
-		} catch (NoSuchAlgorithmException | IOException e) {
-			throw new RuntimeException("ハッシュ化エラー", e);
-			}
-	}
-
+	
 }
