@@ -25,19 +25,6 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		//test
-		// クエリパラメータによって重複チェックとして処理する
-				String checkUsername = request.getParameter("check");
-				if (checkUsername != null) {
-					// Ajaxによる重複チェック処理
-					UsersDao dao = new UsersDao();
-					boolean exists = dao.isUsernameExists(checkUsername);
-
-					response.setContentType("application/json; charset=UTF-8");
-					response.getWriter().write("{\"exists\": " + exists + "}");
-					return;
-				}
 
 		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");

@@ -1,1 +1,19 @@
 @charset "UTF-8";
+
+body {
+    margin: 0 0 0 0; /* ページ全体の四隅のスペースをなくす */
+}
+main {
+	background: rgba(231, 208, 169, 0.1);
+	padding: 60px;
+}
+
+.header {
+    height: 100px;
+    background-color: #f2acac;
+}
+.footer {
+	padding: 10px;
+    background-color: #9fdfec;
+    text-align: center;
+}
