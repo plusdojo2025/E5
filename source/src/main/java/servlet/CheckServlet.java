@@ -12,11 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Check_ResultsDao;
 import model.Check_Results;
 
-//import dao.Check_CommentsDao;
-//import dao.Check_ResultsDao;
-//import model.Check_Comments;
-//import model.Check_Results;
-
 
 /**
  * Servlet implementation class CheckServlet
@@ -99,8 +94,15 @@ public class CheckServlet extends HttpServlet {
 				answers[5], answers[6], answers[7], answers[8], answers[9],
 				stress_Factor
 		);
-		crDao.check_insert(resultData); // 成功・失敗に関係なく進む
-		
+//		crDao.check_insert(resultData); // 成功・失敗に関係なく進む
+		if (crDao.check_insert(resultData)) {
+			//ストレスチェック結果ページ用Servletにリダイレクトする
+			response.sendRedirect("/E5/CheckResultsServlet");
+		} else {
+			//ストレスチェックページ用Servletにリダイレクト(戻る)
+			response.sendRedirect("/E5/CheckServlet");
+
+		}
 		
 //		/*
 //		// ストレススコアと傾向（trend）をもとにコメント取得（検索処理を行う）
