@@ -40,7 +40,7 @@
 							 } %>
 			</span><br>
 			<button type="submit" class="loginButton login-item">ログイン</button><br>
-			<a href="/RegiserServlet">アカウントがない方はこちら</a>
+			<a href="/E5/RegisterServlet">アカウントがない方はこちら</a>
 		</form>
 	</div>
 	</main>
