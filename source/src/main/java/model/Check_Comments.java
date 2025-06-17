@@ -9,6 +9,7 @@ public class Check_Comments {
 	private int min_score;				//最小
 	private int max_score;				//最大
 	
+	// コンストラクタ（引数全部）
 	public Check_Comments(int comments_advice_id, String comments, String advice, String pet_check_comments,
 			String trends, int min_score, int max_score) {
 		this.comments_advice_id = comments_advice_id;
@@ -20,6 +21,7 @@ public class Check_Comments {
 		this.max_score = max_score;
 	}
 	
+	// コンストラクタ（引数なし）
 	public Check_Comments() {
 		this.comments_advice_id = 0;
 		this.comments = "";
@@ -30,6 +32,7 @@ public class Check_Comments {
 		this.max_score = 0;
 	}
 	
+	// コンストラクタ（ストレスチェック結果表示用）
 	public Check_Comments(String comments, String advice, String pet_check_comments) {
 		this.comments = comments;
 		this.advice = advice;

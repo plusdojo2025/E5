@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  * Servlet implementation class CheckServlet
  */
@@ -83,18 +84,39 @@ public class CheckServlet extends HttpServlet {
 		}
 		
 		// 登録処理を行う(登録日の登録はDBで自動で行わせるため、いらない)
-		Check_ResultsDao cDao = new Check_ResultsDao();
+		Check_ResultsDao crDao = new Check_ResultsDao();
 		Check_Results resultData = new Check_Results(
 				userid, 0, stress_Score,
 				answers[0], answers[1], answers[2], answers[3], answers[4],
 				answers[5], answers[6], answers[7], answers[8], answers[9],
 				stress_Factor
 		);
-		cDao.insert(resultData); // 成功・失敗に関係なく進む
-		*/
+		crDao.insert(resultData); // 成功・失敗に関係なく進む
 		
-		//ストレスチェック結果ページ用Servletにリダイレクトする
-		response.sendRedirect("/webapp/CheckResultsServlet");
+		// ストレススコアと傾向（trend）をもとにコメント取得（検索処理を行う）
+		Check_CommentsDao ccDao = new Check_CommentsDao();
+		Check_Comments commentData = ccDao.selectByScoreAndTrend(stress_Score, stress_Factor);
+		
+		// 検索結果をリクエストスコープに格納してJSPに渡す（nullチェックも含めて）
+		if (commentData != null) {
+			request.setAttribute("commentData", commentData);  // まとめてJSPに渡す
+//			request.setAttribute("comment", commentData.getComments());
+//			request.setAttribute("advice", commentData.getAdvice());
+//			request.setAttribute("pet_comment", commentData.getPet_check_comments());
+		}
+//		else {
+//			request.setAttribute("comment", "該当するコメントが見つかりませんでした。");
+//			request.setAttribute("advice", "適切なアドバイスがありません。");
+//			request.setAttribute("pet_comment", "キャラ用コメントなし。");
+//		}
+		*/
+		/*//ストレスチェック結果ページ用Servletにリダイレクトする
+		response.sendRedirect("/E5/CheckResultsServlet");
+		*/
+		// 結果ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_result.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 }
