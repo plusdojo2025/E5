@@ -82,11 +82,11 @@
 			</div>
 			<div class="check_comments">
 				<p>コメント</p>
-				<p>○○</p>
+				<p>${onedaycomments.comments}</p>
 			</div>
 			<div class="check_advice">
 				<p>アドバイス</p>
-				<p>○○</p>
+				<p>${onedaycomments.advice}</p>
 			</div>
 			<a href="/E5/HomeServlet">ホーム</a>
 			</c:otherwise>

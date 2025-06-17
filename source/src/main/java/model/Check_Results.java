@@ -18,9 +18,12 @@ public class Check_Results implements Serializable{
     private int question9;
     private int question10;
     private LocalDate created_at;
-    private String stress_factor;
+	private String stress_factor;
     private String comments;
     private String advice;
+    private LocalDate startday;
+    private LocalDate endday;
+    
     
     public Check_Results(int check_results_id, int stress_score, int question1, int question2,
     		int question3, int question4, int question5, int question6, int question7, int question8,
@@ -104,7 +107,19 @@ public class Check_Results implements Serializable{
     	this.created_at = created_at;
     }
     
-    public int getUserid() {
+    public Check_Results(LocalDate startday, LocalDate endday, int userid) {
+		// TODO 自動生成されたコンストラクター・スタブ
+    	this.startday = startday;
+    	this.endday = endday;
+    	this.userid = userid;
+	}
+
+	public Check_Results(int stress_score) {
+		// TODO 自動生成されたコンストラクター・スタブ
+		this.stress_score = stress_score;
+	}
+
+	public int getUserid() {
 		return userid;
 	}
 	public void setUserid(int userid) {
@@ -209,6 +224,22 @@ public class Check_Results implements Serializable{
 
 	public void setAdvice(String advice) {
 		this.advice = advice;
+	}
+
+	public LocalDate getStartday() {
+		return startday;
+	}
+
+	public void setStartday(LocalDate startday) {
+		this.startday = startday;
+	}
+
+	public LocalDate getEndday() {
+		return endday;
+	}
+
+	public void setEndday(LocalDate endday) {
+		this.endday = endday;
 	}
 
 

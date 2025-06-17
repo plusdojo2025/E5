@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -231,14 +232,19 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT comments, advice, "
-					+ "FROM check_comments "
-					+ "WHERE (min_score <= ? AND max_score > ? ) AND trends LIKE ? ";
+			String sql = "SELECT stress_score,stress_factor \"\r\n"
+					+ "					+ \"FROM check_results \"\r\n"
+					+ "					+ \"WHERE userid LIKE ? AND created_at BETWEEN ? AND ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			pStmt.setString(1, "%" + card.getStress_score() + "%");
-			pStmt.setString(2, "%" + card.getStress_score() + "%");
-			pStmt.setString(3, "%" + card.getStress_factor() + "%");
+			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
+			java.sql.Date sqlDate = java.sql.Date.valueOf(startdate);
+			LocalDate enddate = card.getEndday();  // LocalDate型で日付があると仮定
+			java.sql.Date sqlDate2 = java.sql.Date.valueOf(enddate);
+			
+			pStmt.setString(1, "%" + card.getUserid() + "%");
+			pStmt.setDate(2, sqlDate);
+			pStmt.setDate(3, sqlDate2);
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -246,8 +252,69 @@ public class Check_ResultsDao {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Check_Results bc = new Check_Results(
-						rs.getString("comments"),
-						rs.getString("advice")
+						rs.getInt("stress_score"),
+						rs.getString("stress_factor")
+						);
+				cardList.add(bc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			cardList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			cardList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					cardList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return cardList;
+	}
+	
+	public List<Check_Results> month_check_results(Check_Results card) {
+		Connection conn = null;
+		List<Check_Results> cardList = new ArrayList<Check_Results>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "SELECT stress_score,stress_factor \"\r\n"
+					+ "					+ \"FROM check_results \"\r\n"
+					+ "					+ \"WHERE userid LIKE ? AND created_at BETWEEN ? AND ? ";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
+			java.sql.Date sqlDate = java.sql.Date.valueOf(startdate);
+			LocalDate enddate = card.getEndday();  // LocalDate型で日付があると仮定
+			java.sql.Date sqlDate2 = java.sql.Date.valueOf(enddate);
+			
+			pStmt.setString(1, "%" + card.getUserid() + "%");
+			pStmt.setDate(2, sqlDate);
+			pStmt.setDate(3, sqlDate2);
+
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Check_Results bc = new Check_Results(
+						rs.getInt("stress_score"),
+						rs.getString("stress_factor")
 						);
 				cardList.add(bc);
 			}
