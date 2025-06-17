@@ -305,7 +305,7 @@
             <div id="q10_message"></div><br>
             
             <hr>
-            <input type="submit" name="submit" value="登録">
+            <input type="submit" name="submit" value="登録" class="button">
           </form>
           
           <div id="confirmModal" class="modal">
@@ -317,8 +317,11 @@
             </div>
           </div>
           
-        </div>
-      </div>
+        </div><!-- id="check_list" -->
+        
+        <img src="/E5/images/gotop.png" alt="一番上へ戻る" id="gotop">
+        
+      </div><!-- class="contents_center" -->
     </main>
     <!-- メイン（ここまで） -->
     <!-- フッター（ここから） -->
