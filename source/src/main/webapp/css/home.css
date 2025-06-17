@@ -1,1 +1,70 @@
 @charset "UTF-8";
+
+main {
+    margin: 0;
+    flex-grow: 1;
+    background-color: rgba(231, 208, 169, 0.2);
+}
+
+/* アイテムメニューの枠 */
+.items_waku {
+    position: relative;
+    display: flex;
+    height: 100px;
+    width: 200px;
+    margin: 0;
+    text-align: center;
+    transform: translateX(1150px);
+}
+
+/* アイテムを選択とアイテムの枠 */
+.items_menu, .items {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    margin: 0;
+    height: 35px;
+    top: 60%;
+}
+
+/* アイテムを選択の設定 */
+.items_menu {
+    position: absolute;
+    cursor: pointer;
+    background-color: #daf7e1;
+    border: 1px solid #005751;
+    width: 185px;
+    height: 35px;
+    border-radius: 5px;
+    padding: 5px 0;
+}
+
+/* アイテムの枠の設定 */
+.items {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    list-style: none;
+    transform: translateY(145%);
+    padding: 0;
+}
+
+/* アイテムの設定 */
+.items li {
+    background-color: white;
+    border: 1px solid #005751;
+    width: 220px;
+    padding: 5px 0;
+    text-decoration: none;
+    color: #005751;
+    transform: translateX(-18px);
+}
+
+/* 背景の設定 */
+.haikei {
+    position: relative;
+    background-color: white;
+    border: 1px solid #005751;
+    width: 925px;
+    height: 590px;
+    transform: translate(185px, -40px);
+}

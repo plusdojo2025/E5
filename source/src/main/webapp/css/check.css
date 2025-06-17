@@ -2,12 +2,14 @@
 
 .contents_center {
   text-align: center;
+  position: relative; /* 絶対配置の基準にする */
 }
 
 h2 {
   padding: 10px;
   margin: auto;
   margin-bottom: 10px;
+  margin-top: 20px;
   border: 1px solid #333333;
   border-radius: 10px;
   background-color: #9fdfec;
@@ -139,4 +141,40 @@ hr {
 #q10_message {
   font-size: 125%;
   color: red;
+}
+
+/* 登録ボタン */
+.button {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 27px;   /* 余白       */
+  background    : #def7e1;     /* 背景色     */
+  color         : rgba(47, 81, 79, 0.85);     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 2px 2px 11px #666666;  /* 影の設定 */
+  border        : 2px solid #def7e1;    /* 枠の指定 */
+}
+.button:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #def7e1;     /* 背景色     */
+  background    : rgba(47, 81, 79, 0.85);     /* 文字色     */
+}
+
+/* 一番上へ戻るボタン */
+#gotop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 999;
+  width: 75px;
+  /* position: absolute;
+  bottom: 0;
+  right: 0;
+  right: 100px; */
 }
