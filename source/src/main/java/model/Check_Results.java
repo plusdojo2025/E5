@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Check_Results implements Serializable{
     private int userid;
@@ -17,12 +17,38 @@ public class Check_Results implements Serializable{
     private int question8;
     private int question9;
     private int question10;
-    private Date created_at;
+    private LocalDate created_at;
     private String stress_factor;
+    private String comments;
+    private String advice;
     
-    public Check_Results(int stress_score, int question1) {
+    public Check_Results(int check_results_id, int stress_score, int question1, int question2,
+    		int question3, int question4, int question5, int question6, int question7, int question8,
+    		int question9, int question10, String comments, String advice) {
+    	this.check_results_id = check_results_id;
     	this.stress_score = stress_score;
     	this.question1 = question1;
+    	this.question2 = question2;
+    	this.question3 = question3;
+    	this.question4 = question4;
+    	this.question5 = question5;
+    	this.question6 = question6;
+    	this.question7 = question7;
+    	this.question8 = question8;
+    	this.question9 = question9;
+    	this.question10 = question10;
+    	this.comments = comments;
+    	this.advice = advice;
+    }
+    
+    public Check_Results(int userid, int stress_score, int question1) {
+    	this.stress_score = stress_score;
+    	this.question1 = question1;
+    }
+    
+    public Check_Results(int userid, LocalDate created_at) {
+    	this.userid = userid;
+    	this.created_at = created_at;
     }
     
     public int getUserid() {
@@ -103,10 +129,10 @@ public class Check_Results implements Serializable{
 	public void setQuestion10(int question10) {
 		this.question10 = question10;
 	}
-	public Date getCreated_at() {
+	public LocalDate getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(LocalDate created_at) {
 		this.created_at = created_at;
 	}
 	public String getStress_factor() {
@@ -114,6 +140,22 @@ public class Check_Results implements Serializable{
 	}
 	public void setStress_factor(String stress_factor) {
 		this.stress_factor = stress_factor;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getAdvice() {
+		return advice;
+	}
+
+	public void setAdvice(String advice) {
+		this.advice = advice;
 	}
 
 
