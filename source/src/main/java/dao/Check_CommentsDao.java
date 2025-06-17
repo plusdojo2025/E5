@@ -20,13 +20,13 @@ public class Check_CommentsDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/E5?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e5?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
 			// SQL文を準備する
 			String sql = "SELECT comments, advice, pet_check_comments "
-					+ "FROM Bc "
+					+ "FROM check_comments "
 					+ "WHERE min_score <= ? AND max_score >= ? AND trends = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -40,7 +40,7 @@ public class Check_CommentsDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				Check_Comments c = new Check_Comments(
+				result = new Check_Comments(
 							   rs.getString("comments"),
 							   rs.getString("advice"),
 							   rs.getString("pet_check_comments"));

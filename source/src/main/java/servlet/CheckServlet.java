@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//import dao.Check_CommentsDao;
+//import dao.Check_ResultsDao;
+//import model.Check_Comments;
+//import model.Check_Results;
+
 
 /**
  * Servlet implementation class CheckServlet
@@ -92,31 +97,34 @@ public class CheckServlet extends HttpServlet {
 				stress_Factor
 		);
 		crDao.insert(resultData); // 成功・失敗に関係なく進む
+		*/
 		
-		// ストレススコアと傾向（trend）をもとにコメント取得（検索処理を行う）
-		Check_CommentsDao ccDao = new Check_CommentsDao();
-		Check_Comments commentData = ccDao.selectByScoreAndTrend(stress_Score, stress_Factor);
-		
-		// 検索結果をリクエストスコープに格納してJSPに渡す（nullチェックも含めて）
-		if (commentData != null) {
-			request.setAttribute("commentData", commentData);  // まとめてJSPに渡す
-//			request.setAttribute("comment", commentData.getComments());
-//			request.setAttribute("advice", commentData.getAdvice());
-//			request.setAttribute("pet_comment", commentData.getPet_check_comments());
-		}
-//		else {
-//			request.setAttribute("comment", "該当するコメントが見つかりませんでした。");
-//			request.setAttribute("advice", "適切なアドバイスがありません。");
-//			request.setAttribute("pet_comment", "キャラ用コメントなし。");
+//		/*
+//		// ストレススコアと傾向（trend）をもとにコメント取得（検索処理を行う）
+//		Check_CommentsDao ccDao = new Check_CommentsDao();
+//		Check_Comments commentData = ccDao.selectByScoreAndTrend(stress_Score, stress_Factor);
+//		
+//		// 検索結果をリクエストスコープに格納してJSPに渡す（nullチェックも含めて）
+//		if (commentData != null) {
+//			request.setAttribute("commentData", commentData);  // まとめてJSPに渡す
+////			request.setAttribute("comment", commentData.getComments());
+////			request.setAttribute("advice", commentData.getAdvice());
+////			request.setAttribute("pet_comment", commentData.getPet_check_comments());
 //		}
-		*/
-		/*//ストレスチェック結果ページ用Servletにリダイレクトする
+////		else {
+////			request.setAttribute("comment", "該当するコメントが見つかりませんでした。");
+////			request.setAttribute("advice", "適切なアドバイスがありません。");
+////			request.setAttribute("pet_comment", "キャラ用コメントなし。");
+////		}
+//		*/
+		
+		//ストレスチェック結果ページ用Servletにリダイレクトする
 		response.sendRedirect("/E5/CheckResultsServlet");
-		*/
+		/*
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_result.jsp");
 		dispatcher.forward(request, response);
-		
+		*/
 	}
 
 }
