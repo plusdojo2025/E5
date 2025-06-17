@@ -42,3 +42,24 @@ noBtn.addEventListener("click", function() {
  modal.style.display = "none";
  // 何もしない（フォーム送信されない）
 });
+
+
+/* 一番上へ戻るボタン */
+const gotop = document.getElementById("gotop");
+
+// クリック時に上に戻る
+gotop.addEventListener("click", () => {
+	window.scroll({
+		top:0,
+		behavior: "smooth",
+	});
+});
+
+// スクロール時に表示・非表示を切り替え
+window.addEventListener("scroll", () => {
+	if (window.scrollY > 100) { // 100px以上スクロールしたら表示
+		gotop.style.display = "block";
+	} else {
+		gotop.style.display = "none";
+	}
+});
