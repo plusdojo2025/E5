@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Check_ResultsDao;
+import model.Check_Results;
+
 //import dao.Check_CommentsDao;
 //import dao.Check_ResultsDao;
 //import model.Check_Comments;
@@ -51,7 +54,7 @@ public class CheckServlet extends HttpServlet {
 			return;
 		}
 		*/
-		/*
+		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		
@@ -96,8 +99,8 @@ public class CheckServlet extends HttpServlet {
 				answers[5], answers[6], answers[7], answers[8], answers[9],
 				stress_Factor
 		);
-		crDao.insert(resultData); // 成功・失敗に関係なく進む
-		*/
+		crDao.check_insert(resultData); // 成功・失敗に関係なく進む
+		
 		
 //		/*
 //		// ストレススコアと傾向（trend）をもとにコメント取得（検索処理を行う）
