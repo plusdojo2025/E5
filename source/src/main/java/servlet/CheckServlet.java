@@ -73,10 +73,10 @@ public class CheckServlet extends HttpServlet {
 		// 各カテゴリごとのスコア合計（分類は例）
 		int workStress = answers[0] + answers[1] + answers[2];       // Q1〜Q3
 		int humanStress = answers[3] + answers[4] + answers[5];      // Q4〜Q6
-		int anxietyStress = answers[6] + answers[7] + answers[8];	 // Q7〜Q9
+		int anxietyStress = answers[7] + answers[8] + answers[9];	 // Q8〜Q10
 
 		// 一番高かったストレス項目を決定
-		String stress_Factor = "精神的ストレス";
+		String stress_Factor = "環境的ストレス";
 		int max = workStress;
 
 		if (humanStress > max) {

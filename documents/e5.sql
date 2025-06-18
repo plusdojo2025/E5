@@ -69,12 +69,13 @@ CREATE TABLE IF NOT EXISTS `check_results` (
 
 --  テーブル e5.login_bonus_history の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `login_bonus_history` (
-  `user_id` int NOT NULL,
-  `bonus_date` datetime NOT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `bonus_date` (`bonus_date`),
+  `id` INT AUTO_INCREMENT PRIMARY KEY,              -- 単独主キー（操作が楽）
+  `user_id` INT NOT NULL,
+  `bonus_date` DATE NOT NULL,
+  UNIQUE KEY `uniq_user_date` (`user_id`, `bonus_date`),  -- ユーザー×日付を一意に制限
   CONSTRAINT `fk_login_bonus_history_userid` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 -- エクスポートするデータが選択されていません
 
