@@ -22,8 +22,8 @@ USE `e5`;
 --  テーブル e5.check_comments の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `check_comments` (
   `comments_advice_id` int NOT NULL AUTO_INCREMENT,
-  `comments` varchar(30) NOT NULL,
-  `advice` varchar(30) NOT NULL,
+  `comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `advice` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `pet_check_comments` varchar(50) NOT NULL,
   `trends` varchar(50) NOT NULL,
   `min_score` int NOT NULL,
@@ -60,7 +60,9 @@ CREATE TABLE IF NOT EXISTS `check_results` (
   `question10` int NOT NULL,
   `created_at` datetime NOT NULL,
   `stress_factor` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`check_results_id`)
+  PRIMARY KEY (`check_results_id`),
+  KEY `fk_check_results_userid` (`userid`),
+  CONSTRAINT `fk_check_results_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- エクスポートするデータが選択されていません
@@ -69,7 +71,8 @@ CREATE TABLE IF NOT EXISTS `check_results` (
 CREATE TABLE IF NOT EXISTS `login_rewards` (
   `userid` int NOT NULL,
   `login_date` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`userid`)
+  PRIMARY KEY (`userid`),
+  CONSTRAINT `fk_login_rewards_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- エクスポートするデータが選択されていません
@@ -78,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `login_rewards` (
 CREATE TABLE IF NOT EXISTS `one_month_trends` (
   `omt_id` int NOT NULL AUTO_INCREMENT,
   `omt` varchar(50) NOT NULL,
+  `omt_stress_factor` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`omt_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -114,7 +118,8 @@ CREATE TABLE IF NOT EXISTS `useritems` (
   `petitems6` int NOT NULL DEFAULT '0',
   `petitems7` int NOT NULL DEFAULT '0',
   `petitems8` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`userid`)
+  PRIMARY KEY (`userid`),
+  CONSTRAINT `fk_useritems_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- エクスポートするデータが選択されていません
@@ -125,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'ハッシュ化して利用する',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- エクスポートするデータが選択されていません
 
