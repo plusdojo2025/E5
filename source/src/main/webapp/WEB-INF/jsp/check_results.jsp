@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,10 @@
   <link rel="stylesheet" href="/E5/css/check_results.css" />
   <script src="/E5/js/check_results.js"></script>
 </head>
+<script>
+  const scoresFromJava = [<%= score1 %>, <%= score2 %>, <%= score3 %>];
+  updateRadarChart(scoresFromJava);
+</script>
 <body>
 	<main>
 	<h2>ストレスチェック結果</h2>
@@ -27,8 +32,8 @@
 	            <label for="tab3" class="tab-label label3">月</label>
 	        </div>
             <div class="tab-group_right">
-           		<input type="date" name="day" value="期間変更">
-           		<input type="submit" class="period_change" name="submit" value="期間変更">
+           		<input type="date" name="day">
+           		<input type="submit" class="period_change" name="submit">
            	</div>
         </div>
 		<!-- 選択された期間の内容を個別に表示する。 -->
@@ -41,9 +46,9 @@
         	<h1 class="check_results">ストレスチェック結果 ${onedayresult.stress_score}点</h1>
         	<div class="radar-container">
 				<div class="label-column">
-	        	    <label>kkk</label>
-	    	        <label>kkk</label>
-		            <label>kkk</label>
+	        	    <label>環境的ストレスがやや高いです。</label>
+	    	        <label>生活的ストレスがやや高いです。</label>
+		            <label>身体的ストレスがやや高いです。</label>
 				</div>
 		    	<div class="radar-chart-1">
 			    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 200">
@@ -66,16 +71,16 @@
 			    </svg>
 			    <dl>
 			        <div>
-			            <dt>項目1</dt>
-			            <dd>○○</dd>
+			            <dt>環境的ストレス</dt>
+			            <dd>7</dd>
 			        </div>
 			        <div>
-			            <dt>項目2</dt>
-			            <dd>○○</dd>
+			            <dt>身体的ストレス</dt>
+			            <dd>3</dd>
 			        </div>
 			        <div>
-			            <dt>項目3</dt>
-			            <dd>○○</dd>
+			            <dt>生活的ストレス</dt>
+			            <dd>9</dd>
 			        </div>
 			    </dl>
 			</div>
@@ -94,19 +99,22 @@
         </div>
 		<!-- 週の結果 -->
         <div class="tab-content content2">
-            <h1 class="check_results">${weekresult.weekfirst}～${weekresult.weekfinal}の記録</h1>
+            <h1 class="check_results">${starttoweek}～${endofweek}の記録</h1>
             <dl class="bar-chart-1">
 			    <div>
 			        <dt>項目1</dt>
 			        <dd style="width: 50%">50%</dd>
+			        <dt>50</dt>
 			    </div>
 			    <div>
 			        <dt>項目2</dt>
-			        <dd style="width: 60%">60%</dd>
+			        <dd style="width: 30%">30%</dd>
+			        <dt>30</dt>
 			    </div>
 			    <div>
-			        <dt>項目3</dt>
-			        <dd style="width: 70%">70%</dd>
+			        <dt>06-16</dt>
+			        <dd style="width: 100%">100%</dd>
+			        <dt>100</dt>
 			    </div>
 			</dl>
             
@@ -120,7 +128,51 @@
         </div>
 		<!-- 月の結果 -->
         <div class="tab-content content3">
-            <p>月の結果をここに表示します。</p>
+            <h1 class="check_results">06-01～06-30の記録</h1>
+            <dl class="bar-chart-2">
+			    <div>
+			        <dt>項目1</dt>
+			        <dd style="width: 50%">50%</dd>
+			    </div>
+			    
+			    <div class="container" style="display: flex; gap: 20px; ">
+				  <div class="labels">
+				        	<div>項目1</div>
+				    <!-- ここに項目を縦にずらっと -->
+				  </div>
+				
+				  <div class="bars">
+				      <div style="width: 50%;">
+							50
+				      </div>
+				  </div>
+				  <div class="score">
+				        	<div>50</div>
+				    <!-- ここに項目を縦にずらっと -->
+				  </div>
+				  <div class="labels">
+				        	<div>項目2</div>
+				    <!-- ここに項目を縦にずらっと -->
+				  </div>
+				
+				  <div class="bars">
+				      <div style="width: 60%;">
+							60
+				      </div>
+				  </div>
+				  <div class="score">
+				        	<div>60</div>
+				    <!-- ここに項目を縦にずらっと -->
+				  </div>
+				  
+				</div>
+			</dl>
+            
+            <div class="week_comments">
+				<p>月の傾向</p>
+				<p>○○</p>
+			</div>
+			<a href="/E5/HomeServlet">ホーム</a>
         </div>
 
     </div>
