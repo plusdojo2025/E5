@@ -7,12 +7,14 @@
 <title>ログイン</title>
 <link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="css/common.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<header class="header"></header>
 	<main>
 	<div class="title">
-		<h1>ストレッシュ</h1><img alt="" src="images/logo.png" class="logo">
+		<h1 class="title-text">ストレッシュ</h1>
+		<img alt="" src="images/logo.png" class="logo">
 	</div>
 	<div id="login">
 		<form id="login-form" method="POST"  action="/E5/LoginServlet">
