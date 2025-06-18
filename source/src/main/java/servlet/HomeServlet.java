@@ -93,7 +93,7 @@ public class HomeServlet extends HttpServlet {
     		uiDao.incrementItem(userId, itemNumber);
 
     		// ボーナス取得履歴を登録
-    		LoginBonusHistory record = new LoginBonusHistory(userId, today);
+    		Login_Bonus_History record = new Login_Bonus_History(userId, today);
     		bonusDao.insertBonusRecord(record);
 
     		request.setAttribute("bonusItemId", itemNumber); // JSP/JSに渡す
