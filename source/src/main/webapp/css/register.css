@@ -14,9 +14,12 @@ main {
    	display: flex; 
 	justify-content: center;
 	align-items: center;
+	gap: 16px; /* ロゴとテキストの間のスペース */
+  	flex-wrap: nowrap; /* はみ出す場合に折り返さずスクロールするか、スマホ用で調整する */
 }
 .logo {
 	width: 100px;
+	height: auto;
 	object-fit: contain;
 }
 /* ヘッダー&フッター（ログイン画面） */
@@ -117,7 +120,7 @@ main {
 }
 .registerButton {
     text-transform: uppercase;
-    background: #a4f0b6;
+    background: #daf7e1;
     border: 1px solid;
     width: 50%;
     color: #2f514f;
@@ -127,10 +130,88 @@ main {
     cursor: pointer;
 }
 .registerButton:hover,.registerButton:active,.registerButton:focus {
-    background: #a4f0b6;
+    background: #daf7e1;
 }
 #errorMessage,#error-area {
 	color: red;
 	font-size: 14px;
 }
 
+
+@media screen and (max-width: 600px) {
+  main {
+    padding: 20px;
+  }
+
+  .title {
+    flex-direction: row; /* 念のため横並びを明示 */
+    flex-wrap: nowrap;   /* 折り返さない */
+    font-size: 18px;
+    text-align: center;
+    padding-bottom: 15px;
+    gap: 8px;
+  }
+
+  .logo {
+    width: 20vw; /* 画面幅の20%に比例させる */
+    min-width: 40px;
+    max-width: 80px;
+  }
+  
+  .title-text {
+    font-size: 5vw; /* 画面幅に応じて文字サイズを可変に */
+    white-space: nowrap; /* 改行させない */
+    text-align: center;
+  }
+
+  .header {
+    height: 70px;
+  }
+
+  .footer {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  #login {
+    width: 90%;
+    padding: 5% 0;
+    border-radius: 10%;
+  }
+
+  #login-form {
+    padding: 20px;
+    font-size: 16px;
+  }
+
+  .login-item {
+    margin: 10px;
+    font-size: 14px;
+  }
+
+  .login-item input {
+    width: 100%;
+    height: 30px;
+  }
+
+  .loginButton {
+    font-size: 16px;
+  }
+
+  .tooltip {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .tooltip-text {
+    font-size: 11px;
+    bottom: -45px;
+  }
+
+  #errorMessage, #error-area {
+    font-size: 13px;
+    text-align: center;
+  }
+}

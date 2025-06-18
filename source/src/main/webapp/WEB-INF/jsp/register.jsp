@@ -13,7 +13,8 @@
 	<header class="header"></header>
 	<main>
 	<div class="title">
-		<h1>ストレッシュ</h1><img alt="" src="images/logo.png" class="logo">
+		<h1 class="title-text">ストレッシュ</h1>
+		<img alt="" src="images/logo.png" class="logo">
 	</div>
 	<div id="register">
 		<form id="registerForm" action="/E5/RegisterServlet" method="post">

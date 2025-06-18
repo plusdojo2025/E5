@@ -17,34 +17,34 @@ document.getElementById("registerForm").addEventListener("submit", function(even
 
     // ユーザーネーム未入力
     if (username === "") {
-      messages.push("ユーザーネームを入力してください。");
+      messages.push("※ユーザーネームを入力してください。");
     }
 
     // パスワード未入力
     if (password === "") {
-      messages.push("パスワードを入力してください。");
+      messages.push("※パスワードを入力してください。");
     }
     
     // パスワード未入力
     if (confirmPassword === "") {
-      messages.push("パスワード再入力を入力してください。");
+      messages.push("※パスワード再入力を入力してください。");
     }
 
     // パスワードの英数混合チェック（8文字以上16文字以内）
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
     if (password !== "" && !passwordRegex.test(password)) {
-      messages.push("パスワードは英数字混合で8文字以上16文字以内で入力してください。");
+      messages.push("※パスワードは英数字混合で8文字以上16文字以内で入力してください。");
     }
     
     // ユーザーネームの半角英数字（5文字以上30文字以内）
     const usernameRegex = /^[a-zA-Z0-9\d]{5,30}$/;
     if (username !== "" && !usernameRegex.test(username)) {
-      messages.push("ユーザーネームは半角英数字5～30文字で入力してください。");
+      messages.push("※ユーザーネームは半角英数字5～30文字で入力してください。");
     }
 
     // パスワード再入力と一致するか
     if (password !== confirmPassword) {
-      messages.push("パスワードとパスワード再入力が一致していません。");
+      messages.push("※パスワードとパスワード再入力が一致していません。");
     }
 
     if (messages.length > 0) {
@@ -70,7 +70,7 @@ document.getElementById("registerForm").addEventListener("submit", function(even
         .then(response => response.json())
         .then(data => {
             if (data.exists) {
-                msgElem.textContent = "このユーザーネームは既に使われています";
+                msgElem.textContent = "※このユーザーネームは既に使われています";
                 msgElem.style.color = "red";
             } else {
                 msgElem.textContent = "使用可能です";
