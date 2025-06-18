@@ -1,5 +1,31 @@
 @charset "UTF-8";
 
+#brand {
+  display: flex;
+  flex-wrap: nowrap;       /* 折り返さない */
+  align-items: center;     /* 上下中央揃え */
+  gap: 10px;               /* ロゴとタイトルの間にスペース */
+}
+h1 {
+  margin: auto;
+  font-size: 35px;
+  margin: 0;
+}
+#logo {
+  /* height: 40px; */
+  margin-right: 10px;
+}
+@media screen and (max-width: 400px) {
+  #h1 {
+    font-size: 20px;
+  }
+
+  #logo {
+    height: 30px;
+  }
+}
+
+
 .contents_center {
   text-align: center;
   position: relative; /* 絶対配置の基準にする */
@@ -9,7 +35,7 @@ h2 {
   padding: 10px;
   margin: auto;
   margin-bottom: 10px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   border: 1px solid #333333;
   border-radius: 10px;
   background-color: #9fdfec;
@@ -24,7 +50,7 @@ h2 {
  margin-bottom: 10px;
  border: 1px solid #333333;
  border-radius: 50px;
- width: 800px;
+ width: 700px;
 }
 
 .question {

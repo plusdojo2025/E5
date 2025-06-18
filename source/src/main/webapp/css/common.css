@@ -2,17 +2,28 @@
 
 body {
     margin: 0 0 0 0; /* ページ全体の四隅のスペースをなくす */
+    padding: 0;
+    background: rgba(231, 208, 169, 0.1);
 }
 main {
 	background: rgba(231, 208, 169, 0.1);
 	padding: 60px;
 }
-
-.header {
-    height: 100px;
-    background-color: #f2acac;
+img {
+	width: 100px;
 }
-.footer {
+
+header {
+    height: 70px;
+    width: 100%;
+    background-color: #f2acac;
+    padding: 10px;
+    display: flex;          /* 追加：flexで横並びに */
+    align-items: center;    /* 追加：縦方向中央揃え */
+    justify-content: space-between; /* 任意：左右にメニューやロゴを配置する場合 */ 
+}
+footer {
+	width: 100%;
 	padding: 10px;
     background-color: #9fdfec;
     text-align: center;
