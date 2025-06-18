@@ -38,7 +38,7 @@
 <body>
   <div>
   <!-- ヘッダー -->
-    <header class="header">
+    <header id="header">
       <h1>ストレッシュ
       <a href="<c:url value='/HomeServlet'/>">
         <img src="<c:url value='/images/logo_w.png'/>" alt="ストレッシュロゴ">
@@ -49,7 +49,7 @@
         <ul>
           <li><a href="<c:url value='/HomeServlet'/>">ホーム</a>
           <li><a href="<c:url value='/CheckServlet'/>">ストレスチェック</a>
-          <li><a href="<c:url value='/ResultsServlet'/>">統計</a>
+          <li><a href="<c:url value='/ResultServlet'/>">統計</a>
           <li><a href="<c:url value='/LogoutServlet'/>">ログアウト</a>
         </ul>
       </nav>
