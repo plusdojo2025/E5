@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Check_ResultsDao;
 import model.Check_Results;
@@ -27,7 +28,7 @@ public class CheckServlet extends HttpServlet {
 		/*// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
+			response.sendRedirect("/E5/LoginServlet");
 			return;
 		}
 		*/
@@ -42,13 +43,13 @@ public class CheckServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
+			response.sendRedirect("/E5/LoginServlet");
 			return;
 		}
-		*/
+		
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");

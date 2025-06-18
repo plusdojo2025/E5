@@ -10,7 +10,7 @@
   <title>ストレッシュ</title>
   <link rel="stylesheet" href="<c:url value='/css/common.css'/>" >
   <link rel="stylesheet" href="<c:url value='/css/check.css'/>" >
-  <style>
+  <!-- <style>
     header {
       background-color: #f2acac;
       width: 100%;
@@ -33,7 +33,7 @@
       box-sizing: border-box;
     }
     
-  </style>
+  </style> -->
 </head>
 <body>
   <div>

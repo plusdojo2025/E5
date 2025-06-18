@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,15 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.Check_CommentsDao;
-import dao.Check_ResultsDao;
-import dao.Pet_CommentsDao;
-import dao.UserItemsDao;
-import model.Check_Comments;
-import model.Check_Results;
-import model.Pet_Comments;
-import model.UserItems;
 
 /**
  * Servlet implementation class MenuServlet
@@ -39,6 +28,7 @@ public class HomeServlet extends HttpServlet {
 //			response.sendRedirect("/E5/LoginServlet");
 //			return;
 //		}
+		/*
 		int userId = (int) session.getAttribute("id");
 		
 		//アイテムの所持数を表示
@@ -99,7 +89,7 @@ public class HomeServlet extends HttpServlet {
         int petComNumber = new Random().nextInt(8) + 1;
         Pet_Comments petCom = pcDao.selectComments(petComNumber);
         request.setAttribute("petCom", petCom);
-
+        */
 		
 		// メニューページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
@@ -114,6 +104,7 @@ public class HomeServlet extends HttpServlet {
 //			response.sendRedirect("/E5/LoginServlet");
 //			return;
 //		}
+		/*
 		int userId = (int) session.getAttribute("id");
 		
 		//アイテムをあげる(アイテムを使用して所持数を更新)
@@ -122,6 +113,7 @@ public class HomeServlet extends HttpServlet {
 
 	    // アイテムを使う処理
 		UserItemsDao.useItem(userId, itemId);
+		*/
 		
 		// ホームのJSPにフォワード（数秒待ってから）
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
