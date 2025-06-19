@@ -75,16 +75,21 @@ public class CheckServlet extends HttpServlet {
 		int humanStress = answers[3] + answers[4] + answers[5];      // Q4〜Q6
 		int anxietyStress = answers[7] + answers[8] + answers[9];	 // Q8〜Q10
 
-		// 一番高かったストレス項目を決定
-		String stress_Factor = "環境的ストレス";
-		int max = workStress;
+		// 一番高かったストレス項目を決定(複数ある場合の優先度、1:身体的 2:環境的 3:生活的)
+		int max = Math.max(workStress, Math.max(humanStress, anxietyStress));
 
-		if (humanStress > max) {
-			max = humanStress;
-			stress_Factor = "身体的ストレス";
-		}
-		if (anxietyStress > max) {
-			stress_Factor = "生活的ストレス";
+		// 該当するカテゴリがいくつあるかをチェック
+		boolean isWorkMax = workStress == max;
+		boolean isHumanMax = humanStress == max;
+//		boolean isAnxietyMax = anxietyStress == max;
+
+		String stress_Factor = "";
+		if (isHumanMax) {
+		    stress_Factor = "身体的ストレス";
+		} else if (isWorkMax) {
+		    stress_Factor = "環境的ストレス";
+		} else {
+		    stress_Factor = "生活的ストレス";
 		}
 		
 		// 登録処理を行う(登録日の登録はDBで自動で行わせるため、いらない)
@@ -96,12 +101,16 @@ public class CheckServlet extends HttpServlet {
 				stress_Factor
 		);
 //		crDao.check_insert(resultData); // 成功・失敗に関係なく進む
-		if (crDao.check_insert(resultData)) {
+		boolean result = crDao.check_insert(resultData);
+//		System.out.println("check_insert result: " + result);
+		if (result) {
 			//ストレスチェック結果ページ用Servletにリダイレクトする
-			response.sendRedirect("/E5/CheckResultsServlet");
+			response.sendRedirect(request.getContextPath() +"/ResultServlet");
+			return;
 		} else {
 			//ストレスチェックページ用Servletにリダイレクト(戻る)
-			response.sendRedirect("/E5/CheckServlet");
+			response.sendRedirect(request.getContextPath() +"/CheckServlet");
+			return;
 
 		}
 		
@@ -125,7 +134,7 @@ public class CheckServlet extends HttpServlet {
 //		*/
 		
 		//ストレスチェック結果ページ用Servletにリダイレクトする
-		response.sendRedirect(request.getContextPath() +"/CheckResultsServlet");
+//		response.sendRedirect(request.getContextPath() +"/ResultServlet");
 		/*
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_result.jsp");

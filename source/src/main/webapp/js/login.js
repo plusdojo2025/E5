@@ -26,11 +26,13 @@ document.getElementById('login-form').onsubmit = function(event) {
 			event.preventDefault();
 			return false;
 		}
-		if (!/^(?=.*[a-zA-Z0-9])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password)) {
-			errorEl.textContent = '※パスワードは8文字以上の半角英数字混合で入力してください！';
-			event.preventDefault();
-			return false;
+		if (!/^(?=.*[a-zA-Z])(?=.*\d)[ -~]{8,24}$/.test(password)) {
+    		errorEl.textContent = '※パスワードは8～24文字で、半角英数字混合で入力してください！';
+    		event.preventDefault();
+    		return false;
 		}
+
+
 
 		// すべてOKなら何もせず送信継続
 	};

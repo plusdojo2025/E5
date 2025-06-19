@@ -30,8 +30,8 @@ document.getElementById("registerForm").addEventListener("submit", function(even
       messages.push("※パスワード再入力を入力してください。");
     }
 
-    // パスワードの英数混合チェック（8文字以上16文字以内）
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,24}$/;
+    // パスワードの英数混合チェック（8文字以上24文字以内）
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+[\]{}|;:,.<>?`~\\-]{8,24}$/;
     if (password !== "" && !passwordRegex.test(password)) {
       messages.push("※パスワードは英数字混合で8文字以上24文字以内で入力してください。");
     }
