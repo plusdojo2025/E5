@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.Check_CommentsDao;
+import dao.Check_ResultsDao;
+import dao.Login_Bonus_HistoryDao;
+import dao.Login_RewardsDao;
+import dao.Pet_CommentsDao;
 import dao.UserItemsDao;
+import model.Check_Comments;
+import model.Check_Results;
+import model.Login_Bonus_History;
+import model.Login_Rewards;
+import model.Pet_Comments;
+import model.UserItems;
 
 /**
  * Servlet implementation class MenuServlet
@@ -25,7 +38,7 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect(request.getContextPath() +"/LoginServlet");
@@ -97,11 +110,11 @@ public class HomeServlet extends HttpServlet {
 			LocalDate lastLogin = crDao.getLastCheckDate(userId); // created_atから取得
 		    if (lastLogin != null && lastLogin.plusDays(1).isEqual(today)) {
 		        // 昨日もログインしていた → 継続中
-		        loginStreak = streak.getLoginDate() + 1;
+		        loginStreak = streak.getLogin_date() + 1;
 		        if (loginStreak > 7) loginStreak = 1; // 7超えたら1に戻す
 		    } else if (lastLogin == null || lastLogin.isBefore(today.minusDays(1))) {
-		        // 途切れている → リセット
-		        loginStreak = 0;
+		        // 途切れている → リセット(1日目になる)
+		        loginStreak = 1;
 		    } else {
 		        // 今日単独で初回ログイン（継続なし、前日と関係なし）
 		        loginStreak = 1;
@@ -149,7 +162,7 @@ public class HomeServlet extends HttpServlet {
         // 挨拶コメントをランダムで取得
         Pet_Comments petCom = pcDao.selectComments(petComNumber);
         request.setAttribute("petCom", petCom);
-        */
+        
 		
 		// メニューページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
