@@ -5,6 +5,7 @@
   flex-wrap: nowrap;       /* 折り返さない */
   align-items: center;     /* 上下中央揃え */
   gap: 10px;               /* ロゴとタイトルの間にスペース */
+  /* flex-shrink: 1; /* 幅が狭くても潰れすぎない */
 }
 h1 {
   margin: auto;
@@ -34,12 +35,14 @@ h1 {
 h2 {
   padding: 10px;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   /* margin-top: 20px; */
   border: 1px solid #333333;
   border-radius: 10px;
   background-color: #9fdfec;
-  width: 500px;
+  /*width: 500px;*/
+  width: 90%;
+  max-width: 500px;
 }
 
 /* チェック部分　*/
@@ -50,7 +53,9 @@ h2 {
  margin-bottom: 10px;
  border: 1px solid #333333;
  border-radius: 50px;
- width: 700px;
+ /*width: 700px;*/
+ width: 90%;
+ max-width: 700px;
 }
 
 .question {
@@ -73,6 +78,19 @@ span {
 
 .choose {
   font-size: 50%;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;  /* 均等配置 */
+  /*flex-wrap: wrap;                 /* 必要に応じて折り返しもOK */
+  margin: 5px 60px;               /* 左右の余白調整 */
+}
+.radio_last {
+  display: flex;
+  justify-content: space-between;  /* 均等配置 */
+  /*flex-wrap: wrap;                 /* 必要に応じて折り返しもOK */
+  margin: 5px 100px;               /* 左右の余白調整 */
 }
 
 .radio-item {
@@ -176,7 +194,8 @@ hr {
   font-size     : 18pt;        /* 文字サイズ */
   text-align    : center;      /* 文字位置   */
   cursor        : pointer;     /* カーソル   */
-  padding       : 12px 27px;   /* 余白       */
+  margin: 15px;
+  padding       : 12px 30px;   /* 余白       */
   background    : #def7e1;     /* 背景色     */
   color         : rgba(47, 81, 79, 0.85);     /* 文字色     */
   line-height   : 1em;         /* 1行の高さ  */
@@ -203,4 +222,38 @@ hr {
   bottom: 0;
   right: 0;
   right: 100px; */
+}
+
+/* スマホ用のメディアクエリ（画面が狭いときの調整） */
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 18px;
+    padding: 8px;
+  }
+
+  .radio-item {
+    flex: 1 1 45%;
+    font-size: 100%;
+  }
+
+  .radio-group {
+    margin: 10px;
+    margin: 5px auto;
+  }
+  .radio_last {
+    margin: 10px;
+    margin: 5px auto;
+  }
+
+  #check_list {
+    padding: 15px;
+    border-radius: 20px;
+  }
+  .question-block {
+    margin-left: 5px; /* 必要に応じて調整 */
+  }
 }

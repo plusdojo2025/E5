@@ -50,9 +50,10 @@ public class One_Week_TrendsDao {
 //				System.out.println(monday + sunday);
 			}
 			
-			//選択された日付が含まれる月～日までのチェック結果スコアの検索
-			String sql2 = "SELECT stress_score FROM check_results "
-					+ "WHERE check_date BETWEEN ? AND ?";
+			// 選択された日付が含まれる月～日までのチェック結果スコアと
+			// 一番高いストレス項目（傾向）検索する
+			String sql2 = "SELECT stress_score, stress_factor FROM check_results "
+					+ "WHERE created_at BETWEEN ? AND ?";
 			// 接続する情報とSQLの情報をまとめてpStmtに入れている
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 			
@@ -69,6 +70,13 @@ public class One_Week_TrendsDao {
 				int score = rs2.getInt("stress_score"); // スコア取得
 				weekScore.add(score);                   // リストに追加
 			}
+			
+			String sql3 = "SELECT owt, owt_comments FROM check_results "
+					+ "WHERE owt_stress_factor = ? ";
+			// 接続する情報とSQLの情報をまとめてpStmtに入れている
+			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

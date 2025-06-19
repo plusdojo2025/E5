@@ -43,7 +43,7 @@
         <div class="haikei">
             <!-- コメントの枠div -->
             <div class="home_comment">
-
+				<img src="/E5/images/hukidashi.png" alt="吹き出し">
             </div>
             <!-- キャラクターの枠 -->
             <div class="character">

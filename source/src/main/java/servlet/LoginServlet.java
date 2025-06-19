@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.UsersDao;
 import model.UsernamePassword;
-import model.Users;
 
 /**
  * Servlet implementation class LoginServlet
@@ -55,11 +54,12 @@ public class LoginServlet extends HttpServlet {
 		// ログイン処理を行う		
 		UsersDao uDao = new UsersDao();
 		if (uDao.isLoginOK(new UsernamePassword(username, password))) {// ログイン成功
-			// セッションスコープにusernameを格納する
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", new Users(username));
+			// ユーザーIDを取得
+			int userId = uDao.findUserIdByUsername(username);
+	        HttpSession session = request.getSession();
+	        session.setAttribute("id", userId);
 			// ホームサーブレットにリダイレクトする
-			response.sendRedirect("/E5/HomeServlet");
+			response.sendRedirect(request.getContextPath() + "/HomeServlet");
 		} else {// ログイン失敗
 			// エラーメッセージ付きでlogin.jspへ戻す
 			request.setAttribute("errorMessage", "ユーザーネームもしくはパスワードが間違っています。");

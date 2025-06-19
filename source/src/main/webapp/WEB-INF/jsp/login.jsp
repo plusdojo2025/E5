@@ -5,19 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン</title>
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="c:url value='/css/login.css' ">
+<link rel="stylesheet" href="c:url value='/css/common.css' ">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+	<!-- ヘッダー（ここから） -->
 	<header class="header"></header>
+	<!-- ヘッダー（ここまで） -->
+	<!-- メイン（ここから） -->
 	<main>
 	<div class="title">
 		<h1 class="title-text">ストレッシュ</h1>
-		<img alt="" src="images/logo.png" class="logo">
+		<img alt="" src="<c:url value='/images/logo.png'/>" class="logo">
 	</div>
 	<div id="login">
-		<form id="login-form" method="POST"  action="/E5/LoginServlet">
+		<form id="login-form" method="POST"  action="<c:url value='/LoginServlet' />">
 			<div class="login-item">
 				<label for="username" class="login-label">ユーザーネーム
 					<button class="tooltip">
@@ -29,7 +32,7 @@
 			<div class="login-item">
 				<label for="password" class="login-label">password
 					<button class="tooltip">
-						<span class="tooltip-text">半角英数字8～16文字</span>
+						<span class="tooltip-text">半角英数字8～24文字</span>
 					i</button>
 				</label><br>
 				<input type="password" name="password">
@@ -42,13 +45,16 @@
 							 } %>
 			</span><br>
 			<button type="submit" class="loginButton login-item">ログイン</button><br>
-			<a href="/E5/RegisterServlet">アカウントがない方はこちら</a>
+			<a href="<c:url value='/RegisterServlet' />">アカウントがない方はこちら</a>
 		</form>
 	</div>
 	</main>
+	<!-- メイン（ここまで） -->
+	<!-- フッター（ここから） -->
 	<footer class="footer">
 		<p class="copyright">&copy;makwm</p>
 	</footer>
-	<script src="js/login.js"></script>
+	<!-- フッター（ここまで） -->
+	<script src="<c:url value='/js/login.js' />"></script>
 </body>
 </html>
