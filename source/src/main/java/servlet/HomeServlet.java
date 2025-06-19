@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,15 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.Check_CommentsDao;
-import dao.Login_Bonus_HistoryDao;
-import dao.Pet_CommentsDao;
 import dao.UserItemsDao;
-import model.Check_Comments;
-import model.Check_Results;
-import model.Login_Bonus_History;
-import model.Pet_Comments;
-import model.UserItems;
 
 /**
  * Servlet implementation class MenuServlet
@@ -35,7 +25,7 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		/*// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect(request.getContextPath() +"/LoginServlet");
@@ -54,6 +44,7 @@ public class HomeServlet extends HttpServlet {
 		
 		//表情判定（チェック結果を元に）
 		LocalDate today = LocalDate.now();
+		Check_ResultsDao crDao = new Check_ResultsDao();
         // 今日のストレスチェック結果を取得（存在すれば1件）
         Check_Results todayResult = crDao.findByUserIdAndDate(userId, today);  // ←新たに用意したメソッドを想定
 
@@ -95,22 +86,62 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("showCheckPrompt", !hasCheckedToday); // モーダルを出すべきかどうか
 		
 		
-		//ログインボーナス判定(付与履歴の参照)（ログインボーナスはチェック済かつ未受領時のみ付与）
+		// 今の継続ログインの管理
+		// 継続ログインの管理
+		Login_RewardsDao streakDao = new Login_RewardsDao();
+		Login_Rewards streak = streakDao.findByUserId(userId);
+
+		int loginStreak = 0;
+
+		if (streak != null) {
+			LocalDate lastLogin = crDao.getLastCheckDate(userId); // created_atから取得
+		    if (lastLogin != null && lastLogin.plusDays(1).isEqual(today)) {
+		        // 昨日もログインしていた → 継続中
+		        loginStreak = streak.getLoginDate() + 1;
+		        if (loginStreak > 7) loginStreak = 1; // 7超えたら1に戻す
+		    } else if (lastLogin == null || lastLogin.isBefore(today.minusDays(1))) {
+		        // 途切れている → リセット
+		        loginStreak = 0;
+		    } else {
+		        // 今日単独で初回ログイン（継続なし、前日と関係なし）
+		        loginStreak = 1;
+		    }
+
+		    // DBに更新
+		    streakDao.updateLoginStreak(userId, loginStreak);
+		} else {
+		    // 初回ログイン
+		    streakDao.insertLoginStreak(userId, 1); // 初回は1で登録
+		    loginStreak = 1;
+		}
+
+		// JSPで使用するためセット
+		request.setAttribute("loginStreak", loginStreak);
+
+		// 残り日数を計算してセット（7日でボーナス）
+		int remainingDays = 7 - loginStreak;
+		if (remainingDays < 0) remainingDays = 0; // 念のため
+		request.setAttribute("remainingDays", remainingDays);
+
+		// ログインボーナスの判定（ストレスチェック済かつ未受領）
 		Login_Bonus_HistoryDao bonusDao = new Login_Bonus_HistoryDao();
 		boolean hasReceivedBonus = bonusDao.hasReceivedBonusToday(userId, today);
-        if (hasCheckedToday && !hasReceivedBonus) {
-    		// アイテムをランダムに1つ付与
-    		Random rand = new Random();
-    		int itemNumber = rand.nextInt(8) + 1;
-    		uiDao.incrementItem(userId, itemNumber);
 
-    		// ボーナス取得履歴を登録
-    		Login_Bonus_History record = new Login_Bonus_History(userId, today);
-    		bonusDao.insertBonusRecord(record);
+		if (hasCheckedToday && !hasReceivedBonus) {
+		    // アイテムをランダムで1つ付与
+		    Random rand = new Random();
+		    int itemNumber = rand.nextInt(8) + 1;
+		    uiDao.incrementItem(userId, itemNumber);
 
-    		request.setAttribute("bonusItemId", itemNumber); // JSP/JSに渡す
-    		request.setAttribute("showBonusModal", true);     // モーダル表示用フラグ
+		    // ボーナス取得履歴を登録
+		    Login_Bonus_History record = new Login_Bonus_History(userId, today);
+		    bonusDao.insertBonusRecord(record);
+
+		    // モーダル表示のためのフラグ
+		    request.setAttribute("bonusItemId", itemNumber);
+		    request.setAttribute("showBonusModal", true);
 		}
+		
 		
 		//挨拶・一言コメント(コメント取得)
 		Pet_CommentsDao pcDao = new Pet_CommentsDao();
@@ -118,7 +149,7 @@ public class HomeServlet extends HttpServlet {
         // 挨拶コメントをランダムで取得
         Pet_Comments petCom = pcDao.selectComments(petComNumber);
         request.setAttribute("petCom", petCom);
-        
+        */
 		
 		// メニューページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
