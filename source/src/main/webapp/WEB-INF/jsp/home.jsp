@@ -57,7 +57,7 @@
     <!-- フッター（ここから） -->
     <footer>
     <div id="footer">
-        <p>&copy;Copyright E5</p>
+        <p>&copy; 2025 E5 makwm</p>
     </div>
     </footer>
     <!-- フッター（ここまで） -->
