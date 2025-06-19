@@ -24,10 +24,10 @@
       <div id="menu">メニュー</div>
       <nav id="nav">
         <ul>
-          <li><a href="<c:url value='/HomeServlet'/>">ホーム</a>
-          <li><a href="<c:url value='/CheckServlet'/>">ストレスチェック</a>
-          <li><a href="<c:url value='/ResultServlet'/>">統計</a>
-          <li><a href="<c:url value='/LogoutServlet'/>">ログアウト</a>
+          <li><a href="<c:url value='/HomeServlet'/>">ホーム</a></li>
+          <li><a href="<c:url value='/CheckServlet'/>">ストレスチェック</a></li>
+          <li><a href="<c:url value='/ResultServlet'/>">統計</a></li>
+          <li><a href="<c:url value='/LogoutServlet'/>">ログアウト</a></li>
         </ul>
       </nav>
     </header>
@@ -341,7 +341,7 @@
     <!-- フッター（ここから） -->
     <footer>
       <div id="footer">
-        <p>&copy;Copyright E5</p>
+        <p>&copy;2025 E5 makwm</p>
       </div>
     </footer>
     <!-- フッター（ここまで） -->
