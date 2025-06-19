@@ -44,7 +44,7 @@ public class ResultServlet extends HttpServlet {
     public static List<Check_Results> calcPoints(List<Integer> scores) {
         double centerX = 100.0;
         double centerY = 100.0;
-        double radius = 70.0;
+        double radius = 100.0;
         int pointCount = scores.size();
         double angleStep = 2 * Math.PI / pointCount;
 
@@ -55,6 +55,7 @@ public class ResultServlet extends HttpServlet {
             double angle = angleStep * i - Math.PI / 2;
             double x = centerX + radius * ratio * Math.cos(angle);
             double y = centerY + radius * ratio * Math.sin(angle);
+            System.out.printf("score=%d → ratio=%.2f → x=%.1f, y=%.1f%n", score, ratio, x, y);
             check_results.add(new Check_Results(x, y));
         }
         return check_results;
@@ -118,21 +119,20 @@ public class ResultServlet extends HttpServlet {
 		    request.setAttribute("scores", scores);
 		    
 			System.out.println("miss");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/check_result.jsp");
 			dispatcher.forward(request, response);
 		}
 		request.setCharacterEncoding("UTF-8");
 		
 		int id = (Integer) session.getAttribute("id");
-		String stringDay = request.getParameter("day");
 		
 		// パラメータから日付取得（例：2025-06-17）
-		if (stringDay == null || stringDay.isEmpty()) {
+		if (request.getParameter("day") == null || request.getParameter("day").isEmpty()) {
 			day = LocalDate.now(); 
 		} else {
 			try {
 		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		        day = LocalDate.parse(stringDay, formatter);
+		        day = LocalDate.parse(request.getParameter("day"), formatter);
 		    } catch (DateTimeParseException e) {
 		        // 日付の形式がおかしいときも、今の日付にする or エラー返す
 		        day = LocalDate.now();
@@ -234,7 +234,7 @@ public class ResultServlet extends HttpServlet {
 		// request.setAttribute("oneweekcomments", oneweekcomments);
 		// request.setAttribute("onemonthcomments", onemonthcomments);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/check_result.jsp");
 		dispatcher.forward(request, response);
 	}
 

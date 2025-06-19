@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>チェック結果</title>
-  <link rel="stylesheet" href="<c:url value='/css/style.css' />"  />
+  <link rel="stylesheet" href="<c:url value='/css/check_results.css' />"  />
+  <link rel="stylesheet" href="<c:url value='/css/common.css' />"  />
   <script src="<c:url value='/js/check_results.js' />"></script>
 </head>
 
@@ -165,7 +166,7 @@
 				<p>月の傾向</p>
 				<p>○○</p>
 			</div>
-			<a href="/E5/HomeServlet">ホーム</a>
+			<a href="<c:url value='/HomeServlet' />">ホーム</a>
         </div>
 
     </div>
