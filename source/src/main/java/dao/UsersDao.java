@@ -60,6 +60,41 @@ public class UsersDao {
 	    return loginResult;
 	}
 	
+	//　ログインユーザーのIDを取得
+	public int findUserIdByUsername(String username) {
+	    Connection conn = null;
+	    int userId = -1;
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        conn = DriverManager.getConnection(
+	            "jdbc:mysql://localhost:3306/e5?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	            "root", "password");
+
+	        String sql = "SELECT id FROM users WHERE username = ?";
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setString(1, username);
+	        ResultSet rs = pStmt.executeQuery();
+
+	        if (rs.next()) {
+	            userId = rs.getInt("id");
+	        }
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return userId;
+	}
+
+	
 	//ユーザー登録
 	public boolean insert(UsernamePassword users) {
 	    Connection conn = null;
@@ -83,7 +118,7 @@ public class UsersDao {
 	            return false; // すでにユーザーネームが存在
 	        }
 
-	        // // パスワードをハッシュ化して登録
+	        // パスワードをハッシュ化して登録
 	        String sql = "INSERT INTO users (username,password) VALUES (?, ?)";
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setString(1, users.getUsername());
