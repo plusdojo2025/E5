@@ -29,7 +29,7 @@
 			<div class="login-item">
 				<label for="password" class="login-label">password
 					<button class="tooltip">
-						<span class="tooltip-text">半角英数字8～16文字</span>
+						<span class="tooltip-text">半角英数字8～24文字</span>
 					i</button>
 				</label><br>
 				<input type="password" name="password">
