@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
 	    
 	 // 登録処理を行う
 		if (uDao.insert(new UsernamePassword(0,username,password))) { // 登録成功　ログイン画面へリダイレクト
-	        response.sendRedirect("/E5/LoginServlet");
+	        response.sendRedirect(request.getContextPath() + "/LoginServlet");
 	        return;
 		} else { // 登録失敗
 			request.setAttribute("error", "ユーザーネームが重複しています。");

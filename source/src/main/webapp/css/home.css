@@ -6,6 +6,31 @@ main {
     background-color: rgba(231, 208, 169, 0.2);
 }
 
+/*キャラクターの吹き出し*/
+.home_comment img {
+    position: absolute;
+    top: 120px;
+    width: 400px;
+    height: 200px;
+}
+
+/*キャラクターのコメント*/
+.home_comment div {
+    position: absolute;
+    font-size: 100px;
+    top: 130px;
+    left: 50px;
+}
+
+/*キャラクター画像*/
+.character img {
+    position: absolute;
+    left: 360px;
+    top: 300px;
+    width: 200px;
+    height: 200px;
+}
+
 /* アイテムメニューの枠 */
 .items_waku {
     position: relative;
