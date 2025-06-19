@@ -1,26 +1,28 @@
 @charset "UTF-8";
 h2 {
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   margin: auto;
+  font-size: 40px;
   border: 1px solid #333333;
   border-radius: 10px;
   background-color: #9fdfec;
-  max-width: 500px;
-  
+  max-width: 900px;
+  text-align: center;
 }
 .check_results {
 	max-width: 700px;
 	padding: 10px;	
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 	margin: auto;
 	border: 1px solid #333333;
 	border-radius: 10px;
-
+	text-align:center;
 }
 .tab-container {
     max-width: 1000px;
     margin: 0 auto;
+    margin-top: 30px;
 }
 
 /* ラジオボタンを非表示にする */
@@ -94,6 +96,7 @@ h2 {
     margin: 0 auto;
     padding: 35px;
     box-sizing: content-box;
+    margin-top:20px;
 }
 
 .radar-chart-1 svg {
@@ -140,8 +143,12 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
+	margin-top: 10px;
 }
-
+.label-column label {
+	margin-top: 10px;
+	font-size: 20px;
+}
 .check_comments {
 	border-top: 2px solid black;
 }
@@ -178,6 +185,66 @@ h2 {
 }
 
 @keyframes anima-bar-chart-1 {
+    from {
+        width: 0;
+    }
+}
+
+.bar-chart-2 {
+    font-size: .9em;
+}
+
+.bar-chart-2 > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.bar-chart-2 dt {
+    width: 55px;
+    min-width: 55px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.bar-chart-2 dd {
+    margin: 0;
+    padding-right: 15px;
+    border-radius: 3px;
+    background-color: #2589d0;
+    color: #fff;
+    font-weight: 600;
+    line-height: 45px;
+    text-align: right;
+    white-space: nowrap;
+    animation: anima-bar-chart-1 1.2s ease;
+}
+/* 月結果の棒グラフ */
+.labels div,
+.bars div {
+  margin-bottom: 12px;
+}
+.labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+   width: 55px;
+   min-width: 55px;
+}
+.bars {
+    margin: 0;
+    padding-right: 15px;
+    border-radius: 3px;
+    background-color: #2589d0;
+    border: 2px solid #333;
+    color: #fff;
+    font-weight: 600;
+    line-height: 45px;
+    text-align: right;
+    white-space: nowrap;
+    animation: anima-bar-chart-1 1.2s ease;
+}
+@keyframes anima-bar-chart-2 {
     from {
         width: 0;
     }
