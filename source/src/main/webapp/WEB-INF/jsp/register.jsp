@@ -29,7 +29,7 @@
 			<div class="register-item">
 				<label for="password" class="register-label">password
 					<button class="tooltip">
-						<span class="tooltip-text" id="username-msg">半角英数字8～16文字</span>
+						<span class="tooltip-text" id="username-msg">半角英数字8～24文字</span>
 					i</button>
 				</label><br>
 			<input type="password" id="password" name="password">

@@ -31,9 +31,9 @@ document.getElementById("registerForm").addEventListener("submit", function(even
     }
 
     // パスワードの英数混合チェック（8文字以上16文字以内）
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,24}$/;
     if (password !== "" && !passwordRegex.test(password)) {
-      messages.push("※パスワードは英数字混合で8文字以上16文字以内で入力してください。");
+      messages.push("※パスワードは英数字混合で8文字以上24文字以内で入力してください。");
     }
     
     // ユーザーネームの半角英数字（5文字以上30文字以内）
