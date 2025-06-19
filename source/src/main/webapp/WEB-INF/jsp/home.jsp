@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="/E5/js/home.js"></script>
+<script src="<c:url value='/js/home.js'/>"></script>
 <link rel="stylesheet" href="<c:url value='/css/common.css'/>" >
   <link rel="stylesheet" href="<c:url value='/css/check.css'/>" >
 </head>
@@ -22,10 +22,10 @@
       <div id="menu">メニュー</div>
       <nav id="nav">
         <ul>
-          <li><a href="<c:url value='/HomeServlet'/>">ホーム</a>
-          <li><a href="<c:url value='/CheckServlet'/>">ストレスチェック</a>
-          <li><a href="<c:url value='/ResultServlet'/>">統計</a>
-          <li><a href="<c:url value='/LogoutServlet'/>">ログアウト</a>
+          <li><a href="<c:url value='/HomeServlet'/>">ホーム</a></li>
+          <li><a href="<c:url value='/CheckServlet'/>">ストレスチェック</a></li>
+          <li><a href="<c:url value='/ResultServlet'/>">統計</a></li>
+          <li><a href="<c:url value='/LogoutServlet'/>">ログアウト</a></li>
         </ul>
       </nav>
     </header>
@@ -50,7 +50,7 @@
             </div>
             <!-- キャラクターの枠 -->
             <div class="character">
-				<img src="<c:url value='/images/happy_character.png'/>" alt="ハッピーなキャラ">
+				<img src="<c:url value='/images/happy_character.gif'/>" alt="ハッピーなキャラ">
             </div>
         </div>
     </main>
