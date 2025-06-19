@@ -75,7 +75,7 @@ public class CheckServlet extends HttpServlet {
 		int humanStress = answers[3] + answers[4] + answers[5];      // Q4〜Q6
 		int anxietyStress = answers[7] + answers[8] + answers[9];	 // Q8〜Q10
 
-		// 一番高かったストレス項目を決定(複数ある場合の優先度、1:環境的 2:身体的 3:生活的)
+		// 一番高かったストレス項目を決定(複数ある場合の優先度、1:身体的 2:環境的 3:生活的)
 		int max = Math.max(workStress, Math.max(humanStress, anxietyStress));
 
 		// 該当するカテゴリがいくつあるかをチェック
