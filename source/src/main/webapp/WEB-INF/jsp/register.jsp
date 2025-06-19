@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +8,7 @@
 <title>ユーザー登録</title>
 <link rel="stylesheet" href="<c:url value='/css/register.css' />">
 <link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<!-- ヘッダー（ここから） -->
