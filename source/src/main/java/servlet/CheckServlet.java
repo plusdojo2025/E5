@@ -105,7 +105,7 @@ public class CheckServlet extends HttpServlet {
 //		System.out.println("check_insert result: " + result);
 		if (result) {
 			//ストレスチェック結果ページ用Servletにリダイレクトする
-			response.sendRedirect(request.getContextPath() +"/CheckResultsServlet");
+			response.sendRedirect(request.getContextPath() +"/ResultServlet");
 			return;
 		} else {
 			//ストレスチェックページ用Servletにリダイレクト(戻る)
@@ -134,7 +134,7 @@ public class CheckServlet extends HttpServlet {
 //		*/
 		
 		//ストレスチェック結果ページ用Servletにリダイレクトする
-//		response.sendRedirect(request.getContextPath() +"/CheckResultsServlet");
+//		response.sendRedirect(request.getContextPath() +"/ResultServlet");
 		/*
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_result.jsp");
