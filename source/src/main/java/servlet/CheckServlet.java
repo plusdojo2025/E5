@@ -28,7 +28,7 @@ public class CheckServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/E5/LoginServlet");
+			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 			return;
 		}
 		
@@ -46,7 +46,7 @@ public class CheckServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/E5/LoginServlet");
+			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 			return;
 		}
 		
@@ -125,7 +125,7 @@ public class CheckServlet extends HttpServlet {
 //		*/
 		
 		//ストレスチェック結果ページ用Servletにリダイレクトする
-		response.sendRedirect("/E5/CheckResultsServlet");
+		response.sendRedirect(request.getContextPath() +"/CheckResultsServlet");
 		/*
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_result.jsp");

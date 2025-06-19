@@ -39,7 +39,7 @@ public class HomeServlet extends HttpServlet {
 //		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 //		HttpSession session = request.getSession();
 //		if (session.getAttribute("id") == null) {
-//			response.sendRedirect("/E5/LoginServlet");
+//			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 //			return;
 //		}
 		
@@ -132,7 +132,7 @@ public class HomeServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/E5/LoginServlet");
+			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 			return;
 		}
 		
