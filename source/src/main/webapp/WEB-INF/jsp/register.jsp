@@ -58,7 +58,7 @@
 	<!-- メイン（ここまで） -->
 	<!-- フッター（ここから） -->
 	<footer class="footer">
-		<p>&copy;makwm</p>
+		<p>&copy; 2025 E5 makwm</p>
 	</footer>
 	<!-- フッター（ここまで） -->
 	<script src="<c:url value='/js/register.js' />"></script>
