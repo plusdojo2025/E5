@@ -13,6 +13,11 @@ import java.util.Map;
 import model.One_Week_Trends;
 
 public class One_Week_TrendsDao {
+	// クラスフィールド定義
+	private String monday;
+	private String sunday;
+	private List<Integer> weekScore;
+	
 	public List<One_Week_Trends> One_Week_Trends(One_Week_Trends weekTrends, String selectedDate) {
 		Connection conn = null;
 		List<One_Week_Trends> cardList = new ArrayList<One_Week_Trends>();
@@ -65,20 +70,11 @@ public class One_Week_TrendsDao {
 			ResultSet rs2 = pStmt2.executeQuery();
 			
 			// 7日分のスコアを格納するリスト
-			List<Integer> weekScore = new ArrayList<>();
+			weekScore = new ArrayList<>();
 			
 			while (rs2.next()) {
 				int score = rs2.getInt("stress_score"); // スコア取得
 				weekScore.add(score);                   // リストに追加
-			}
-			
-			public Map<String, Object> getWeekData(String selectedDate) {
-				Map<String, Object> dataMap = new HashMap<>();
-			    // 必要なデータを追加する
-			    dataMap.put("weekScore", weekScore); // ローカルまたはフィールド変数を参照
-			    dataMap.put("monday", monday);
-			    dataMap.put("sunday", sunday);
-			    return dataMap;
 			}
 			
 			// 一番大きいストレス項目のカウント
@@ -138,5 +134,12 @@ public class One_Week_TrendsDao {
 		return cardList;
 	}
 	
+	public Map<String, Object> getWeekData() {
+		Map<String, Object> dataMap = new HashMap<>();
+		dataMap.put("weekScore", weekScore);
+		dataMap.put("monday", monday);
+		dataMap.put("sunday", sunday);
+		return dataMap;)
+	}
 	
 }
