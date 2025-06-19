@@ -75,16 +75,21 @@ public class CheckServlet extends HttpServlet {
 		int humanStress = answers[3] + answers[4] + answers[5];      // Q4〜Q6
 		int anxietyStress = answers[7] + answers[8] + answers[9];	 // Q8〜Q10
 
-		// 一番高かったストレス項目を決定
-		String stress_Factor = "環境的ストレス";
-		int max = workStress;
+		// 一番高かったストレス項目を決定(複数ある場合の優先度、1:環境的 2:身体的 3:生活的)
+		int max = Math.max(workStress, Math.max(humanStress, anxietyStress));
 
-		if (humanStress > max) {
-			max = humanStress;
-			stress_Factor = "身体的ストレス";
-		}
-		if (anxietyStress > max) {
-			stress_Factor = "生活的ストレス";
+		// 該当するカテゴリがいくつあるかをチェック
+		boolean isWorkMax = workStress == max;
+		boolean isHumanMax = humanStress == max;
+//		boolean isAnxietyMax = anxietyStress == max;
+
+		String stress_Factor = "";
+		if (isHumanMax) {
+		    stress_Factor = "身体的ストレス";
+		} else if (isWorkMax) {
+		    stress_Factor = "環境的ストレス";
+		} else {
+		    stress_Factor = "生活的ストレス";
 		}
 		
 		// 登録処理を行う(登録日の登録はDBで自動で行わせるため、いらない)
