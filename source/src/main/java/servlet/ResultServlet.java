@@ -51,6 +51,13 @@ public class ResultServlet extends HttpServlet {
 		// 日、週、月の結果を取得して渡す ユーザーidと今日の日付を取得し、今日のチェック結果を探す。
 		
 		if (session.getAttribute("id") == null) {
+			int score1 = 15;
+			int score2 = 10;
+			int score3 = 5;
+			request.setAttribute("score1", score1);
+			request.setAttribute("score2", score2);
+			request.setAttribute("score3", score3);
+			System.out.println("miss");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -90,13 +97,15 @@ public class ResultServlet extends HttpServlet {
 		String stress_factor = onedayresult.get(0).getStress_factor();
 		
 		// jsのレーダーチャート計算に渡すスコア
-		int score1 = onedayresult.get(0).getQuestion1() + onedayresult.get(0).getQuestion2() 
-				+ onedayresult.get(0).getQuestion3();
-		int score2 = onedayresult.get(0).getQuestion4() + onedayresult.get(0).getQuestion5() 
-				+ onedayresult.get(0).getQuestion6();
-		int score3 = onedayresult.get(0).getQuestion7() + onedayresult.get(0).getQuestion8() 
-				+ onedayresult.get(0).getQuestion9();
-		
+//		int score1 = onedayresult.get(0).getQuestion1() + onedayresult.get(0).getQuestion2() 
+//				+ onedayresult.get(0).getQuestion3();
+//		int score2 = onedayresult.get(0).getQuestion4() + onedayresult.get(0).getQuestion5() 
+//				+ onedayresult.get(0).getQuestion6();
+//		int score3 = onedayresult.get(0).getQuestion7() + onedayresult.get(0).getQuestion8() 
+//				+ onedayresult.get(0).getQuestion9();
+		int score1 = 70;
+		int score2 = 30;
+		int score3 = 90;
 		
 		// 週、月のチェック結果で一番高いストレス傾向を求める
 		Map<String, Integer> weekcountmap = new HashMap<>();
@@ -151,6 +160,11 @@ public class ResultServlet extends HttpServlet {
 		request.setAttribute("endofweek", endofweek);
 		request.setAttribute("startofmonth", startofmonth);
 		request.setAttribute("endofmonth", endofmonth);
+		
+		// スコアの傾向をリクエストスコープに格納する。
+		request.setAttribute("score1", score1);
+		request.setAttribute("score2", score2);
+		request.setAttribute("score3", score3);
 		
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("onedayresult", onedayresult);
