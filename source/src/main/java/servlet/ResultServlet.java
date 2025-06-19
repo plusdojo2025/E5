@@ -5,6 +5,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,42 @@ public class ResultServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+    public static List<Check_Results> calcPoints(List<Integer> scores) {
+        double centerX = 100.0;
+        double centerY = 100.0;
+        double radius = 70.0;
+        int pointCount = scores.size();
+        double angleStep = 2 * Math.PI / pointCount;
+
+        List<Check_Results> check_results = new ArrayList<>();
+        for (int i = 0; i < pointCount; i++) {
+            int score = scores.get(i);
+            double ratio = (score - 3.0) / 12.0;  // scoreが3〜15の範囲を想定
+            double angle = angleStep * i - Math.PI / 2;
+            double x = centerX + radius * ratio * Math.cos(angle);
+            double y = centerY + radius * ratio * Math.sin(angle);
+            check_results.add(new Check_Results(x, y));
+        }
+        return check_results;
+    }
+    
+ // ポリゴンのd属性用文字列を作る
+    public static String makePolygonD(List<Check_Results> check_results) {
+        if (check_results.isEmpty()) return "";
+
+        StringBuilder sb = new StringBuilder();
+        Check_Results first = check_results.get(0);
+        sb.append("M ").append(first.getX()).append(" ").append(first.getY());
+        for (int i = 1; i < check_results.size(); i++) {
+            Check_Results p = check_results.get(i);
+            sb.append(" L ").append(p.getX()).append(" ").append(p.getY());
+        }
+        sb.append(" L ").append(first.getX()).append(" ").append(first.getY()); // 閉じる
+        return sb.toString();
+    }
+
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -47,9 +84,8 @@ public class ResultServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		LocalDate day;
-		
-		// 日、週、月の結果を取得して渡す ユーザーidと今日の日付を取得し、今日のチェック結果を探す。
-		
+
+		// ログインしていない時。
 		if (session.getAttribute("id") == null) {
 			int score1 = 15;
 			int score2 = 10;
@@ -57,6 +93,30 @@ public class ResultServlet extends HttpServlet {
 			request.setAttribute("score1", score1);
 			request.setAttribute("score2", score2);
 			request.setAttribute("score3", score3);
+			
+			List<Integer> scores = List.of(5, 10, 15);
+		    // 座標計算
+		    List<Check_Results> check_results = calcPoints(scores);
+
+		    // d属性作成
+		    String polygonD = makePolygonD(check_results);
+
+		    // JSPに渡す用に座標を文字列化（例：JSON形式など）
+		    // ここはJSP側で使いやすいように加工する
+		    // 例として、JavaScript配列風の文字列を作成
+		    StringBuilder pointsJsArray = new StringBuilder("[");
+		    for (int i = 0; i < check_results.size(); i++) {
+		    	Check_Results p = check_results.get(i);
+		        pointsJsArray.append("{x:").append(p.getX()).append(", y:").append(p.getY()).append("}");
+		        if (i != check_results.size() -1) pointsJsArray.append(",");
+		    }
+		    pointsJsArray.append("]");
+		    // リクエスト属性にセット
+		    request.setAttribute("polygonD", polygonD);
+		    request.setAttribute("pointsJsArray", check_results);
+		    request.setAttribute("pointsJsArray", pointsJsArray.toString());
+		    request.setAttribute("scores", scores);
+		    
 			System.out.println("miss");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
 			dispatcher.forward(request, response);

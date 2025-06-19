@@ -59,13 +59,16 @@
 			            <path d="M 100.0 33.3 L 157.7 133.3 L 42.3 133.3 L 100.0 33.3"/>
 			            <path d="M 100.0 66.7 L 128.9 116.7 L 71.1 116.7 L 100.0 66.7"/>
 			        </g>
-			        <path id="dataPolygon" d="M 100.0 30.0 L 160.6 135.0 L 39.4 135.0 L 100.0 30.0" fill="#2589d030" stroke="#2589d0"/>
+			        <path id="dataPolygon" d="${polygonD}" fill="#2589d030" stroke="#2589d0"/>
+			        
 			        <g fill="#2589d0">
-			            <circle id="point0" cx="100.0" cy="30.0" r="3"/>
-			            <circle id="point1" cx="160.6" cy="135.0" r="3"/>
-			            <circle id="point2" cx="39.4" cy="135.0" r="3"/>
+			        
+			           <c:forEach var="point" items="${points}" varStatus="status">
+						    <circle id="point${status.index}" cx="${point.x}" cy="${point.y}" r="3" fill="red"/>
+						</c:forEach>
 			        </g>
 			    </svg>
+			    
 			    <dl>
 			        <div>
 			            <dt>環境的ストレス</dt>
@@ -98,20 +101,21 @@
         <div class="tab-content content2">
             <h1 class="check_results">${starttoweek}～${endofweek}の記録</h1>
             <dl class="bar-chart-1">
-				
+					<c:forEach var="item" items="${oneweekresult}">
+					    <!-- データ表示 -->
 				    <div>
-				        <dt>項目1</dt>
-				        <dd style="width: 50%">50%</dd>
-				        <dt>50</dt>
+				        <dt>${item.created_at}</dt>
+				        <dd style="width: ${item.stress_score}%">${item.stress_score}%</dd>
+				        <dt>${item.stress_score}</dt>
 				    </div>
-
+					</c:forEach>
 			</dl>
             
             <div class="week_comments">
 				<p>週の傾向</p>
-				<p>○○</p>
+				<p>${oneweekcomments}</p>
 				<p>アドバイス</p>
-				<p>○○</p>
+				<p>${oneweekcomments}</p>
 			</div>
 			<a href="/E5/HomeServlet">ホーム</a>
         </div>
@@ -121,7 +125,8 @@
             <dl class="bar-chart-2">
 			    <div>
 			        <dt>項目1<%= request.getAttribute("score1")%></dt>
-			        <dd style="width: <%= request.getAttribute("score1")%>%">50%</dd>
+			        <dd style="width: <%= request.getAttribute("score1")%>%"><%= request.getAttribute("score1")%>%</dd>
+			        <dt><%= request.getAttribute("score1")%></dt>
 			    </div>
 			    
 			    <div class="container" style="display: flex; gap: 20px; ">
@@ -170,109 +175,5 @@
 
 	</main>
 </body>
-		  <%Object obj =  request.getAttribute("score1");
-		  int s1 = 3; // デフォルト値
-		  if (obj != null && obj instanceof Integer) {
-		      s1 = (Integer) obj;
-		  } 
-		  System.out.println(s1);
 		  
-		  if (obj instanceof Integer) {
-			    int score = (Integer) obj;
-			    System.out.println("score1 = " + score);
-			} else {
-			    System.out.println("score1はIntegerではありません");
-			}
-			
-			Object obj2 =  request.getAttribute("score2");
-			  int s2 = 3; // デフォルト値
-			  if (obj2 != null && obj2 instanceof Integer) {
-			      s2 = (Integer) obj2;
-			  } 
-			  System.out.println(s2);
-			  
-			  if (obj instanceof Integer) {
-				    int score2 = (Integer) obj2;
-				    System.out.println("score2 = " + score2);
-				} else {
-				    System.out.println("score2はIntegerではありません");
-				}
-				
-				Object obj3 =  request.getAttribute("score3");
-				  int s3 = 3; // デフォルト値
-				  if (obj3 != null && obj3 instanceof Integer) {
-				      s3 = (Integer) obj3;
-				  } 
-				  System.out.println(s3);%>
-				  
-				  <%if (obj3 instanceof Integer) {
-					    int score3 = (Integer) obj3;
-					    System.out.println("score3 = " + score3);
-					} else {
-					    System.out.println("score3はIntegerではありません");
-					}%>
-	<script>
-  // Javaの値をJS変数に変換（エスケープに注意）
-  console.log("dsada");
-  function updateRadarChart(scores) {
-	  console.log('scores:', scores);
-	  const centerX = 100;
-	  const centerY = 100;
-	  const radius = 70;
-	  const pointCount = scores.length;
-	  const angleStep = (2 * Math.PI) / pointCount;
-	  console.log(`score ${score} → ratio ${ratio}`);
-	  // 頂点座標計算
-	  const points = scores.map((score, i) => {
-	    const ratio = (score - 3) / (15 - 3);  // = (score - 3) / 12
-	    const angle = angleStep * i - Math.PI / 2;
-	    const x = centerX + radius * ratio * Math.cos(angle);
-	    const y = centerY + radius * ratio * Math.sin(angle);
-	    return { x, y };
-	  });
-
-	  // ポリゴンのd属性の文字列を作る
-	  // M x0 y0 L x1 y1 L x2 y2 ... L x0 y0
-	  let d = `M ${points[0].x} ${points[0].y}`;
-	  for(let i = 1; i < points.length; i++) {
-	    d += ` L ${points[i].x} ${points[i].y}`;
-	  }
-	  d += ` L ${points[0].x} ${points[0].y}`; // 閉じる
-
-	  // ポリゴンを書き換え
-	  const dataPolygon = document.getElementById('dataPolygon');
-	  if(dataPolygon) {
-	    dataPolygon.setAttribute('d', d);
-	  }
-	  
-	  console.log("scores:", scores);
-	  console.log("points:", points);
-	  console.log("d attribute:", d);
-	  console.log(`score ${score} → ratio ${ratio}`);
-	  // 円の座標を書き換え
-	  points.forEach((p, i) => {
-	    const circle = document.getElementById(`point${i}`);
-	    if(circle) {
-	      circle.setAttribute('cx', p.x);
-	      circle.setAttribute('cy', p.y);
-	    } else {
-	        console.warn(`circle point${i} not found`);
-	    }
-	  });
-	}
-
-  
-  function onTabShown(tabIndex) {
-
-	  if (tabIndex === 0) { // content1のとき
-		  const scoresFromJava = [<%= s1 %>, <%= s2 %>, <%= s3 %>];
-		  <%System.out.println(s2);%>
-		  <%System.out.println(s3);%>
-	    console.log('scoresFromJava raw:', scoresFromJava);
-	    const scores = scoresFromJava.map(s => parseInt(s, 10));
-	    console.log('scores numeric:', scores);
-	    updateRadarChart(scores);
-	  }
-	}
-  </script>
 </html>
