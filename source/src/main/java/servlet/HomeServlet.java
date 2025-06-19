@@ -63,7 +63,6 @@ public class HomeServlet extends HttpServlet {
 //        Check_Results todayResult = crDao.findByUserIdAndDate(userId, today);  // ←新たに用意したメソッドを想定
 		List<Check_Results> todayResults = crDao.findByUserIdAndDate(userId, today);
 		Check_Results todayResult = todayResults.isEmpty() ? null : todayResults.get(0); // 1件だけ取得
-
 		
         String expression = "default";
         int stress_Score = -1;
