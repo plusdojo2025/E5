@@ -177,27 +177,27 @@ public class Check_ResultsDao {
 					+ "		);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			pStmt.setString(1, "%" + card.getUserid() + "%");
-			pStmt.setString(2, "%" + card.getStress_score() + "%");
-			pStmt.setString(3, "%" + card.getQuestion1() + "%");
-			pStmt.setString(4, "%" + card.getQuestion2() + "%");
-			pStmt.setString(5, "%" + card.getQuestion3() + "%");
-			pStmt.setString(6, "%" + card.getQuestion4() + "%");
-			pStmt.setString(7, "%" + card.getQuestion5() + "%");
-			pStmt.setString(8, "%" + card.getQuestion6() + "%");
-			pStmt.setString(9, "%" + card.getQuestion7() + "%");
-			pStmt.setString(10, "%" + card.getQuestion8() + "%");
-			pStmt.setString(11, "%" + card.getQuestion9() + "%");
-			pStmt.setString(12, "%" + card.getQuestion10() + "%");
-			pStmt.setString(13, "%" + card.getStress_factor() + "%");
+			pStmt.setInt(1, card.getUserid());
+	        pStmt.setInt(2, card.getStress_score());
+	        pStmt.setInt(3, card.getQuestion1());
+	        pStmt.setInt(4, card.getQuestion2());
+	        pStmt.setInt(5, card.getQuestion3());
+	        pStmt.setInt(6, card.getQuestion4());
+	        pStmt.setInt(7, card.getQuestion5());
+	        pStmt.setInt(8, card.getQuestion6());
+	        pStmt.setInt(9, card.getQuestion7());
+	        pStmt.setInt(10, card.getQuestion8());
+	        pStmt.setInt(11, card.getQuestion9());
+	        pStmt.setInt(12, card.getQuestion10());
+	        pStmt.setString(13, card.getStress_factor());
 			
-			// SELECT文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
+//			// SELECT文を実行し、結果表を取得する
+//			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
-			if (pStmt.executeUpdate() == 1) {
-				result = true;
-			}
+	        if (pStmt.executeUpdate() == 1) {
+	            result = true;
+	        }
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

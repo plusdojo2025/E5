@@ -36,15 +36,15 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("id") == null) {
-//			response.sendRedirect(request.getContextPath() +"/LoginServlet");
-//			return;
-//		}
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect(request.getContextPath() +"/LoginServlet");
+			return;
+		}
 		
 		// ログイン中ユーザーの取得(ユーザーごとのデータを扱うため)
-		int userId = (int) session.getAttribute("id");	//ここはいい
+		int userId = (int) session.getAttribute("id");
 		
 		//アイテムの所持数を表示
 		UserItemsDao uiDao = new UserItemsDao();

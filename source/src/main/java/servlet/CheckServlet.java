@@ -96,12 +96,16 @@ public class CheckServlet extends HttpServlet {
 				stress_Factor
 		);
 //		crDao.check_insert(resultData); // 成功・失敗に関係なく進む
-		if (crDao.check_insert(resultData)) {
+		boolean result = crDao.check_insert(resultData);
+//		System.out.println("check_insert result: " + result);
+		if (result) {
 			//ストレスチェック結果ページ用Servletにリダイレクトする
-			response.sendRedirect("/E5/CheckResultsServlet");
+			response.sendRedirect(request.getContextPath() +"/CheckResultsServlet");
+			return;
 		} else {
 			//ストレスチェックページ用Servletにリダイレクト(戻る)
-			response.sendRedirect("/E5/CheckServlet");
+			response.sendRedirect(request.getContextPath() +"/CheckServlet");
+			return;
 
 		}
 		
@@ -125,7 +129,7 @@ public class CheckServlet extends HttpServlet {
 //		*/
 		
 		//ストレスチェック結果ページ用Servletにリダイレクトする
-		response.sendRedirect(request.getContextPath() +"/CheckResultsServlet");
+//		response.sendRedirect(request.getContextPath() +"/CheckResultsServlet");
 		/*
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_result.jsp");
