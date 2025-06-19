@@ -6,18 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>ユーザー登録</title>
-<link rel="stylesheet" href="css/register.css">
-<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="c:url value='/css/login.css' ">
+<link rel="stylesheet" href="c:url value='/css/common.css' ">
 </head>
 <body>
+	<!-- ヘッダー（ここから） -->
 	<header class="header"></header>
+	<!-- ヘッダー（ここまで） -->
+	<!-- メイン（ここから） -->
 	<main>
 	<div class="title">
 		<h1 class="title-text">ストレッシュ</h1>
-		<img alt="" src="images/logo.png" class="logo">
+		<img alt="" src="<c:url value='/images/logo.png'/>" class="logo">
 	</div>
 	<div id="register">
-		<form id="registerForm" action="/E5/RegisterServlet" method="post">
+		<form id="registerForm" action="<c:url value='/RegisterServlet' />" method="POST">
 			<div class="register-item">
 			<label for="username" class="register-label">ユーザーネーム
 				<button class="tooltip">
@@ -47,13 +50,16 @@
   			</c:if>
 			</span><br>
 			<button type="submit" class="registerButton register-item">登録</button><br>
-			<a href="/E5/LoginServlet">ログインはこちら</a>
+			<a href="<c:url value='/LoginServlet' />">ログインはこちら</a>
 		</form>
 	</div>	
 	</main>
+	<!-- メイン（ここまで） -->
+	<!-- フッター（ここから） -->
 	<footer class="footer">
 		<p>&copy;makwm</p>
 	</footer>
-	<script src="/E5/js/register.js"></script>
+	<!-- フッター（ここまで） -->
+	<script src="<c:url value='/js/register.js' />"></script>
 </body>
 </html>
