@@ -29,10 +29,10 @@ public class Check_ResultsDao {
 			String sql = "SELECT stress_score, question1, question2, question3, question4, "
 					+ "question5, question6, question7, question8, question9, question10, stress_factor "
 					+ "FROM check_results "
-					+ "WHERE userid LIKE ? AND created_at LIKE ? ";
+					+ "WHERE userid = ? AND created_at LIKE ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			pStmt.setString(1, "%" + card.getUserid() + "%");
+			pStmt.setInt(1, card.getUserid());
 			pStmt.setString(2, "%" + card.getCreated_at() + "%");
 
 			// SELECT文を実行し、結果表を取得する
@@ -234,7 +234,7 @@ public class Check_ResultsDao {
 			// SQL文を準備する
 			String sql = "SELECT stress_score,stress_factor \"\r\n"
 					+ "					+ \"FROM check_results \"\r\n"
-					+ "					+ \"WHERE userid LIKE ? AND created_at BETWEEN ? AND ? ";
+					+ "					+ \"WHERE userid = ? AND created_at BETWEEN ? AND ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
@@ -242,9 +242,9 @@ public class Check_ResultsDao {
 			LocalDate enddate = card.getEndday();  // LocalDate型で日付があると仮定
 			java.sql.Date sqlDate2 = java.sql.Date.valueOf(enddate);
 			
-			pStmt.setString(1, "%" + card.getUserid() + "%");
-			pStmt.setDate(2, sqlDate);
-			pStmt.setDate(3, sqlDate2);
+			pStmt.setInt(1, card.getUserid());
+			pStmt.setString(2, "%" + sqlDate +"%");
+			pStmt.setString(3, "%" + sqlDate2 +"%");
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -295,7 +295,7 @@ public class Check_ResultsDao {
 			// SQL文を準備する
 			String sql = "SELECT stress_score,stress_factor \"\r\n"
 					+ "					+ \"FROM check_results \"\r\n"
-					+ "					+ \"WHERE userid LIKE ? AND created_at BETWEEN ? AND ? ";
+					+ "					+ \"WHERE userid = ? AND created_at BETWEEN ? AND ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
@@ -303,9 +303,9 @@ public class Check_ResultsDao {
 			LocalDate enddate = card.getEndday();  // LocalDate型で日付があると仮定
 			java.sql.Date sqlDate2 = java.sql.Date.valueOf(enddate);
 			
-			pStmt.setString(1, "%" + card.getUserid() + "%");
-			pStmt.setDate(2, sqlDate);
-			pStmt.setDate(3, sqlDate2);
+			pStmt.setInt(1, card.getUserid());
+			pStmt.setString(2, "%" + sqlDate +"%");
+			pStmt.setString(3, "%" + sqlDate2 +"%");
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -338,5 +338,112 @@ public class Check_ResultsDao {
 
 		// 結果を返す
 		return cardList;
+	}
+	
+	public List<Check_Results> findByUserIdAndDate(int userid, LocalDate today) {
+		Connection conn = null;
+		List<Check_Results> cardList = new ArrayList<Check_Results>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "SELECT stress_score,stress_factor \"\r\n"
+					+ "					+ \"FROM check_results \"\r\n"
+					+ "					+ \"WHERE userid = ? AND created_at LIKE ? ";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			java.sql.Date sqlDate = java.sql.Date.valueOf(today);
+			
+			pStmt.setInt(1, userid);
+			pStmt.setString(2, "%" + sqlDate +"%");
+
+
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Check_Results bc = new Check_Results(
+						rs.getInt("stress_score"),
+						rs.getString("stress_factor")
+						);
+				cardList.add(bc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			cardList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			cardList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					cardList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return cardList;
+	}
+	
+	public boolean hasCheckResultToday(int userid, LocalDate today) {
+		Connection conn = null;
+		boolean result = false;
+		
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "SELECT stress_score,created_at \"\r\n"
+					+ "					+ \"FROM check_results \"\r\n"
+					+ "					+ \"WHERE userid = ? AND created_at LIKE ? ";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			pStmt.setInt(1, userid);
+			pStmt.setString(2, "%" + today +"%");
+			
+//			// SELECT文を実行し、結果表を取得する
+//			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+	        if (pStmt.executeUpdate() == 1) {
+	            result = true;
+	        }
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
 	}
 }

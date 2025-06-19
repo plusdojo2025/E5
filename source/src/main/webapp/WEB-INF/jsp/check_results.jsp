@@ -7,15 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>チェック結果</title>
-  <link rel="stylesheet" href="/E5/css/common.css" />
-  <link rel="stylesheet" href="/E5/css/check_results.css" />
-  <script src="/E5/js/check_results.js"></script>
+  <link rel="stylesheet" href="<c:url value='/css/style.css' />"  />
+  <script src="<c:url value='/js/check_results.js' />"></script>
 </head>
 
 <body>
 	<main>
 	<h2>ストレスチェック結果</h2>
-<form action="/E5/ResultServlet" method="get">
+<form action="<c:url value='/CheckServlet' />" method="get">
 	<div class="tab-container">
 		○○の部分はservletからデータを取ってくる
         <input type="radio" name="tabs" id="tab1" class="tab-input" checked>

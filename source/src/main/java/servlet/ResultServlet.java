@@ -51,7 +51,7 @@ public class ResultServlet extends HttpServlet {
         List<Check_Results> check_results = new ArrayList<>();
         for (int i = 0; i < pointCount; i++) {
             int score = scores.get(i);
-            double ratio = (score - 3.0) / 12.0;  // scoreが3〜15の範囲を想定
+            double ratio = (score - 3.0) / (15-3);  // scoreが3〜15の範囲を想定
             double angle = angleStep * i - Math.PI / 2;
             double x = centerX + radius * ratio * Math.cos(angle);
             double y = centerY + radius * ratio * Math.sin(angle);
