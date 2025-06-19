@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.Check_CommentsDao;
-import dao.Check_ResultsDao;
 import dao.Login_Bonus_HistoryDao;
 import dao.Pet_CommentsDao;
 import dao.UserItemsDao;
@@ -54,17 +53,19 @@ public class HomeServlet extends HttpServlet {
 		
 		
 		//表情判定（チェック結果を元に）
-		Check_ResultsDao crDao = new Check_ResultsDao();
-        // 最新のストレスチェック結果の取得(最新の1件)
-        Check_Results latestResult = crDao.findLatestByUserId(userId);
+		LocalDate today = LocalDate.now();
+        // 今日のストレスチェック結果を取得（存在すれば1件）
+        Check_Results todayResult = crDao.findByUserIdAndDate(userId, today);  // ←新たに用意したメソッドを想定
+
         String expression = "default";
         int stress_Score = -1;
         String stress_Factor = null;
-		// 点数に応じてキャラクターの表情（画像やアニメーション）を変えるために文字列で分類
-        if (latestResult != null) {
-            stress_Score = latestResult.getStress_score();		// ストレス点数（0〜100）を取得
-            stress_Factor = latestResult.getStress_factor();	// ストレスの傾向を取得
+        //　今日のストレスチェック結果があれば表情選択と、結果に応じたコメント選択を実行する
+        if (todayResult != null) {
+            stress_Score = todayResult.getStress_score();	// ストレス点数（0〜100）を取得
+            stress_Factor = todayResult.getStress_factor();	// ストレスの傾向を取得
 
+            // 点数に応じてキャラクターの表情を決定
             if (stress_Score < 30) {
                 expression = "genki";
             } else if (stress_Score < 50) {
@@ -74,13 +75,10 @@ public class HomeServlet extends HttpServlet {
             } else {
                 expression = "shindoi";
             }
-        }
-        request.setAttribute("expression", expression);
-		
-		
-		//コメント判定(チェック結果を元に)
-        if (stress_Score >= 0 && stress_Factor != null) {
-            //チェック結果に基づくコメント取得
+
+            request.setAttribute("expression", expression);
+
+            // チェック結果に基づくコメント取得
             Check_CommentsDao ccDao = new Check_CommentsDao();
             Check_Comments commentData = ccDao.selectByScoreAndTrend(stress_Score, stress_Factor);
             if (commentData != null) {
@@ -90,7 +88,7 @@ public class HomeServlet extends HttpServlet {
 		
 		
 		//ストレスチェックの促し(実施済みかの確認)
-        LocalDate today = LocalDate.now();
+//        LocalDate today = LocalDate.now();
         // 今日すでにチェック済みかを確認(今日すでにチェックをしていれば true、していなければ false)
         boolean hasCheckedToday = crDao.hasCheckResultToday(userId, today);
         // JSP側で showCheckPrompt == true なら JavaScript モーダルを表示させる構成にする
