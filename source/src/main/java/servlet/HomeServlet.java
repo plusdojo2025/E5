@@ -112,7 +112,7 @@ public class HomeServlet extends HttpServlet {
 
 		if (streak != null) {
 			LocalDate lastLogin = crDao.getLastCheckDate(userId, today); // created_atから取得
-		    if (lastLogin != null && lastLogin.plusDays(1).isEqual(today)) {
+		    if (lastLogin != null && lastLogin.plusDays(1).isEqual(LocalDate.now())) {
 		        // 昨日もログインしていた → 継続中
 		        loginStreak = streak.getLogin_date() + 1;
 		        if (loginStreak > 7) loginStreak = 1; // 7超えたら1に戻す
