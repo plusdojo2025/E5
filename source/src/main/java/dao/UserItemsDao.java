@@ -19,13 +19,14 @@ public class UserItemsDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/E5"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/E5?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
 			// SQL文を準備する
             String sql = "SELECT * FROM useritems WHERE userid = ?";
             PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setInt(1, userid);
 			
             
          // SQL文を実行し、結果を取得する
@@ -58,9 +59,9 @@ public class UserItemsDao {
         return item;
     }
 	
-	// 新規登録（ユーザー登録時に自動で作成?）
+	// 新規登録（ユーザー登録時に自動で作成）
 	// ユーザーIDをもとに、useritemsテーブルに初期アイテムを挿入する
-	/* public void insertInitialUserItems(int userid) {
+	public void insertInitialUserItems(int userid) {
 		Connection conn = null;
 	    PreparedStatement pstmt = null;
 
@@ -70,7 +71,7 @@ public class UserItemsDao {
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
 
 	    	// データベースに接続する
-	    	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/E5"
+	    	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/E5?"
 	    						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 	    						"root", "password");
 	    	System.out.println("AutoCommit: " + conn.getAutoCommit());
@@ -94,7 +95,7 @@ public class UserItemsDao {
 	            e.printStackTrace();
 	        }
 	    }
-	} */
+	} 
 
     // 更新（ログイン＆チェックやログインボーナスで増やす、使うで減らす）
     // アイテム数を増やす処理
