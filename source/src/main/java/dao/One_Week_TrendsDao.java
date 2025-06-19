@@ -72,6 +72,15 @@ public class One_Week_TrendsDao {
 				weekScore.add(score);                   // リストに追加
 			}
 			
+			public Map<String, Object> getWeekData(String selectedDate) {
+				Map<String, Object> dataMap = new HashMap<>();
+			    // 必要なデータを追加する
+			    dataMap.put("weekScore", weekScore); // ローカルまたはフィールド変数を参照
+			    dataMap.put("monday", monday);
+			    dataMap.put("sunday", sunday);
+			    return dataMap;
+			}
+			
 			// 一番大きいストレス項目のカウント
 			String sql3 = "SELECT stress_factor FROM check_results "
 					+ "WHERE created_at BETWEEN ? AND ?";
@@ -111,10 +120,6 @@ public class One_Week_TrendsDao {
 				}
 			}
 			
-			// 7日分のstress_score、monday、sundayをcardListに保持させる
-			One_Week_Trends trends = new One_Week_Trends();
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			cardList = null;
@@ -132,4 +137,6 @@ public class One_Week_TrendsDao {
 		//結果を返す
 		return cardList;
 	}
+	
+	
 }

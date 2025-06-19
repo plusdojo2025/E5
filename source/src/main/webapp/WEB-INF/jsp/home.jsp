@@ -44,10 +44,11 @@
             <!-- コメントの枠div -->
             <div class="home_comment">
 				<img src="/E5/images/hukidashi.png" alt="吹き出し">
+				<div>happy</div>
             </div>
             <!-- キャラクターの枠 -->
             <div class="character">
-
+				<img src="/E5/images/happy_character.gif" alt="ハッピーなキャラ">
             </div>
         </div>
     </main>

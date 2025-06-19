@@ -8,9 +8,9 @@ public class One_Week_Trends implements Serializable {
 	private String owt;                //週の傾向
 	private String owt_comments;       //週のコメント
 	private String owt_stress_factor;  //一番高いストレスの傾向
-	private List<Integer> weekScore;
-	private String monday;
-	private String sunday;
+	private List<Integer> weekScore;   //7日間のストレススコア
+	private String monday;             //月曜日の日付
+	private String sunday;             //日曜日の日付
 	
 	public int getOwt_id() {
 		return owt_id;
@@ -61,9 +61,12 @@ public class One_Week_Trends implements Serializable {
 		this.sunday = sunday;
 	}
 	
+	public One_Week_Trends() {
+		super();
+	}
+	
 	public One_Week_Trends(int owt_id, String owt, String owt_comments, String owt_stress_factor,
 			List<Integer> weekScore, String monday, String sunday) {
-		super();
 		this.owt_id = owt_id;
 		this.owt = owt;
 		this.owt_comments = owt_comments;
