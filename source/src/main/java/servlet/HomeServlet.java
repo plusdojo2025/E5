@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -59,8 +60,11 @@ public class HomeServlet extends HttpServlet {
 		LocalDate today = LocalDate.now();
 		Check_ResultsDao crDao = new Check_ResultsDao();
         // 今日のストレスチェック結果を取得（存在すれば1件）
-        Check_Results todayResult = crDao.findByUserIdAndDate(userId, today);  // ←新たに用意したメソッドを想定
+//        Check_Results todayResult = crDao.findByUserIdAndDate(userId, today);  // ←新たに用意したメソッドを想定
+		List<Check_Results> todayResults = crDao.findByUserIdAndDate(userId, today);
+		Check_Results todayResult = todayResults.isEmpty() ? null : todayResults.get(0); // 1件だけ取得
 
+		
         String expression = "default";
         int stress_Score = -1;
         String stress_Factor = null;
@@ -107,7 +111,7 @@ public class HomeServlet extends HttpServlet {
 		int loginStreak = 0;
 
 		if (streak != null) {
-			LocalDate lastLogin = crDao.getLastCheckDate(userId); // created_atから取得
+			LocalDate lastLogin = crDao.getLastCheckDate(userId, today); // created_atから取得
 		    if (lastLogin != null && lastLogin.plusDays(1).isEqual(today)) {
 		        // 昨日もログインしていた → 継続中
 		        loginStreak = streak.getLogin_date() + 1;
