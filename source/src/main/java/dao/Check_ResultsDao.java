@@ -218,6 +218,61 @@ public class Check_ResultsDao {
 		return result;
 	}
 	
+	public LocalDate getLastCheckDate(int userid, LocalDate today) {
+		Connection conn = null;
+		LocalDate lgday = null;
+		java.sql.Date loginday;
+		
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "SELECT created_at \"\r\n"
+					+ "					+ \"FROM check_results \"\r\n"
+					+ "					+ \"WHERE userid = ? AND created_at ";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, userid);
+	        pStmt.setString(2, "%" + today + "%");
+			
+//			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			
+			if (rs.next()) {  // 1行目があれば
+				loginday = rs.getDate("created_at");
+			    if (loginday != null) {
+			        lgday = loginday.toLocalDate();
+			    } else {
+			        lgday = null;
+			    }
+			} else {
+			    lgday = null;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return lgday;
+	}
+	
 	public List<Check_Results> week_check_results(Check_Results card) {
 		Connection conn = null;
 		List<Check_Results> cardList = new ArrayList<Check_Results>();

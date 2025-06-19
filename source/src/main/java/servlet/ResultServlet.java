@@ -119,8 +119,9 @@ public class ResultServlet extends HttpServlet {
 		    request.setAttribute("scores", scores);
 		    
 			System.out.println("miss");
-			RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/check_result.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
 			dispatcher.forward(request, response);
+			return;
 		}
 		request.setCharacterEncoding("UTF-8");
 		

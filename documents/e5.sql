@@ -22,8 +22,8 @@ USE `e5`;
 --  テーブル e5.check_comments の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `check_comments` (
   `comments_advice_id` int NOT NULL AUTO_INCREMENT,
-  `comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `advice` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `comments` varchar(30) NOT NULL,
+  `advice` varchar(30) NOT NULL,
   `pet_check_comments` varchar(50) NOT NULL,
   `trends` varchar(50) NOT NULL,
   `min_score` int NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `check_comments` (
   PRIMARY KEY (`comments_advice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.check_comments: ~0 rows (約) のデータをダンプしています
 
 --  テーブル e5.check_questions の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `check_questions` (
@@ -41,12 +41,12 @@ CREATE TABLE IF NOT EXISTS `check_questions` (
   PRIMARY KEY (`question_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.check_questions: ~0 rows (約) のデータをダンプしています
 
 --  テーブル e5.check_results の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `check_results` (
   `userid` int NOT NULL,
-  `check_results_id` int NOT NULL AUTO_INCREMENT,
+  `check_results_id` int unsigned NOT NULL AUTO_INCREMENT,
   `stress_score` int NOT NULL,
   `question1` int NOT NULL,
   `question2` int NOT NULL,
@@ -60,44 +60,42 @@ CREATE TABLE IF NOT EXISTS `check_results` (
   `question10` int NOT NULL,
   `created_at` datetime NOT NULL,
   `stress_factor` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`check_results_id`),
-  KEY `fk_check_results_userid` (`userid`),
-  CONSTRAINT `fk_check_results_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`check_results_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.check_results: ~2 rows (約) のデータをダンプしています
+REPLACE INTO `check_results` (`userid`, `check_results_id`, `stress_score`, `question1`, `question2`, `question3`, `question4`, `question5`, `question6`, `question7`, `question8`, `question9`, `question10`, `created_at`, `stress_factor`) VALUES
+	(1, 2, 47, 3, 4, 2, 5, 1, 4, 2, 5, 3, 1, '2025-06-16 15:28:42', 'lack_of_sleep'),
+	(1, 3, 48, 2, 1, 3, 5, 1, 4, 5, 3, 2, 1, '2025-06-17 16:44:42', 'lack_of_sleep');
 
 --  テーブル e5.login_bonus_history の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `login_bonus_history` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,              -- 単独主キー（操作が楽）
-  `user_id` INT NOT NULL,
-  `bonus_date` DATE NOT NULL,
-  UNIQUE KEY `uniq_user_date` (`user_id`, `bonus_date`),  -- ユーザー×日付を一意に制限
+  `user_id` int NOT NULL,
+  `bonus_date` datetime NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `bonus_date` (`bonus_date`),
   CONSTRAINT `fk_login_bonus_history_userid` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
--- エクスポートするデータが選択されていません
+-- テーブル e5.login_bonus_history: ~0 rows (約) のデータをダンプしています
 
 --  テーブル e5.login_rewards の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `login_rewards` (
   `userid` int NOT NULL,
   `login_date` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`userid`),
-  CONSTRAINT `fk_login_rewards_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.login_rewards: ~0 rows (約) のデータをダンプしています
 
 --  テーブル e5.one_month_trends の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `one_month_trends` (
   `omt_id` int NOT NULL AUTO_INCREMENT,
   `omt` varchar(50) NOT NULL,
-  `omt_stress_factor` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`omt_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.one_month_trends: ~0 rows (約) のデータをダンプしています
 
 --  テーブル e5.one_week_trends の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `one_week_trends` (
@@ -108,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `one_week_trends` (
   PRIMARY KEY (`owt_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.one_week_trends: ~0 rows (約) のデータをダンプしています
 
 --  テーブル e5.pet_comments の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `pet_comments` (
@@ -117,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `pet_comments` (
   PRIMARY KEY (`pet_comments_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.pet_comments: ~0 rows (約) のデータをダンプしています
 
 --  テーブル e5.useritems の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `useritems` (
@@ -130,11 +128,10 @@ CREATE TABLE IF NOT EXISTS `useritems` (
   `petitems6` int NOT NULL DEFAULT '0',
   `petitems7` int NOT NULL DEFAULT '0',
   `petitems8` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`userid`),
-  CONSTRAINT `fk_useritems_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.useritems: ~0 rows (約) のデータをダンプしています
 
 --  テーブル e5.users の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `users` (
@@ -142,9 +139,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'ハッシュ化して利用する',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- エクスポートするデータが選択されていません
+-- テーブル e5.users: ~0 rows (約) のデータをダンプしています
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
