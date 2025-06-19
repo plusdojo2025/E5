@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +10,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.Check_CommentsDao;
+import dao.Check_ResultsDao;
+import dao.Login_Bonus_HistoryDao;
+import dao.Pet_CommentsDao;
+import dao.UserItemsDao;
+import model.Check_Comments;
+import model.Check_Results;
+import model.Login_Bonus_History;
+import model.Pet_Comments;
+import model.UserItems;
 
 /**
  * Servlet implementation class MenuServlet
@@ -25,12 +39,12 @@ public class HomeServlet extends HttpServlet {
 //		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 //		HttpSession session = request.getSession();
 //		if (session.getAttribute("id") == null) {
-//			response.sendRedirect("/E5/LoginServlet");
+//			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 //			return;
 //		}
-		/*
+		
 		// ログイン中ユーザーの取得(ユーザーごとのデータを扱うため)
-		int userId = (int) session.getAttribute("id");
+		int userId = (int) session.getAttribute("id");	//ここはいい
 		
 		//アイテムの所持数を表示
 		UserItemsDao uiDao = new UserItemsDao();
@@ -66,7 +80,7 @@ public class HomeServlet extends HttpServlet {
 		
 		//コメント判定(チェック結果を元に)
         if (stress_Score >= 0 && stress_Factor != null) {
-            チェック結果に基づくコメント取得
+            //チェック結果に基づくコメント取得
             Check_CommentsDao ccDao = new Check_CommentsDao();
             Check_Comments commentData = ccDao.selectByScoreAndTrend(stress_Score, stress_Factor);
             if (commentData != null) {
@@ -84,9 +98,9 @@ public class HomeServlet extends HttpServlet {
 		
 		
 		//ログインボーナス判定(付与履歴の参照)（ログインボーナスはチェック済かつ未受領時のみ付与）
-		LoginBonusHistoryDao bonusDao = new LoginBonusHistoryDao();
+		Login_Bonus_HistoryDao bonusDao = new Login_Bonus_HistoryDao();
 		boolean hasReceivedBonus = bonusDao.hasReceivedBonusToday(userId, today);
-        if (hasCheckedToday && !uiDao.hasReceivedLoginBonusToday(userId, today)) {
+        if (hasCheckedToday && !hasReceivedBonus) {
     		// アイテムをランダムに1つ付与
     		Random rand = new Random();
     		int itemNumber = rand.nextInt(8) + 1;
@@ -106,7 +120,7 @@ public class HomeServlet extends HttpServlet {
         // 挨拶コメントをランダムで取得
         Pet_Comments petCom = pcDao.selectComments(petComNumber);
         request.setAttribute("petCom", petCom);
-        */
+        
 		
 		// メニューページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
@@ -115,13 +129,13 @@ public class HomeServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("id") == null) {
-//			response.sendRedirect("/E5/LoginServlet");
-//			return;
-//		}
-		/*
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect(request.getContextPath() +"/LoginServlet");
+			return;
+		}
+		
 		// ログイン中ユーザーの取得(ユーザーごとのデータを扱うため)
 		int userId = (int) session.getAttribute("id");
 		
@@ -130,8 +144,9 @@ public class HomeServlet extends HttpServlet {
 	    int itemId = Integer.parseInt(request.getParameter("item_id"));  // 例：formのhidden inputで送信
 
 	    // アイテムを使う処理(→ アイテムの所持数を -1 更新（DB更新）)
-		UserItemsDao.useItem(userId, itemId);
-		*/
+	    UserItemsDao uidao = new UserItemsDao();
+	    uidao.useItem(userId, itemId);
+		
 		
 		// ホームのJSPにフォワード（数秒待ってから）
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
