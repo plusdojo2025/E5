@@ -7,19 +7,21 @@
 <meta charset="UTF-8">
 <title>ユーザー登録</title>
 <link rel="stylesheet" href="<c:url value='/css/register.css' />">
-<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<!--  <link rel="stylesheet" href="<c:url value='/css/common.css' />"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<!-- ヘッダー（ここから） -->
-	<header class="header"></header>
+	<header class="header">
+	<div class="title">
+		<h1 class="title-text">ストレッシュ</h1>
+		<img alt="" src="<c:url value='/images/logo_w.png'/>" class="logo">
+	</div>
+	</header>
 	<!-- ヘッダー（ここまで） -->
 	<!-- メイン（ここから） -->
 	<main>
-	<div class="title">
-		<h1 class="title-text">ストレッシュ</h1>
-		<img alt="" src="<c:url value='/images/logo.png'/>" class="logo">
-	</div>
+	
 	<div id="register">
 		<form id="registerForm" action="<c:url value='/RegisterServlet' />" method="POST">
 			<div class="register-item">
@@ -50,10 +52,12 @@
     		${error}
   			</c:if>
 			</span><br>
+			<div class=form_bottom>
 			<button type="submit" class="registerButton register-item">登録</button><br>
 			<a href="<c:url value='/LoginServlet' />">ログインはこちら</a>
+			</div>
 		</form>
-	</div>	
+	</div>
 	</main>
 	<!-- メイン（ここまで） -->
 	<!-- フッター（ここから） -->

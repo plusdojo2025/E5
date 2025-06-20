@@ -7,19 +7,21 @@
 <meta charset="UTF-8">
 <title>ログイン</title>
 <link rel="stylesheet" href="<c:url value='/css/login.css' />">
-<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<!--  <link rel="stylesheet" href="<c:url value='/css/common.css' />">-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<!-- ヘッダー（ここから） -->
-	<header class="header"></header>
+	<header class="header">
+	<div class="title">
+		<h1 class="title-text">ストレッシュ</h1>
+		<img alt="" src="<c:url value='/images/logo_w.png'/>" class="logo">
+	</div>
+	</header>
 	<!-- ヘッダー（ここまで） -->
 	<!-- メイン（ここから） -->
 	<main>
-	<div class="title">
-		<h1 class="title-text">ストレッシュ</h1>
-		<img alt="" src="<c:url value='/images/logo.png'/>" class="logo">
-	</div>
+	
 	<div id="login">
 		<form id="login-form" method="POST"  action="<c:url value='/LoginServlet' />">
 			<div class="login-item">
@@ -45,15 +47,17 @@
 							 out.print("※" + error);
 							 } %>
 			</span><br>
+			<div class=form_bottom>
 			<button type="submit" class="loginButton login-item">ログイン</button><br>
 			<a href="<c:url value='/RegisterServlet' />">アカウントがない方はこちら</a>
+			</div>
 		</form>
 	</div>
 	</main>
 	<!-- メイン（ここまで） -->
 	<!-- フッター（ここから） -->
 	<footer class="footer">
-		<p class="copyright">&copy;makwm</p>
+		<p class="copyright">&copy; 2025 E5 makwm</p>
 	</footer>
 	<!-- フッター（ここまで） -->
 	<script src="<c:url value='/js/login.js' />"></script>

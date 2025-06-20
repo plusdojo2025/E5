@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-body {
+html,body {
     margin: 0 0 0 0; /* ページ全体の四隅のスペースをなくす */
     padding: 0;
     background: rgba(231, 208, 169, 0.01);
@@ -32,3 +32,77 @@ footer {
     background-color: #9fdfec;
     text-align: center;
 }
+
+/* ハンバーガーメニュー*/
+.menu_boxWrapBg{
+    display:none;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom:0;
+    margin:auto;
+    z-index: 9;
+}
+.menu_boxWrapWrap.active .menu_boxWrapBg{
+    display:block;
+}
+.menu_boxWrap{
+    position: fixed;
+    top: 0;
+    right: -420px;
+    z-index: 99;
+    width: 300px;
+    height: auto;
+    transition:0.3s;
+}
+.menu_boxWrapWrap.active .menu_boxWrap{
+    right:0px;
+    transition:0.3s;
+}
+#menu{
+    cursor: default;
+}
+.menu_box_close{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f2acac;
+    color:#2f514f;
+    height:80px;
+    cursor:default;
+    border-bottom: 1px solid #fff;
+}
+.menu_box_close:hover {
+  background: #eee;
+}
+.menu_box_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.menu_box_list_items_link {
+  display: block;
+  padding: 25px;
+  color: #2f514f;
+  text-decoration: none;
+  background: #f2acac;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  cursor:default;
+}
+.menu_box_list_items_link:hover {
+  background: #eee;
+}
+
+@media screen and (max-width: 844px) {
+
+ footer {
+	padding: 10px;
+	padding-bottom:30px;
+    background-color: #9fdfec;
+    text-align: center;
+ }
+ }
