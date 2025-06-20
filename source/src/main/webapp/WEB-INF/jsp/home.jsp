@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>ホーム</title>
 <link rel="stylesheet" href="<c:url value='/css/common.css'/>" >
-<link rel="stylesheet" href="<c:url value='/css/check.css'/>" >
+<link rel="stylesheet" href="<c:url value='/css/home.css'/>" >
 </head>
 <body>
     <!-- ヘッダー -->
