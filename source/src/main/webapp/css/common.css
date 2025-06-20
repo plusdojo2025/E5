@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-body {
+html,body {
     margin: 0 0 0 0; /* ページ全体の四隅のスペースをなくす */
     padding: 0;
     background: rgba(231, 208, 169, 0.01);
@@ -32,3 +32,13 @@ footer {
     background-color: #9fdfec;
     text-align: center;
 }
+
+@media screen and (max-width: 844px) {
+
+ footer {
+	padding: 10px;
+	padding-bottom:30px;
+    background-color: #9fdfec;
+    text-align: center;
+ }
+ }
