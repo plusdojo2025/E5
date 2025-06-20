@@ -163,19 +163,8 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO check_results (\r\n"
-					+ "		    userid, stress_score,\r\n"
-					+ "		    question1, question2, question3, question4, question5,\r\n"
-					+ "		    question6, question7, question8, question9, question10,\r\n"
-					+ "		    created_at, stress_factor\r\n"
-					+ "		) VALUES (\r\n"
-					+ "		    ?,               \r\n"
-					+ "		    ?,				\r\n"
-					+ "		    ?, ?, ?, ?, ?,  \r\n"
-					+ "		    ?, ?, ?, ?, ?,  \r\n"
-					+ "		    NOW(),          \r\n"
-					+ "		    ?  \r\n"
-					+ "		);";
+			String sql = "INSERT INTO check_results userid, stress_score,question1, question2, question3, question4, "
+					+ "question5,question6, question7, question8, question9, question10,created_at, stress_factor) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  NOW(), ? )";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, card.getUserid());
@@ -287,7 +276,7 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score,stress_factor FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ? ";
+			String sql = "SELECT stress_score,stress_factor, created_at FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
@@ -304,9 +293,17 @@ public class Check_ResultsDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
+				// 各行のcreated_atを取得し、その都度LocalDateに変換する
+	            java.sql.Date created_date = rs.getDate("created_at"); // ループ内で取得
+	            java.time.LocalDate localdate = null;
+	            if (created_date != null) { // nullチェックも重要
+	                localdate = created_date.toLocalDate(); // その都度変換
+	            }
+	            
 				Check_Results bc = new Check_Results(
 						rs.getInt("stress_score"),
-						rs.getString("stress_factor")
+						rs.getString("stress_factor"),
+						localdate
 						);
 				cardList.add(bc);
 			}
@@ -346,7 +343,7 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score,stress_factor FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ?";
+			String sql = "SELECT stress_score,stress_factor, created_at FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
@@ -361,12 +358,20 @@ public class Check_ResultsDao {
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
+		    
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
+				java.sql.Date created_date = rs.getDate("created_at"); // ループ内で取得
+	            java.time.LocalDate localdate = null;
+	            if (created_date != null) { // nullチェックも重要
+	                localdate = created_date.toLocalDate(); // その都度変換
+	            }
 				Check_Results bc = new Check_Results(
 						rs.getInt("stress_score"),
-						rs.getString("stress_factor")
+						rs.getString("stress_factor"),
+						localdate
 						);
+				System.out.println(localdate);
 				cardList.add(bc);
 			}
 		} catch (SQLException e) {
@@ -405,9 +410,7 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score,stress_factor \"\r\n"
-					+ "		FROM check_results \"\r\n"
-					+ "		 WHERE userid = ? AND created_at BETWEEN ? AND ?";
+			String sql = "SELECT stress_score,stress_factor FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, userid);

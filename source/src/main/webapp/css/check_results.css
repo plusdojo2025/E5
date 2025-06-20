@@ -184,6 +184,8 @@ h2 {
     animation: anima-bar-chart-1 1.2s ease;
 }
 
+
+
 @keyframes anima-bar-chart-1 {
     from {
         width: 0;
@@ -214,7 +216,7 @@ h2 {
     background-color: #2589d0;
     color: #fff;
     font-weight: 600;
-    line-height: 45px;
+    line-height: 30px;
     text-align: right;
     white-space: nowrap;
     animation: anima-bar-chart-1 1.2s ease;

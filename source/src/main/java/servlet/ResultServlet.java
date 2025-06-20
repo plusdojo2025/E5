@@ -149,8 +149,7 @@ public class ResultServlet extends HttpServlet {
         LocalDate endofmonth = day.withDayOfMonth(day.lengthOfMonth());
         
 		// チェック結果を格納する
-        System.out.println(id);
-        System.out.println(day);
+
 		Check_ResultsDao crdao = new Check_ResultsDao();
 		List<Check_Results> onedayresult = crdao.check_results(new Check_Results(id,day));
 		List<Check_Results> oneweekresult = crdao.week_check_results(new Check_Results(startofweek,endofweek,id));
@@ -158,9 +157,30 @@ public class ResultServlet extends HttpServlet {
 		//　チェック結果のストレススコア、ストレス傾向を代入する
 		System.out.println(onedayresult);
 		System.out.println(oneweekresult);
+		
 		System.out.println(onemonthresult);
 		int stress_score = onedayresult.get(0).getStress_score();
 		String stress_factor = onedayresult.get(0).getStress_factor();
+		// jspに表示されるように型を変換しています
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
+
+		for (Check_Results result : oneweekresult) {
+		    LocalDate date = result.getCreated_at(); // これは LocalDate だよね？
+		    if (date != null) {
+		        result.setFormattedDate(date.format(formatter));
+		    } else {
+		        result.setFormattedDate(""); // null 対策
+		    }
+		}
+		
+		for (Check_Results result : onemonthresult) {
+		    LocalDate date = result.getCreated_at(); // これは LocalDate だよね？
+		    if (date != null) {
+		        result.setFormattedDate(date.format(formatter));
+		    } else {
+		        result.setFormattedDate(""); // null 対策
+		    }
+		}
 		
 		// jsのレーダーチャート計算に渡すスコア
 		int score1 = onedayresult.get(0).getQuestion1() + onedayresult.get(0).getQuestion2() 
@@ -227,6 +247,8 @@ public class ResultServlet extends HttpServlet {
 		        monthmaxcount = entry.getValue();
 		    }
 		}
+		
+		
 		
 		// daoのインスタンス化
 		Check_CommentsDao ccdao = new Check_CommentsDao();

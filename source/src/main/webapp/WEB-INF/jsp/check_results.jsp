@@ -37,10 +37,10 @@
         <div class="tab-content content1">
         <c:choose>
           <c:when test="${noData}">
-		  <p>チェックは行いませんでした。</p>
+		  <p>チェック結果がありません。</p>
 		  </c:when>
 		  <c:otherwise>
-        	<h1 class="check_results">ストレスチェック結果 ${onedayresult.stress_score}点</h1>
+        	<h1 class="check_results">ストレスチェック結果 ${onedayresult[0].stress_score}点</h1>
         	<div class="radar-container">
 				<div class="label-column">
 	        	    <label>環境的ストレスがやや高いです。</label>
@@ -72,7 +72,7 @@
 			    <dl>
 			        <div>
 			            <dt>環境的ストレス</dt>
-			            <dd><%= request.getAttribute("score1")%></dd>
+			            <dd><%= request.getAttribute("score3")%></dd>
 			        </div>
 			        <div>
 			            <dt>身体的ストレス</dt>
@@ -80,7 +80,7 @@
 			        </div>
 			        <div>
 			            <dt>生活的ストレス</dt>
-			            <dd><%= request.getAttribute("score3")%></dd>
+			            <dd><%= request.getAttribute("score1")%></dd>
 			        </div>
 			    </dl>
 			</div>
@@ -99,12 +99,12 @@
         </div>
 		<!-- 週の結果 -->
         <div class="tab-content content2">
-            <h1 class="check_results">${starttoweek}～${endofweek}の記録</h1>
+            <h1 class="check_results">${startofweek}～${endofweek}の記録</h1>
             <dl class="bar-chart-1">
 					<c:forEach var="item" items="${oneweekresult}">
 					    <!-- データ表示 -->
 				    <div>
-				        <dt>${item.created_at}</dt>
+				        <dt>${item.formattedDate}</dt>
 				        <dd style="width: ${item.stress_score}%">${item.stress_score}%</dd>
 				        <dt>${item.stress_score}</dt>
 				    </div>
@@ -121,50 +121,22 @@
         </div>
 		<!-- 月の結果 -->
         <div class="tab-content content3">
-            <h1 class="check_results">06-01～06-30の記録</h1>
+            <h1 class="check_results">${startofmonth}～${endofmonth}の記録</h1>
             <dl class="bar-chart-2">
-			    <div>
-			        <dt>項目1<%= request.getAttribute("score1")%></dt>
-			        <dd style="width: <%= request.getAttribute("score1")%>%"><%= request.getAttribute("score1")%>%</dd>
-			        <dt><%= request.getAttribute("score1")%></dt>
-			    </div>
+			    <c:forEach var="item" items="${onemonthresult}">
+					    <!-- データ表示 -->
+				    <div>
+				        <dt>${item.created_at}</dt>
+				        <dd style="width: ${item.stress_score}%">${item.stress_score}%</dd>
+				        <dt>${item.stress_score}</dt>
+				    </div>
+					</c:forEach>
 			    
-			    <div class="container" style="display: flex; gap: 20px; ">
-				  <div class="labels">
-				        	<div>項目1</div>
-				    <!-- ここに項目を縦にずらっと -->
-				  </div>
-				
-				  <div class="bars">
-				      <div style="width: 50%;">
-							50
-				      </div>
-				  </div>
-				  <div class="score">
-				        	<div>50</div>
-				    <!-- ここに項目を縦にずらっと -->
-				  </div>
-				  <div class="labels">
-				        	<div>項目2</div>
-				    <!-- ここに項目を縦にずらっと -->
-				  </div>
-				
-				  <div class="bars">
-				      <div style="width: 60%;">
-							60
-				      </div>
-				  </div>
-				  <div class="score">
-				        	<div>60</div>
-				    <!-- ここに項目を縦にずらっと -->
-				  </div>
-				  
-				</div>
 			</dl>
             
             <div class="week_comments">
 				<p>月の傾向</p>
-				<p>○○</p>
+				<p>${onemonthcomments}</p>
 			</div>
 			<a href="<c:url value='/HomeServlet' />">ホーム</a>
         </div>

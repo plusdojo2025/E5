@@ -25,6 +25,15 @@ public class Check_Results implements Serializable{
     private LocalDate endday;
     private double x;
     private double y;
+    private String formattedDate;
+
+    public String getFormattedDate() {
+        return formattedDate;
+    }
+
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
+    }
     
     public Check_Results(int check_results_id, int stress_score, int question1, int question2,
     		int question3, int question4, int question5, int question6, int question7, int question8,
@@ -124,6 +133,13 @@ public class Check_Results implements Serializable{
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.x = x;
 		this.y = y;
+	}
+
+	public Check_Results(int stress_score, String stress_factor, LocalDate created_at) {
+		// TODO 自動生成されたコンストラクター・スタブ
+		this.stress_score = stress_score;
+		this.stress_factor = stress_factor;
+		this.created_at = created_at;
 	}
 
 	public int getUserid() {
