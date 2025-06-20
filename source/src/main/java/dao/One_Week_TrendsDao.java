@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,12 +14,7 @@ import java.util.Map;
 import model.One_Week_Trends;
 
 public class One_Week_TrendsDao {
-	// クラスフィールド定義
-	private String monday;
-	private String sunday;
-	private List<Integer> weekScore;
-	
-	public List<One_Week_Trends> One_Week_Trends(One_Week_Trends weekTrends, String selectedDate) {
+	public List<One_Week_Trends> One_Week_Trends(One_Week_Trends weekTrends, LocalDate startofmouth, LocalDate endofmouth, String weekmaxtrend) {
 		Connection conn = null;
 		List<One_Week_Trends> cardList = new ArrayList<One_Week_Trends>();
 		
