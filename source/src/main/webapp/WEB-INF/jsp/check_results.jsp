@@ -6,18 +6,60 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>チェック結果</title>
+<title>ストレッシュ</title>
   <link rel="stylesheet" href="<c:url value='/css/check_results.css' />"  />
   <link rel="stylesheet" href="<c:url value='/css/common.css' />"  />
   <script src="<c:url value='/js/check_results.js' />"></script>
 </head>
 
 <body>
+<header id="header">
+      <div id="brand">
+        <h1 id="h1">ストレッシュ</h1>
+        <a href="<c:url value='/HomeServlet'/>">
+          <img src="<c:url value='/images/logo_w.png'/>" alt="ストレッシュロゴ" id="logo">
+        </a>
+      </div>
+      <div id="menu">メニュー</div>
+
+	  <div class="menu_boxWrapWrap">
+        <div class="menu_boxWrapBg"></div>
+        <div class="menu_boxWrap">
+            <nav id="nav">
+                <div class="menu_box_close">
+                    メニュー　×
+                </div>
+                <ul class="menu_box_list">
+                    <li class="menu_box_list_items">
+                        <a class="menu_box_list_items_link" href="<c:url value='/HomeServlet'/>">
+                            ホーム
+                        </a>
+                    </li>
+                    <li class="menu_box_list_items">
+                        <a class="menu_box_list_items_link" href="<c:url value='/CheckServlet'/>">
+                            ストレスチェック
+                        </a>
+                    </li>
+                    <li class="menu_box_list_items">
+                        <a class="menu_box_list_items_link" href="<c:url value='/ResultServlet'/>">
+                            統計
+                        </a>
+                    </li>
+                    <li class="menu_box_list_items">
+                        <a class="menu_box_list_items_link" href="<c:url value='/LogoutServlet'/>">
+                            ログアウト
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    </header>
 	<main>
 	<h2>ストレスチェック結果</h2>
-<form action="<c:url value='/CheckServlet' />" method="get">
+<form action="<c:url value='/ResultServlet' />" method="get">
 	<div class="tab-container">
-		○○の部分はservletからデータを取ってくる
         <input type="radio" name="tabs" id="tab1" class="tab-input" checked>
         <input type="radio" name="tabs" id="tab2" class="tab-input">
         <input type="radio" name="tabs" id="tab3" class="tab-input">
@@ -103,9 +145,9 @@
             <dl class="bar-chart-1">
 					<c:forEach var="item" items="${oneweekresult}">
 					    <!-- データ表示 -->
-				    <div>
+				    <div class="bar-item">
 				        <dt>${item.formattedDate}</dt>
-				        <dd style="width: ${item.stress_score}%">${item.stress_score}%</dd>
+				        <dd style="width: ${item.stress_score * 7.5}px">${item.stress_score}%</dd>
 				        <dt>${item.stress_score}</dt>
 				    </div>
 					</c:forEach>
@@ -126,8 +168,8 @@
 			    <c:forEach var="item" items="${onemonthresult}">
 					    <!-- データ表示 -->
 				    <div>
-				        <dt>${item.created_at}</dt>
-				        <dd style="width: ${item.stress_score}%">${item.stress_score}%</dd>
+				        <dt>${item.formattedDate}</dt>
+				        <dd style="width: ${item.stress_score * 7.5}px">${item.stress_score}%</dd>
 				        <dt>${item.stress_score}</dt>
 				    </div>
 					</c:forEach>
@@ -146,6 +188,13 @@
 </form>
 
 	</main>
+	<footer>
+      <div id="footer">
+        <p>&copy;2025 E5 makwm</p>
+      </div>
+    </footer>
+	<script src="<c:url value='/js/check_results.js'/>"></script>
+	<script src="<c:url value='/js/common.js'/>"></script>
 </body>
 		  
 </html>

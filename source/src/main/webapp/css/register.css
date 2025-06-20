@@ -144,8 +144,9 @@ main {
     transition: all 0.3 ease;
     cursor: pointer;
 }
-.registerButton:hover,.registerButton:active,.registerButton:focus {
-    background: #daf7e1;
+.registerButton:hover {
+    background    : rgba(47, 81, 79, 0.85);     /* 背景色     */
+  	color         : #def7e1;     /* 文字色     */
 }
 #errorMessage,#error-area {
 	color: red;

@@ -46,11 +46,24 @@ public class ResultServlet extends HttpServlet {
         double radius = 100.0;
         int pointCount = scores.size();
         double angleStep = 2 * Math.PI / pointCount;
+        
+        
 
         List<Check_Results> check_results = new ArrayList<>();
         for (int i = 0; i < pointCount; i++) {
-            int score = scores.get(i);
-            double ratio = (score - 3.0) / (15-3);  // scoreが3〜15の範囲を想定
+        	
+            Integer currentScore = scores.get(i); // Integer型で取得
+
+            int score;
+            if (currentScore == null) {
+                score = 0; // nullであれば0に変換する
+                // または、その点の描画をスキップするなど、要件に応じた処理
+                // 例: continue; // この点計算をスキップする場合
+            } else {
+                score = currentScore;
+            }
+
+            double ratio = (score-3.0) / (15-3);  // scoreが3〜15の範囲を想定
             double angle = angleStep * i - Math.PI / 2;
             double x = centerX + radius * ratio * Math.cos(angle);
             double y = centerY + radius * ratio * Math.sin(angle);
@@ -87,39 +100,8 @@ public class ResultServlet extends HttpServlet {
 
 		// ログインしていない時。
 //		if (session.getAttribute("id") == null) {
-//			int score1 = 15;
-//			int score2 = 10;
-//			int score3 = 5;
-//			request.setAttribute("score1", score1);
-//			request.setAttribute("score2", score2);
-//			request.setAttribute("score3", score3);
 //			
-//			List<Integer> scores = List.of(5, 10, 15);
-//		    // 座標計算
-//		    List<Check_Results> check_results = calcPoints(scores);
-//
-//		    // d属性作成
-//		    String polygonD = makePolygonD(check_results);
-//
-//		    // JSPに渡す用に座標を文字列化（例：JSON形式など）
-//		    // ここはJSP側で使いやすいように加工する
-//		    // 例として、JavaScript配列風の文字列を作成
-//		    StringBuilder pointsJsArray = new StringBuilder("[");
-//		    for (int i = 0; i < check_results.size(); i++) {
-//		    	Check_Results p = check_results.get(i);
-//		        pointsJsArray.append("{x:").append(p.getX()).append(", y:").append(p.getY()).append("}");
-//		        if (i != check_results.size() -1) pointsJsArray.append(",");
-//		    }
-//		    pointsJsArray.append("]");
-//		    // リクエスト属性にセット
-//		    request.setAttribute("polygonD", polygonD);
-//		    request.setAttribute("pointsJsArray", check_results);
-//		    request.setAttribute("pointsJsArray", pointsJsArray.toString());
-//		    request.setAttribute("scores", scores);
-//		    
-//			System.out.println("miss");
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
-//			dispatcher.forward(request, response);
+//			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 //			return;
 //		}
 		
@@ -155,6 +137,8 @@ public class ResultServlet extends HttpServlet {
 		List<Check_Results> oneweekresult = crdao.week_check_results(new Check_Results(startofweek,endofweek,id));
 		List<Check_Results> onemonthresult = crdao.month_check_results(new Check_Results(startofmonth,endofmonth,id));
 		//　チェック結果のストレススコア、ストレス傾向を代入する
+		
+				
 		System.out.println(onedayresult);
 		System.out.println(oneweekresult);
 		
@@ -198,6 +182,18 @@ public class ResultServlet extends HttpServlet {
 
 	    // d属性作成
 	    String polygonD = makePolygonD(check_results);
+
+	    if (check_results == null || polygonD == null) {
+	    	
+		} else {
+			try {
+		        
+		    } catch (DateTimeParseException e) {
+		        // 日付の形式がおかしいときも、今の日付にする or エラー返す
+		        day = LocalDate.now();
+		        e.printStackTrace(); // ログにも出す
+		    }
+		}
 
 	    // JSPに渡す用に座標を文字列化（例：JSON形式など）
 	    // ここはJSP側で使いやすいように加工する
@@ -272,9 +268,12 @@ public class ResultServlet extends HttpServlet {
 		request.setAttribute("endofmonth", endofmonth);
 		
 		// スコアの傾向をリクエストスコープに格納する。
-		request.setAttribute("score1", score1);
-		request.setAttribute("score2", score2);
-		request.setAttribute("score3", score3);
+		double newscore1 = score1/1.5;
+		double newscore2 = score2/1.5;
+		double newscore3 = score3/1.5;
+		request.setAttribute("score1", newscore1);
+		request.setAttribute("score2", newscore2);
+		request.setAttribute("score3", newscore3);
 		
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("onedayresult", onedayresult);
