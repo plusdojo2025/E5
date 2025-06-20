@@ -7,14 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import model.One_Week_Trends;
 
 public class One_Week_TrendsDao {
-	public List<One_Week_Trends> One_Week_Trends(One_Week_Trends weekTrends, LocalDate startofmouth, LocalDate endofmouth, String weekmaxtrend) {
+	public List<One_Week_Trends> selectByScoreAndTrend(int stressScore, String weekmaxtrend) {
 		Connection conn = null;
 		List<One_Week_Trends> cardList = new ArrayList<One_Week_Trends>();
 		
@@ -24,100 +22,20 @@ public class One_Week_TrendsDao {
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 			
-			//SQL文を準備する
-			//選択された日付が含まれる月～日までのチェック結果スコアの検索
-			String sql = "SELECT "
-					+ "DATE_SUB(?, INTERVAL DAYOFWEEK(?) - 2 DAY) AS monday, "
-					+ "DATE_ADD(DATE_SUB(?, INTERVAL DAYOFWEEK(?) - 2 DAY), INTERVAL 6 DAY) AS sunday "
-					+ "FROM DUAL";
-			// 接続する情報とSQLの情報をまとめてpStmtに入れている
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			//選択された日付を?に入れてSQL文を完成させる まだselectedDateが無いためコメントアウト中
-			pStmt.setString(1, selectedDate); // 選択された日付をプレースホルダーに設定
-			pStmt.setString(2, selectedDate); // 月曜と日曜の算出に使用
-			pStmt.setString(3, selectedDate); 
-			pStmt.setString(4, selectedDate); 
 			
-			// mondayとsundayを格納する
-			// SQL文を実行し、結果表を取得する
-			// ResultSet型　なんでも受け付ける
-			// rsにpStmtを表にしたものを入れる　rsは表
-			ResultSet rs = pStmt.executeQuery();
-			String monday = null;
-			String sunday = null;
-			
-			if (rs.next()) {
-				monday = rs.getString("monday");
-				sunday = rs.getString("sunday");
-			}
-			
-			// 選択された日付が含まれる月～日までのチェック結果スコアを取得する
-			String sql2 = "SELECT stress_score, stress_factor FROM check_results "
-					+ "WHERE created_at BETWEEN ? AND ?";
+			// 一番大きいストレス項目の週の傾向と週のコメントを取得する
+			String sql2 = "SELECT owt, owt_comments FROM check_results "
+					+ "WHERE owt_stress_factor = ?";
 			// 接続する情報とSQLの情報をまとめてpStmtに入れている
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 			
 			//選択された日付を?に入れてSQL文を完成させる
-			pStmt2.setString(1, monday);
-			pStmt2.setString(2, sunday);
+			pStmt2.setString(1, weekmaxtrend);
 
 			ResultSet rs2 = pStmt2.executeQuery();
 			
-			// 7日分のスコアを格納するリスト
-			weekScore = new ArrayList<>();
-			
 			while (rs2.next()) {
-				int score = rs2.getInt("stress_score"); // スコア取得
-				weekScore.add(score);                   // リストに追加
-			}
-			
-			// One_Week_Trendsオブジェクトにデータを格納
-			One_Week_Trends trends = new One_Week_Trends();
-			trends.setMonday(monday);        // 月曜日
-			trends.setSunday(sunday);        // 日曜日
-			trends.setWeekScore(weekScore);  // ７日分のスコア
-			// cardListに追加
-			cardList.add(trends);
-			
-			// 一番大きいストレス項目のカウント
-			String sql3 = "SELECT stress_factor FROM check_results "
-					+ "WHERE created_at BETWEEN ? AND ?";
-			// 接続する情報とSQLの情報をまとめてpStmtに入れている
-			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
-			
-			//選択された日付を?に入れてSQL文を完成させる
-			pStmt3.setString(1, monday);
-			pStmt3.setString(2, sunday);
-
-			ResultSet rs3 = pStmt3.executeQuery();
-			
-			// 7日分の最も高いスコアを格納するリスト
-			Map<String, Integer> weekSF = new HashMap<>();
-			weekSF.put("環境的ストレス", 0);
-			weekSF.put("身体的ストレス", 0);
-			weekSF.put("生活的ストレス", 0);
-			
-			// 検索結果からその日の一番大きいストレス項目を取得
-			while (rs3.next()) {
-				String stressFactor = rs3.getString("stress_factor");
-				
-				// ストレス項目がweekSFのキーと同じならカウントを増やす
-				// weekSFのキーは３つのいずれか(環境的ストレス,身体的ストレス,生活的ストレス)
-				if (weekSF.containsKey(stressFactor)) {
-					weekSF.put(stressFactor, weekSF.get(stressFactor) + 1);
-				}
-			}
-			
-			// 最もカウント数の多いストレス項目を特定
-			String mostFactor = null;
-			int maxCount = 0;
-			
-			// 最もカウント数の多かったキーとそのカウント数を取得
-			for (Map.Entry<String, Integer> entry : weekSF.entrySet()) {
-				if (entry.getValue() > maxCount) {
-					maxCount = entry.getValue();
-					mostFactor = entry.getKey();
-				}
+				One_Week_Trends owt = new One_Week_Trends(rs2.getOwt(''))
 			}
 			
 		} catch (SQLException e) {

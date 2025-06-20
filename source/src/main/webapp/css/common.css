@@ -32,6 +32,33 @@ footer {
     background-color: #9fdfec;
     text-align: center;
 }
+#brand {
+  display: flex;
+  flex-wrap: nowrap;       /* 折り返さない */
+  align-items: center;     /* 上下中央揃え */
+  gap: 10px;               /* ロゴとタイトルの間にスペース */
+  /* flex-shrink: 1; /* 幅が狭くても潰れすぎない */
+}
+h1 {
+  margin: auto;
+  font-size: 35px;
+  margin: 0;
+}
+#logo {
+  /* height: 40px; */
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 400px) {
+  #h1 {
+    height: 70px;
+    margin-top: 12.6px;
+  }
+
+  #logo {
+    height: 30px;
+  }
+}
 
 /* ハンバーガーメニュー*/
 .menu_boxWrapBg{

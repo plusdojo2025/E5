@@ -11,6 +11,7 @@ main {
     position: absolute;
     top: 120px;
     width: 400px;
+    max-width: 400px;
     height: 200px;
 }
 
@@ -28,6 +29,7 @@ main {
     left: 360px;
     top: 300px;
     width: 200px;
+    max-width: 200px;
     height: 200px;
 }
 
@@ -92,4 +94,9 @@ main {
     width: 925px;
     height: 590px;
     transform: translate(185px, -40px);
+}
+
+/* スマホ用のサイズ調整 */
+@media screen and (max-width: 480px) {
+	
 }

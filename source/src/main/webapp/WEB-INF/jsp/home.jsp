@@ -6,18 +6,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ホーム</title>
 <link rel="stylesheet" href="<c:url value='/css/common.css'/>" >
 <link rel="stylesheet" href="<c:url value='/css/check.css'/>" >
+<link rel="stylesheet" href="<c:url value='/css/home.css'/>" >
 </head>
 <body>
     <!-- ヘッダー -->
     <header class="header">
-      <h1>ストレッシュ
-      <a href="<c:url value='/HomeServlet'/>">
-        <img src="<c:url value='/images/logo_w.png'/>" alt="ストレッシュロゴ" id="logo">
-      </a>
-      </h1>
+      <div id="brand">
+        <h1 id="h1">ストレッシュ</h1>
+        <a href="<c:url value='/HomeServlet'/>">
+          <img src="<c:url value='/images/logo_w.png'/>" alt="ストレッシュロゴ" id="logo">
+        </a>
+      </div>
+      
       <div id="menu">メニュー</div>
 
 	  <div class="menu_boxWrapWrap">
