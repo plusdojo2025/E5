@@ -102,7 +102,6 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("showCheckPrompt", !hasCheckedToday); // モーダルを出すべきかどうか
 		
 		
-		// 今の継続ログインの管理
 		// 継続ログインの管理
 		Login_RewardsDao streakDao = new Login_RewardsDao();
 		Login_Rewards streak = streakDao.findByUserId(userId);
