@@ -13,11 +13,13 @@
 <body>
     <!-- ヘッダー -->
     <header class="header">
-      <h1>ストレッシュ
-      <a href="<c:url value='/HomeServlet'/>">
-        <img src="<c:url value='/images/logo_w.png'/>" alt="ストレッシュロゴ" id="logo">
-      </a>
-      </h1>
+      <div id="brand">
+        <h1 id="h1">ストレッシュ</h1>
+        <a href="<c:url value='/HomeServlet'/>">
+          <img src="<c:url value='/images/logo_w.png'/>" alt="ストレッシュロゴ" id="logo">
+        </a>
+      </div>
+      
       <div id="menu">メニュー</div>
 
 	  <div class="menu_boxWrapWrap">
