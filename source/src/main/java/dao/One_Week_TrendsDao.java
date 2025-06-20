@@ -45,7 +45,7 @@ public class One_Week_TrendsDao {
 			// mondayとsundayを格納する
 			// SQL文を実行し、結果表を取得する
 			// ResultSet型　なんでも受け付ける
-			// rsにpStmtを表にしたものを入れる　つまりrsは表
+			// rsにpStmtを表にしたものを入れる　rsは表
 			ResultSet rs = pStmt.executeQuery();
 			String monday = null;
 			String sunday = null;
@@ -53,8 +53,6 @@ public class One_Week_TrendsDao {
 			if (rs.next()) {
 				monday = rs.getString("monday");
 				sunday = rs.getString("sunday");
-				// mondayとsundayを取得できているかの確認用
-//				System.out.println(monday + sunday);
 			}
 			
 			// 選択された日付が含まれる月～日までのチェック結果スコアを取得する
@@ -77,6 +75,14 @@ public class One_Week_TrendsDao {
 				weekScore.add(score);                   // リストに追加
 			}
 			
+			// One_Week_Trendsオブジェクトにデータを格納
+			One_Week_Trends trends = new One_Week_Trends();
+			trends.setMonday(monday);        // 月曜日
+			trends.setSunday(sunday);        // 日曜日
+			trends.setWeekScore(weekScore);  // ７日分のスコア
+			// cardListに追加
+			cardList.add(trends);
+			
 			// 一番大きいストレス項目のカウント
 			String sql3 = "SELECT stress_factor FROM check_results "
 					+ "WHERE created_at BETWEEN ? AND ?";
@@ -89,17 +95,18 @@ public class One_Week_TrendsDao {
 
 			ResultSet rs3 = pStmt3.executeQuery();
 			
-			// 7日分のスコアを格納するリスト
+			// 7日分の最も高いスコアを格納するリスト
 			Map<String, Integer> weekSF = new HashMap<>();
 			weekSF.put("環境的ストレス", 0);
 			weekSF.put("身体的ストレス", 0);
 			weekSF.put("生活的ストレス", 0);
 			
 			// 検索結果からその日の一番大きいストレス項目を取得
-			while (rs.next()) {
+			while (rs3.next()) {
 				String stressFactor = rs3.getString("stress_factor");
 				
 				// ストレス項目がweekSFのキーと同じならカウントを増やす
+				// weekSFのキーは３つのいずれか(環境的ストレス,身体的ストレス,生活的ストレス)
 				if (weekSF.containsKey(stressFactor)) {
 					weekSF.put(stressFactor, weekSF.get(stressFactor) + 1);
 				}
@@ -109,6 +116,7 @@ public class One_Week_TrendsDao {
 			String mostFactor = null;
 			int maxCount = 0;
 			
+			// 最もカウント数の多かったキーとそのカウント数を取得
 			for (Map.Entry<String, Integer> entry : weekSF.entrySet()) {
 				if (entry.getValue() > maxCount) {
 					maxCount = entry.getValue();
@@ -125,7 +133,8 @@ public class One_Week_TrendsDao {
 				try {
 					conn.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					e.printStackTrace(); // // デバッグ情報としてコンソールに詳細を出力
+					System.out.println("エラーが起きました！！"); // ユーザー向けのメッセージ
 					cardList = null;
 				}
 			}
@@ -133,13 +142,4 @@ public class One_Week_TrendsDao {
 		//結果を返す
 		return cardList;
 	}
-	
-	public Map<String, Object> getWeekData() {
-		Map<String, Object> dataMap = new HashMap<>();
-		dataMap.put("weekScore", weekScore);
-		dataMap.put("monday", monday);
-		dataMap.put("sunday", sunday);
-		return dataMap;)
-	}
-	
 }

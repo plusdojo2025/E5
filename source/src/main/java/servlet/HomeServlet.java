@@ -105,33 +105,32 @@ public class HomeServlet extends HttpServlet {
 		// 継続ログインの管理
 		Login_RewardsDao streakDao = new Login_RewardsDao();
 		Login_Rewards streak = streakDao.findByUserId(userId);
-
-		int loginStreak = 0;
+		int loginStreak;
 
 		if (streak != null) {
-			LocalDate lastLogin = crDao.getLastCheckDate(userId, today); // created_atから取得
-		    if (lastLogin != null && lastLogin.plusDays(1).isEqual(LocalDate.now())) {
+		    // 最終チェック日（昨日までで最新）を取得
+		    LocalDate lastLogin = crDao.getLastCheckDate(userId, today);
+
+		    if (lastLogin != null && lastLogin.plusDays(1).isEqual(today)) {
 		        // 昨日もログインしていた → 継続中
 		        loginStreak = streak.getLogin_date() + 1;
-		        if (loginStreak > 7) loginStreak = 1; // 7超えたら1に戻す
-		    } else if (lastLogin == null || lastLogin.isBefore(today.minusDays(1))) {
-		        // 途切れている → リセット(1日目になる)
-		        loginStreak = 1;
+		        if (loginStreak > 7) loginStreak = 1; // 上限7日でループ
 		    } else {
-		        // 今日単独で初回ログイン（継続なし、前日と関係なし）
+		        // 初日 or 継続途切れ → 1日目にリセット
 		        loginStreak = 1;
 		    }
 
-		    // DBに更新
+		    // ストリーク情報を更新
 		    streakDao.updateLoginStreak(userId, loginStreak);
 		} else {
 		    // 初回ログイン
-		    streakDao.insertLoginStreak(userId, 1); // 初回は1で登録
 		    loginStreak = 1;
+		    streakDao.insertLoginStreak(userId, loginStreak);
 		}
 
-		// JSPで使用するためセット
+		// 表示用にJSPに渡す
 		request.setAttribute("loginStreak", loginStreak);
+
 
 		// 残り日数を計算してセット（7日でボーナス）
 		int remainingDays = 7 - loginStreak;
