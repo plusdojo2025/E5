@@ -6,10 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="<c:url value='/js/home.js'/>"></script>
+<title>ホーム</title>
 <link rel="stylesheet" href="<c:url value='/css/common.css'/>" >
-  <link rel="stylesheet" href="<c:url value='/css/check.css'/>" >
+<link rel="stylesheet" href="<c:url value='/css/check.css'/>" >
 </head>
 <body>
     <!-- ヘッダー -->
@@ -20,14 +19,39 @@
       </a>
       </h1>
       <div id="menu">メニュー</div>
-      <nav id="nav">
-        <ul>
-          <li><a href="<c:url value='/HomeServlet'/>">ホーム</a></li>
-          <li><a href="<c:url value='/CheckServlet'/>">ストレスチェック</a></li>
-          <li><a href="<c:url value='/ResultServlet'/>">統計</a></li>
-          <li><a href="<c:url value='/LogoutServlet'/>">ログアウト</a></li>
-        </ul>
-      </nav>
+
+	  <div class="menu_boxWrapWrap">
+        <div class="menu_boxWrapBg"></div>
+        <div class="menu_boxWrap">
+            <nav id="nav">
+                <div class="menu_box_close">
+                    メニュー　×
+                </div>
+                <ul class="menu_box_list">
+                    <li class="menu_box_list_items">
+                        <a class="menu_box_list_items_link" href="<c:url value='/HomeServlet'/>">
+                            ホーム
+                        </a>
+                    </li>
+                    <li class="menu_box_list_items">
+                        <a class="menu_box_list_items_link" href="<c:url value='/CheckServlet'/>">
+                            ストレスチェック
+                        </a>
+                    </li>
+                    <li class="menu_box_list_items">
+                        <a class="menu_box_list_items_link" href="<c:url value='/ResultServlet'/>">
+                            統計
+                        </a>
+                    </li>
+                    <li class="menu_box_list_items">
+                        <a class="menu_box_list_items_link" href="<c:url value='/LogoutServlet'/>">
+                            ログアウト
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
     </header>
     <!-- ヘッダー（ここまで） -->
 
@@ -61,5 +85,7 @@
     </div>
     </footer>
     <!-- フッター（ここまで） -->
+    <script src="<c:url value='/js/home.js'/>"></script>
+    <script src="<c:url value='/js/common.js'/>"></script>
 </body>
 </html>
