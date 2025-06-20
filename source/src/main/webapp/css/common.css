@@ -48,9 +48,11 @@ h1 {
   /* height: 40px; */
   margin-right: 10px;
 }
+
 @media screen and (max-width: 400px) {
   #h1 {
-    font-size: 20px;
+    height: 70px;
+    margin-top: 12.6px;
   }
 
   #logo {

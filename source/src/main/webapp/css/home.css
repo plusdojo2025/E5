@@ -95,3 +95,8 @@ main {
     height: 590px;
     transform: translate(185px, -40px);
 }
+
+/* スマホ用のサイズ調整 */
+@media screen and (max-width: 480px) {
+	
+}
