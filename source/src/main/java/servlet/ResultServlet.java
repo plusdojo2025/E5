@@ -22,7 +22,6 @@ import dao.Check_CommentsDao;
 import dao.Check_ResultsDao;
 import dao.One_Month_TrendsDao;
 import dao.One_Week_TrendsDao;
-import model.Check_Comments;
 import model.Check_Results;
 
 /**
@@ -87,46 +86,47 @@ public class ResultServlet extends HttpServlet {
 		LocalDate day;
 
 		// ログインしていない時。
-		if (session.getAttribute("id") == null) {
-			int score1 = 15;
-			int score2 = 10;
-			int score3 = 5;
-			request.setAttribute("score1", score1);
-			request.setAttribute("score2", score2);
-			request.setAttribute("score3", score3);
-			
-			List<Integer> scores = List.of(5, 10, 15);
-		    // 座標計算
-		    List<Check_Results> check_results = calcPoints(scores);
-
-		    // d属性作成
-		    String polygonD = makePolygonD(check_results);
-
-		    // JSPに渡す用に座標を文字列化（例：JSON形式など）
-		    // ここはJSP側で使いやすいように加工する
-		    // 例として、JavaScript配列風の文字列を作成
-		    StringBuilder pointsJsArray = new StringBuilder("[");
-		    for (int i = 0; i < check_results.size(); i++) {
-		    	Check_Results p = check_results.get(i);
-		        pointsJsArray.append("{x:").append(p.getX()).append(", y:").append(p.getY()).append("}");
-		        if (i != check_results.size() -1) pointsJsArray.append(",");
-		    }
-		    pointsJsArray.append("]");
-		    // リクエスト属性にセット
-		    request.setAttribute("polygonD", polygonD);
-		    request.setAttribute("pointsJsArray", check_results);
-		    request.setAttribute("pointsJsArray", pointsJsArray.toString());
-		    request.setAttribute("scores", scores);
-		    
-			System.out.println("miss");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
-			dispatcher.forward(request, response);
-			return;
-		}
+//		if (session.getAttribute("id") == null) {
+//			int score1 = 15;
+//			int score2 = 10;
+//			int score3 = 5;
+//			request.setAttribute("score1", score1);
+//			request.setAttribute("score2", score2);
+//			request.setAttribute("score3", score3);
+//			
+//			List<Integer> scores = List.of(5, 10, 15);
+//		    // 座標計算
+//		    List<Check_Results> check_results = calcPoints(scores);
+//
+//		    // d属性作成
+//		    String polygonD = makePolygonD(check_results);
+//
+//		    // JSPに渡す用に座標を文字列化（例：JSON形式など）
+//		    // ここはJSP側で使いやすいように加工する
+//		    // 例として、JavaScript配列風の文字列を作成
+//		    StringBuilder pointsJsArray = new StringBuilder("[");
+//		    for (int i = 0; i < check_results.size(); i++) {
+//		    	Check_Results p = check_results.get(i);
+//		        pointsJsArray.append("{x:").append(p.getX()).append(", y:").append(p.getY()).append("}");
+//		        if (i != check_results.size() -1) pointsJsArray.append(",");
+//		    }
+//		    pointsJsArray.append("]");
+//		    // リクエスト属性にセット
+//		    request.setAttribute("polygonD", polygonD);
+//		    request.setAttribute("pointsJsArray", check_results);
+//		    request.setAttribute("pointsJsArray", pointsJsArray.toString());
+//		    request.setAttribute("scores", scores);
+//		    
+//			System.out.println("miss");
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
+//			dispatcher.forward(request, response);
+//			return;
+//		}
+		
+		// ログインしていた時の処理
 		request.setCharacterEncoding("UTF-8");
-		
-		int id = (Integer) session.getAttribute("id");
-		
+//		int id = (Integer) session.getAttribute("id");
+		int id = 1;
 		// パラメータから日付取得（例：2025-06-17）
 		if (request.getParameter("day") == null || request.getParameter("day").isEmpty()) {
 			day = LocalDate.now(); 
@@ -149,24 +149,51 @@ public class ResultServlet extends HttpServlet {
         LocalDate endofmonth = day.withDayOfMonth(day.lengthOfMonth());
         
 		// チェック結果を格納する
+        System.out.println(id);
+        System.out.println(day);
 		Check_ResultsDao crdao = new Check_ResultsDao();
 		List<Check_Results> onedayresult = crdao.check_results(new Check_Results(id,day));
 		List<Check_Results> oneweekresult = crdao.week_check_results(new Check_Results(startofweek,endofweek,id));
 		List<Check_Results> onemonthresult = crdao.month_check_results(new Check_Results(startofmonth,endofmonth,id));
 		//　チェック結果のストレススコア、ストレス傾向を代入する
+		System.out.println(onedayresult);
+		System.out.println(oneweekresult);
+		System.out.println(onemonthresult);
 		int stress_score = onedayresult.get(0).getStress_score();
 		String stress_factor = onedayresult.get(0).getStress_factor();
 		
 		// jsのレーダーチャート計算に渡すスコア
-//		int score1 = onedayresult.get(0).getQuestion1() + onedayresult.get(0).getQuestion2() 
-//				+ onedayresult.get(0).getQuestion3();
-//		int score2 = onedayresult.get(0).getQuestion4() + onedayresult.get(0).getQuestion5() 
-//				+ onedayresult.get(0).getQuestion6();
-//		int score3 = onedayresult.get(0).getQuestion7() + onedayresult.get(0).getQuestion8() 
-//				+ onedayresult.get(0).getQuestion9();
-		int score1 = 70;
-		int score2 = 30;
-		int score3 = 90;
+		int score1 = onedayresult.get(0).getQuestion1() + onedayresult.get(0).getQuestion2() 
+				+ onedayresult.get(0).getQuestion3();
+		int score2 = onedayresult.get(0).getQuestion4() + onedayresult.get(0).getQuestion5() 
+				+ onedayresult.get(0).getQuestion6();
+		int score3 = onedayresult.get(0).getQuestion7() + onedayresult.get(0).getQuestion8() 
+				+ onedayresult.get(0).getQuestion9();
+		
+		// レーダーチャートの座標計算
+		
+		List<Integer> scores = List.of(score3, score2, score1);
+	    // 座標計算
+	    List<Check_Results> check_results = calcPoints(scores);
+
+	    // d属性作成
+	    String polygonD = makePolygonD(check_results);
+
+	    // JSPに渡す用に座標を文字列化（例：JSON形式など）
+	    // ここはJSP側で使いやすいように加工する
+	    // 例として、JavaScript配列風の文字列を作成
+	    StringBuilder pointsJsArray = new StringBuilder("[");
+	    for (int i = 0; i < check_results.size(); i++) {
+	    	Check_Results p = check_results.get(i);
+	        pointsJsArray.append("{x:").append(p.getX()).append(", y:").append(p.getY()).append("}");
+	        if (i != check_results.size() -1) pointsJsArray.append(",");
+	    }
+	    pointsJsArray.append("]");
+	    // リクエスト属性にセット
+	    request.setAttribute("polygonD", polygonD);
+	    request.setAttribute("pointsJsArray", check_results);
+	    request.setAttribute("pointsJsArray", pointsJsArray.toString());
+	    request.setAttribute("scores", scores);
 		
 		// 週、月のチェック結果で一番高いストレス傾向を求める
 		Map<String, Integer> weekcountmap = new HashMap<>();
@@ -206,13 +233,13 @@ public class ResultServlet extends HttpServlet {
 		One_Week_TrendsDao owdao = new One_Week_TrendsDao();
 		One_Month_TrendsDao omdao = new One_Month_TrendsDao();
 		// 日、週、月のコメントと、アドバイスを取得する
-		Check_Comments onedaycomments = ccdao.selectByScoreAndTrend(stress_score, stress_factor);
+//		Check_Comments onedaycomments = ccdao.selectByScoreAndTrend(stress_score, stress_factor);
 //		One_Week_Trends oneweekcomments = owdao.selectByScoreAndTrend(stress_score, weekmaxTrend);
 		// One_Month_Trends onemonthcomments = omdao.selectByScoreAndTrend(stress_score, monthmaxtrend);
 		
 		// チェック結果に応じたペットコメントを一度だけ表示する場合、前回のログイン時間を記録し、今回のログイン時間と比べる
-		session.setAttribute("pet_check_comments", onedaycomments.getPet_check_comments());
-		
+//		session.setAttribute("pet_check_comments", onedaycomments.getPet_check_comments());
+//		
 		boolean noData = onedayresult.isEmpty();
 		request.setAttribute("noData", noData);
 		
@@ -231,11 +258,11 @@ public class ResultServlet extends HttpServlet {
 		request.setAttribute("onedayresult", onedayresult);
 		request.setAttribute("oneweekresult", oneweekresult);
 		request.setAttribute("onemonthresult", onemonthresult);
-		request.setAttribute("onedaycomments", onedaycomments);
-		// request.setAttribute("oneweekcomments", oneweekcomments);
-		// request.setAttribute("onemonthcomments", onemonthcomments);
+//		request.setAttribute("onedaycomments", onedaycomments);
+//		 request.setAttribute("oneweekcomments", oneweekcomments);
+//		 request.setAttribute("onemonthcomments", onemonthcomments);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/check_result.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
 		dispatcher.forward(request, response);
 	}
 

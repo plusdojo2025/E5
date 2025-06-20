@@ -72,15 +72,15 @@
 			    <dl>
 			        <div>
 			            <dt>環境的ストレス</dt>
-			            <dd>7</dd>
+			            <dd><%= request.getAttribute("score1")%></dd>
 			        </div>
 			        <div>
 			            <dt>身体的ストレス</dt>
-			            <dd>3</dd>
+			            <dd><%= request.getAttribute("score2")%></dd>
 			        </div>
 			        <div>
 			            <dt>生活的ストレス</dt>
-			            <dd>9</dd>
+			            <dd><%= request.getAttribute("score3")%></dd>
 			        </div>
 			    </dl>
 			</div>

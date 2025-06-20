@@ -26,14 +26,15 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score, question1, question2, question3, question4, "
+			String sql = "SELECT check_results_id, stress_score, question1, question2, question3, question4, "
 					+ "question5, question6, question7, question8, question9, question10, stress_factor "
 					+ "FROM check_results "
-					+ "WHERE userid = ? AND created_at LIKE ? ";
+					+ "WHERE userid = ? AND created_at BETWEEN ? AND ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, card.getUserid());
-			pStmt.setString(2, "%" + card.getCreated_at() + "%");
+			pStmt.setDate(2,  java.sql.Date.valueOf(card.getCreated_at()));
+			pStmt.setDate(3,  java.sql.Date.valueOf(card.getCreated_at().plusDays(1)));
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -233,12 +234,11 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT created_at \"\r\n"
-					+ "					+ \"FROM check_results \"\r\n"
-					+ "					+ \"WHERE userid = ? AND created_at ";
+			String sql = "SELECT created_at FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, userid);
-	        pStmt.setString(2, "%" + today + "%");
+			pStmt.setDate(2,  java.sql.Date.valueOf(today));
+			pStmt.setDate(3,  java.sql.Date.valueOf(today.plusDays(1)));
 			
 //			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -287,9 +287,7 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score,stress_factor \"\r\n"
-					+ "					+ \"FROM check_results \"\r\n"
-					+ "					+ \"WHERE userid = ? AND created_at BETWEEN ? AND ? ";
+			String sql = "SELECT stress_score,stress_factor FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
@@ -298,8 +296,8 @@ public class Check_ResultsDao {
 			java.sql.Date sqlDate2 = java.sql.Date.valueOf(enddate);
 			
 			pStmt.setInt(1, card.getUserid());
-			pStmt.setString(2, "%" + sqlDate +"%");
-			pStmt.setString(3, "%" + sqlDate2 +"%");
+			pStmt.setDate(2, sqlDate);
+			pStmt.setDate(3, sqlDate2);
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -348,9 +346,7 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score,stress_factor \"\r\n"
-					+ "					+ \"FROM check_results \"\r\n"
-					+ "					+ \"WHERE userid = ? AND created_at BETWEEN ? AND ? ";
+			String sql = "SELECT stress_score,stress_factor FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
@@ -359,8 +355,8 @@ public class Check_ResultsDao {
 			java.sql.Date sqlDate2 = java.sql.Date.valueOf(enddate);
 			
 			pStmt.setInt(1, card.getUserid());
-			pStmt.setString(2, "%" + sqlDate +"%");
-			pStmt.setString(3, "%" + sqlDate2 +"%");
+			pStmt.setDate(2, sqlDate);
+			pStmt.setDate(3, sqlDate2);
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -410,14 +406,13 @@ public class Check_ResultsDao {
 
 			// SQL文を準備する
 			String sql = "SELECT stress_score,stress_factor \"\r\n"
-					+ "					+ \"FROM check_results \"\r\n"
-					+ "					+ \"WHERE userid = ? AND created_at LIKE ? ";
+					+ "					 \"FROM check_results \"\r\n"
+					+ "					 \"WHERE userid = ? AND created_at BETWEEN ? AND ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			java.sql.Date sqlDate = java.sql.Date.valueOf(today);
-			
 			pStmt.setInt(1, userid);
-			pStmt.setString(2, "%" + sqlDate +"%");
+			pStmt.setDate(2,  java.sql.Date.valueOf(today));
+			pStmt.setDate(3,  java.sql.Date.valueOf(today.plusDays(1)));
 
 
 			// SELECT文を実行し、結果表を取得する
@@ -467,19 +462,18 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score,created_at \"\r\n"
-					+ "					+ \"FROM check_results \"\r\n"
-					+ "					+ \"WHERE userid = ? AND created_at LIKE ? ";
+			String sql = "SELECT stress_score,created_at FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, userid);
-			pStmt.setString(2, "%" + today +"%");
+			pStmt.setDate(2,  java.sql.Date.valueOf(today));
+			pStmt.setDate(3,  java.sql.Date.valueOf(today.plusDays(1)));
 			
 //			// SELECT文を実行し、結果表を取得する
-//			ResultSet rs = pStmt.executeQuery();
+			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
-	        if (pStmt.executeUpdate() == 1) {
+	        if (rs.next()) {
 	            result = true;
 	        }
 			
