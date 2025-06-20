@@ -406,8 +406,8 @@ public class Check_ResultsDao {
 
 			// SQL文を準備する
 			String sql = "SELECT stress_score,stress_factor \"\r\n"
-					+ "					 \"FROM check_results \"\r\n"
-					+ "					 \"WHERE userid = ? AND created_at BETWEEN ? AND ?";
+					+ "		FROM check_results \"\r\n"
+					+ "		 WHERE userid = ? AND created_at BETWEEN ? AND ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, userid);
