@@ -152,23 +152,26 @@ h2 {
 .check_comments {
 	border-top: 2px solid black;
 }
-.check_advice {
-	
-}
+
 
 .bar-chart-1 {
-    font-size: .9em;
+    font-size: 16px;
+    width: 950px
 }
-
+.bar-item {
+	
+}
 .bar-chart-1 > div {
-    display: flex;
+	display:flex;
     align-items: center;
     margin-bottom: 7px;
 }
 
 .bar-chart-1 dt {
+	flex-shrink: 0;
     width: 55px;
-    min-width: 55px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .bar-chart-1 dd {
@@ -178,7 +181,7 @@ h2 {
     background-color: #2589d0;
     color: #fff;
     font-weight: 600;
-    line-height: 45px;
+    line-height: 30px;
     text-align: right;
     white-space: nowrap;
     animation: anima-bar-chart-1 1.2s ease;
@@ -193,7 +196,8 @@ h2 {
 }
 
 .bar-chart-2 {
-    font-size: .9em;
+    font-size: 16px;
+    width:950px
 }
 
 .bar-chart-2 > div {
@@ -221,7 +225,7 @@ h2 {
     white-space: nowrap;
     animation: anima-bar-chart-1 1.2s ease;
 }
-/* 月結果の棒グラフ */
+/* 月結果の棒グラフ 
 .labels div,
 .bars div {
   margin-bottom: 12px;
@@ -245,7 +249,7 @@ h2 {
     text-align: right;
     white-space: nowrap;
     animation: anima-bar-chart-1 1.2s ease;
-}
+} */
 @keyframes anima-bar-chart-2 {
     from {
         width: 0;

@@ -276,7 +276,7 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score,stress_factor, created_at FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ? ";
+			String sql = "SELECT stress_score,stress_factor, created_at FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ? ORDER BY created_at ASC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
@@ -343,7 +343,7 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT stress_score,stress_factor, created_at FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ?";
+			String sql = "SELECT stress_score,stress_factor, created_at FROM check_results WHERE userid = ? AND created_at BETWEEN ? AND ? ORDER BY created_at ASC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			LocalDate startdate = card.getStartday();  // LocalDate型で日付があると仮定
@@ -420,15 +420,20 @@ public class Check_ResultsDao {
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
-
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				Check_Results bc = new Check_Results(
-						rs.getInt("stress_score"),
-						rs.getString("stress_factor")
-						);
-				cardList.add(bc);
-			}
+	            // stress_scoreがNULLの可能性を考慮してIntegerで取得
+	            Integer stressScoreDb = (Integer) rs.getObject("stress_score");
+	            String stressFactorDb = rs.getString("stress_factor"); // Stringはnullを直接返せる
+
+	            // nullチェックとデフォルト値の設定
+	            int finalStressScore = (stressScoreDb != null) ? stressScoreDb : 0; // nullなら0
+	            String finalStressFactor = (stressFactorDb != null) ? stressFactorDb : "データなし"; // nullなら「データなし」
+
+	            Check_Results bc = new Check_Results(finalStressScore, finalStressFactor);
+	            cardList.add(bc);
+	        }
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			cardList = null;
@@ -478,6 +483,8 @@ public class Check_ResultsDao {
 			// 結果表をコレクションにコピーする
 	        if (rs.next()) {
 	            result = true;
+	        } else {
+	        	result = true;
 	        }
 			
 		} catch (SQLException e) {
