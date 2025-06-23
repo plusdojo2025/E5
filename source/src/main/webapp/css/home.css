@@ -40,15 +40,23 @@ main {
     top: 50px;
     width: 500px;
     max-width: 500px;
-    height: 177px;
+    height: 193px;
 }
 
 /*キャラクターのコメント*/
 .home_comment div {
     position: absolute;
-    font-size: 70px;
-    top: 60px;
-    left: 94px;
+    font-size: 31px;
+    top: 76px;
+    left: 82px;
+    max-width: 370px;
+    height: 134px;
+    max-height: 134px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 /*キャラクター画像*/
@@ -184,8 +192,8 @@ main {
   }
 
   .home_comment div {
-    font-size: 32px;
-    top: 128px;
-    left: 72px;
+    font-size: 24px;
+    top: 92px;
+    left: 39px;
   }
 }
