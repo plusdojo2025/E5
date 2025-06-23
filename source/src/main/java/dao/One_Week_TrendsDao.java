@@ -35,7 +35,7 @@ public class One_Week_TrendsDao {
 			if (rs.next()) {
 				trendComment = new One_Week_Trends();
 				trendComment.setOwt(rs.getString("owt"));
-				trendComment.setOwt_comments(rs.getString("owt_comment"));
+				trendComment.setOwt_comments(rs.getString("owt_comments"));
 			}
 			
 		} catch (SQLException e) {
