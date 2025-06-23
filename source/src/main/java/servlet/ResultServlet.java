@@ -138,13 +138,20 @@ public class ResultServlet extends HttpServlet {
 		List<Check_Results> onemonthresult = crdao.month_check_results(new Check_Results(startofmonth,endofmonth,id));
 		//　チェック結果のストレススコア、ストレス傾向を代入する
 		
-				
 		System.out.println(onedayresult);
 		System.out.println(oneweekresult);
-		
 		System.out.println(onemonthresult);
+		// データがあるかどうか確認
+		boolean resultbool = onedayresult.get(0).getHasData();
+		if (resultbool)	{
+			
+		}
+		System.out.println(resultbool);
+		System.out.println(1);
 		int stress_score = onedayresult.get(0).getStress_score();
 		String stress_factor = onedayresult.get(0).getStress_factor();
+
+		
 		// jspに表示されるように型を変換しています
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
 

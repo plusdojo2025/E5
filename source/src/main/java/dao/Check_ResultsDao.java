@@ -15,7 +15,7 @@ public class Check_ResultsDao {
 	public List<Check_Results> check_results(Check_Results card) {
 		Connection conn = null;
 		List<Check_Results> cardList = new ArrayList<Check_Results>();
-
+		
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -38,12 +38,22 @@ public class Check_ResultsDao {
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
+			
+//			if (rs.next()) {  
+//				stress_score = rs.getInt("stress_score");
+//				
+//			    if (stress_score != null) {
+//			    	score = stress_score;
+//			    } else {
+//			    	score = 0;
+//			    }
+//			} 
 
 			// 結果表をコレクションにコピーする
-			while (rs.next()) {
+			if (rs.next()) {
 				Check_Results bc = new Check_Results(
 						rs.getInt("check_results_id"),
-						rs.getInt("stress_score"), 
+						rs.getInt("stress_score"),
 						rs.getInt("question1"),
 						rs.getInt("question2"),
 						rs.getInt("question3"),
@@ -54,7 +64,17 @@ public class Check_ResultsDao {
 						rs.getInt("question8"),
 						rs.getInt("question9"),
 						rs.getInt("question10"),
-						rs.getString("stress_factor")
+						rs.getString("stress_factor"),
+						true
+						);
+				cardList.add(bc);
+			} else {
+				Check_Results bc = new Check_Results(
+						0,
+						0,
+						0,0,0,0,0,0,0,0,0,0,
+						"",
+						false
 						);
 				cardList.add(bc);
 			}
@@ -420,20 +440,15 @@ public class Check_ResultsDao {
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
+
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-	            // stress_scoreがNULLの可能性を考慮してIntegerで取得
-	            Integer stressScoreDb = (Integer) rs.getObject("stress_score");
-	            String stressFactorDb = rs.getString("stress_factor"); // Stringはnullを直接返せる
-
-	            // nullチェックとデフォルト値の設定
-	            int finalStressScore = (stressScoreDb != null) ? stressScoreDb : 0; // nullなら0
-	            String finalStressFactor = (stressFactorDb != null) ? stressFactorDb : "データなし"; // nullなら「データなし」
-
-	            Check_Results bc = new Check_Results(finalStressScore, finalStressFactor);
-	            cardList.add(bc);
-	        }
-			
+				Check_Results bc = new Check_Results(
+						rs.getInt("stress_score"),
+						rs.getString("stress_factor")
+						);
+				cardList.add(bc);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			cardList = null;
@@ -484,7 +499,7 @@ public class Check_ResultsDao {
 	        if (rs.next()) {
 	            result = true;
 	        } else {
-	        	result = true;
+	        	result = false;
 	        }
 			
 		} catch (SQLException e) {
