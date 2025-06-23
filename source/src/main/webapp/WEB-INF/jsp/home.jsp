@@ -79,7 +79,7 @@
 				<div>
 			        <c:choose>
 			            <c:when test="${not empty commentData}">
-			                ${commentData.comment}
+			                ${commentData.pet_check_comments}
 			            </c:when>
 			            <c:when test="${not empty petCom}">
 			                ${petCom.pet_comments}
