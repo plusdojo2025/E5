@@ -15,29 +15,57 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- e5 のデータベース構造をダンプしています
-CREATE DATABASE IF NOT EXISTS `e5` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `e5`;
 
 --  テーブル e5.check_comments の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `check_comments` (
   `comments_advice_id` int NOT NULL AUTO_INCREMENT,
-  `comments` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `advice` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `pet_check_comments` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `trends` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `advice` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `pet_check_comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `trends` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `min_score` int NOT NULL,
   `max_score` int NOT NULL,
   PRIMARY KEY (`comments_advice_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.check_comments: ~0 rows (約) のデータをダンプしています
+REPLACE INTO `check_comments` (`comments_advice_id`, `comments`, `advice`, `pet_check_comments`, `trends`, `min_score`, `max_score`) VALUES
+	(1, '今日もよく頑張りましたね。ひとつひとつ、ちゃんと向き合っている姿が素敵です。 ', '頑張りすぎた日は、少し立ち止まって「よくやってるよ」と声をかけてあげてください。 ', 'おつかれさま。今日もちゃんと頑張ってえらいね！ぼくはいつでもそばにいるよ ', '環境的ストレス', 10, 100),
+	(2, '仕事に真剣だからこそ、いろんなことに気をつかって疲れちゃいますよね。 ', '抱えているものを紙に書き出すと、心の中が少し整ってきますよ。 ', 'なんにもできなくても、だいじょうぶ。ぼくは、きみの味方だよ', '環境的ストレス', 10, 100),
+	(3, '自分にしかできないことを抱えていると、少し孤独に感じることもあります。', '無理に全部やろうとせず、できることからひとつずつ取り組んでみましょう。', 'ちょっと休む？無理しなくていいよ。ぼくも一緒にゴロゴロするね〜', '環境的ストレス', 10, 100),
+	(4, '思うようにいかない日があっても、それはあなたの価値を下げるものではありません。', '完璧じゃなくても大丈夫。少し抜けたくらいがちょうどいい日もあります。', 'がんばった日も、がんばれなかった日も、どっちも大切なきみだよ。', '環境的ストレス', 10, 100),
+	(5, '大きな変化の中にいるときは、不安が出てくるのも自然なことです。', '疲れているときほど、ちょっとした休憩や深呼吸を大切にしてください。 ', '泣いてもいいし、笑ってもいいし、きみの気持ちは全部OKだよ', '環境的ストレス', 10, 100),
+	(6, '頼られることが多い人ほど、無理をしがちになります。', '信頼できる人に今の気持ちを話すだけで、心がすっと軽くなることがありますよ。 ', 'ストレスって、おいしいおやつで少しだけ忘れられるって聞いたよ？', '環境的ストレス', 10, 100),
+	(7, '小さな違和感を放っておくと、心が疲れてしまうこともあります。', '自分のペースで進むことを許してあげましょう。比べなくて大丈夫です。', 'しんどいときは、ムリにがんばらなくていいんだよ。ぼくも休んでるし！', '環境的ストレス', 10, 100),
+	(8, '真面目な人ほど、完璧を目指して自分を責めやすくなってしまいます。 ', '忙しい日々の中にも、心が落ち着く時間を少しだけ作ってみてくださいね。 ', 'どんなときでも、きみの一番のファンはぼくだよ', '環境的ストレス', 10, 100),
+	(9, '周りと比べず、自分の歩幅で進めていること、それだけで十分です。 ', '「できていること」を見つけて、自分をほめる習慣を育ててみましょう。 ', 'よく眠れた？寝られなくても、ぼくはずっと見守ってたよ', '環境的ストレス', 10, 100),
+	(10, 'ちょっとしたひと息が、働くあなたをやさしく支えてくれます。', 'しんどいときは、誰かに頼ってもいい。それは弱さではなく、優しさです 。', '元気でも元気じゃなくても、ぼくは変わらず隣にいるよ', '環境的ストレス', 10, 100),
+	(11, '今日はよく休めるかな？そんな日々が、心を守ってくれます。 ', '朝起きたら、まず深呼吸をひとつ。ゆっくり一日を始めてみましょう。', 'いまのきみも、ちゃんとすてきだよ。ぼくは知ってる', '身体的ストレス', 10, 100),
+	(12, '眠れない夜や、なんとなく元気が出ない日も、ちゃんとあなたの一部です。', '疲れたときは、ぬるめのお風呂に浸かって、体と心を一緒にほぐしてください。', 'きみのがんばり、ちゃんと届いてるよ。ぼく、見てたもん！', '身体的ストレス', 10, 100),
+	(13, '気持ちがゆらぐのは、頑張っている証拠でもあります。 ', '眠る前のスマホを少しお休みして、心を静かに整える時間を作ってみましょう', '“きょうも終わった”って言えるだけで、100点だよ！ ', '身体的ストレス', 10, 100),
+	(14, '体が重いときは、心も少し休みたいサインを出しているのかもしれません。', '食事や睡眠のリズムを整えることが、心の元気にもつながりますよ。 ', '心が晴れるまで、のんびり行こうね。ぼくも一緒に歩くから', '身体的ストレス', 10, 100),
+	(15, '頭の中がぐるぐるしているときは、深呼吸をひとつ。 ', '今日の「しんどかったこと」と「ちょっと嬉しかったこと」を書き出してみてください。', 'よしよし…まずは深呼吸だよ。ぼくも一緒に…す〜っ、は〜っ ', '身体的ストレス', 10, 100),
+	(16, 'イライラやモヤモヤは、外に出してあげると少し軽くなりますよ。 ', '感情が揺れたときは、「そう感じていいんだよ」と優しく認めてあげましょう。', '大丈夫。休むのも、進むのも、きみのタイミングでいいんだよ', '身体的ストレス', 10, 100),
+	(17, 'なんでもない日を心地よく過ごせること、それだけでもすごいことです。 ', '少しだけ外の空気を吸って、光や風に触れる時間をつくってみてください。 ', 'きょうは“がんばらない”って決める日でもいいんだよ？', '身体的ストレス', 10, 100),
+	(18, '自分を責めてしまう日は、自分を守る言葉をそっとかけてあげてください。', '涙が出るときは、そのままにしてあげましょう。涙にも役割があります。', '調子がいい日も、ちょっとイマイチな日も…全部きみの一部だね', '身体的ストレス', 10, 100),
+	(19, '心が整っていると、物事の見え方も変わってきます.', '自分に合った“心の休憩方法”をいくつか持っておくと安心できます。 ', '毎日、自分の気持ちと向き合ってえらい！…ほんとに、すごいなぁ。', '身体的ストレス', 10, 100),
+	(20, '「なんだかしんどいな」という感覚、大事に受け取ってあげてください。 ', '小さな「できたこと」を見つけて、心にそっと花丸をつけてあげましょう。 ', 'おつかれさま。今日もちゃんと頑張ってえらいね！ぼくはいつでもそばにいるよ', '身体的ストレス', 10, 100),
+	(21, '一人で頑張ってきた時間、その努力をちゃんと見てあげてくださいね。', '気持ちを誰かに伝えること、それだけでも心は少し安心します。', 'なんにもできなくても、だいじょうぶ。ぼくは、きみの味方だよ ', '生活的ストレス', 10, 100),
+	(22, '「話を聞いてほしいな」そんな気持ちが湧いてきたら、それは大切な合図です。', '「話したいな」と思ったときは、その気持ちに素直になってみてください。', 'ちょっと休む？無理しなくていいよ。ぼくも一緒にゴロゴロするね〜', '生活的ストレス', 10, 100),
+	(23, '優しさを向ける相手に、自分自身も含めてあげてください。 ', '無理に全部話そうとせず、言える範囲で少しずつで大丈夫です。 ', 'がんばった日も、がんばれなかった日も、どっちも大切なきみだよ。', '生活的ストレス', 10, 100),
+	(24, '頼っていいし、甘えていい。そのことを忘れないでくださいね。', '相手の反応を気にしすぎず、自分の気持ちに正直になることを大切にしましょう。 ', '泣いてもいいし、笑ってもいいし、きみの気持ちは全部OKだよ ', '生活的ストレス', 10, 100),
+	(25, 'そっと誰かとつながるだけで、心がふっと軽くなることがあります。 ', 'つながりは「ありがとう」や「元気？」の一言から始まることもあります。 ', 'しんどいときは、ムリにがんばらなくていいんだよ。ぼくも休んでるし！', '生活的ストレス', 10, 100),
+	(26, 'どんなに強そうに見える人も、本当は誰かの支えを必要としています。', '支えてくれる人の存在に、時々「気づいてみる」だけでも心が温まりますよ。', '元気でも元気じゃなくても、ぼくは変わらず隣にいるよ', '生活的ストレス', 10, 100),
+	(27, '思いを分かち合える人がいることは、心の安全基地になります。 ', '誰かのやさしさに甘えてもいい。そのやさしさを素直に受け取ってください。', 'きみのがんばり、ちゃんと届いてるよ。ぼく、見てたもん！', '生活的ストレス', 10, 100),
+	(28, '自分の気持ちに正直になれる瞬間、それだけで癒しになります。', '自分の気持ちに寄り添えるようになると、人との距離も少しずつ変わっていきます。 ', '“きょうも終わった”って言えるだけで、100点だよ！ ', '生活的ストレス', 10, 100),
+	(29, '「ありがとう」や「助かったよ」の言葉が、関係を少しずつ温めてくれます。', '不安や孤独を抱えているときこそ、人のぬくもりが力になります。 ', '心が晴れるまで、のんびり行こうね。ぼくも一緒に歩くから。', '生活的ストレス', 10, 100),
+	(30, '一歩踏み出した先には、きっとやさしさが待っていますよ。', '誰かに手を差し伸べることも、心のつながりを育てるやさしい時間になります。 ', '大丈夫。休むのも、進むのも、きみのタイミングでいいんだよ', '生活的ストレス', 10, 100);
 
 --  テーブル e5.check_questions の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `check_questions` (
   `question_id` int NOT NULL AUTO_INCREMENT,
-  `questions1` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `questions_category` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `questions1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `questions_category` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`question_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -46,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `check_questions` (
 --  テーブル e5.check_results の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `check_results` (
   `userid` int NOT NULL,
-  `check_results_id` int unsigned NOT NULL AUTO_INCREMENT,
+  `check_results_id` int NOT NULL AUTO_INCREMENT,
   `stress_score` int NOT NULL,
   `question1` int NOT NULL,
   `question2` int NOT NULL,
@@ -59,25 +87,28 @@ CREATE TABLE IF NOT EXISTS `check_results` (
   `question9` int NOT NULL,
   `question10` int NOT NULL,
   `created_at` datetime NOT NULL,
-  `stress_factor` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`check_results_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- テーブル e5.check_results: ~2 rows (約) のデータをダンプしています
+-- テーブル e5.check_results: ~1 rows (約) のデータをダンプしています
 REPLACE INTO `check_results` (`userid`, `check_results_id`, `stress_score`, `question1`, `question2`, `question3`, `question4`, `question5`, `question6`, `question7`, `question8`, `question9`, `question10`, `created_at`, `stress_factor`) VALUES
-	(1, 2, 47, 3, 4, 2, 5, 1, 4, 2, 5, 3, 1, '2025-06-16 15:28:42', 'lack_of_sleep'),
-	(1, 3, 48, 2, 1, 3, 5, 1, 4, 5, 3, 2, 1, '2025-06-17 16:44:42', 'lack_of_sleep');
+	(11, 3, 38, 1, 1, 1, 1, 2, 2, 1, 4, 4, 2, '2025-06-20 13:40:18', '生活的ストレス'),
+	(14, 4, 50, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, '2025-06-22 13:00:00', '身体的ストレス');
 
 --  テーブル e5.login_bonus_history の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `login_bonus_history` (
-   `id` INT AUTO_INCREMENT PRIMARY KEY,              -- 単独主キー（操作が楽）
-  `user_id` INT NOT NULL,
-  `bonus_date` DATE NOT NULL,
-  UNIQUE KEY `uniq_user_date` (`user_id`, `bonus_date`),  -- ユーザー×日付を一意に制限
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `bonus_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_user_date` (`user_id`,`bonus_date`),
   CONSTRAINT `fk_login_bonus_history_userid` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- テーブル e5.login_bonus_history: ~0 rows (約) のデータをダンプしています
+-- テーブル e5.login_bonus_history: ~1 rows (約) のデータをダンプしています
+REPLACE INTO `login_bonus_history` (`id`, `user_id`, `bonus_date`) VALUES
+	(1, 11, '2025-06-20');
 
 --  テーブル e5.login_rewards の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `login_rewards` (
@@ -86,36 +117,112 @@ CREATE TABLE IF NOT EXISTS `login_rewards` (
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- テーブル e5.login_rewards: ~0 rows (約) のデータをダンプしています
+-- テーブル e5.login_rewards: ~1 rows (約) のデータをダンプしています
+REPLACE INTO `login_rewards` (`userid`, `login_date`) VALUES
+	(11, 1);
 
 --  テーブル e5.one_month_trends の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `one_month_trends` (
   `omt_id` int NOT NULL AUTO_INCREMENT,
-  `omt` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `omt` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `omt_stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`omt_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.one_month_trends: ~0 rows (約) のデータをダンプしています
+REPLACE INTO `one_month_trends` (`omt_id`, `omt`, `omt_stress_factor`) VALUES
+	(1, '今月は、ずっと走り続けてきたような日々でしたね。', '環境的ストレス'),
+	(2, '責任や期待を背負いながら、よく耐えてきました。 ', '環境的ストレス'),
+	(3, '大きな波の中でも、あなたらしさを失わずに進んできましたね。 ', '環境的ストレス'),
+	(4, '忙しさの中で、心の声が少し遠くなっていたように見えます。 ', '環境的ストレス'),
+	(5, 'プレッシャーと向き合う日が続いて、気づかぬうちに疲れがたまっていました。 ', '環境的ストレス'),
+	(6, '環境の変化が重なって、心も体も戸惑っていた一ヶ月だったかもしれません。 ', '環境的ストレス'),
+	(7, '人との関係に気を配りすぎて、少し息苦しさを感じていたかもしれません。 ', '環境的ストレス'),
+	(8, '「やらなきゃ」で動いていた時間が多く、自分の気持ちが後回しになっていました。 ', '環境的ストレス'),
+	(9, '自分に厳しくしすぎていたからこそ、いま少し休む時間が必要です。 ', '環境的ストレス'),
+	(10, '頑張ることが当たり前になっているあなたへ、そっと「ありがとう」を贈ります。 ', '環境的ストレス'),
+	(11, '少しずつたまっていた疲れが、今月は表に出てきたようです。', '身体的ストレス'),
+	(12, '気力が続かなかった日があっても、それは自然なサインです。 ', '身体的ストレス'),
+	(13, '感情の波が大きく揺れた月でしたね。あなたはその波をちゃんと越えてきました。', '身体的ストレス'),
+	(14, '体のサインに、うっすら気づいていたけれど見過ごしてきたのかもしれません。 ', '身体的ストレス'),
+	(15, '「なんとなくしんどい」が続いていたことに、やっと気づけた月かもしれません。 ', '身体的ストレス'),
+	(16, '気を張る時間が多くて、リラックスの仕方を忘れてしまいそうでしたね。 ', '身体的ストレス'),
+	(17, 'うまく休めずにいたことが、今月のストレスに影響していたように見えます。 ', '身体的ストレス'),
+	(18, '体がだるく、心もくもっていた日が続いた一ヶ月でした。 ', '身体的ストレス'),
+	(19, '少し立ち止まって、今月の自分に「ごめんね」と言いたくなるような日々でしたね。 ', '身体的ストレス'),
+	(20, '「つかれた」と言えるようになったあなたの勇気を、心から讃えます。 ', '身体的ストレス'),
+	(21, 'この1ヶ月、支えてくれる人とのつながりが少し感じにくかったようですね。 ', '生活的ストレス'),
+	(22, '一人で頑張る時間が長くて、少し孤独を感じていたかもしれません。 ', '生活的ストレス'),
+	(23, '優しさを求めたいのに、遠慮が先に立ってしまった場面があったようです。', '生活的ストレス'),
+	(24, '誰かに寄りかかりたい気持ちを、ずっと胸の奥にしまっていたように感じます。 ', '生活的ストレス'),
+	(25, '周りに気を遣いすぎて、自分の気持ちを抑える日が続いていましたね。 ', '生活的ストレス'),
+	(26, '「わかってほしい」と思いながら、言葉にできないもどかしさがあったかもしれません。 ', '生活的ストレス'),
+	(27, '気を張ってばかりで、「たよる」「あまえる」が遠くなっていた一ヶ月でした。', '生活的ストレス'),
+	(28, '本当は、もっとそばにいてほしいと思っていたのかもしれませんね。 ', '生活的ストレス'),
+	(29, 'やさしさに触れるたびに、少しほっとした気持ちになったこともあったでしょう。 ', '生活的ストレス'),
+	(30, '今月は、つながりへの想いがより深くなった月だったように思います。 ', '生活的ストレス');
 
 --  テーブル e5.one_week_trends の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `one_week_trends` (
   `owt_id` int NOT NULL AUTO_INCREMENT,
   `owt` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `owt_comments` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `owt_stress_factor` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `owt_comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `owt_stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`owt_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.one_week_trends: ~0 rows (約) のデータをダンプしています
+REPLACE INTO `one_week_trends` (`owt_id`, `owt`, `owt_comments`, `owt_stress_factor`) VALUES
+	(1, '仕事量に追われ、自分を見失いかけているようです。', '優先順位をつけ、「今すぐでなくてもいい仕事」を明確にしましょう。', '環境的ストレス'),
+	(2, 'ペースを乱され、焦りが溜まっているようです。', '1日の中で「マイペース時間（10分でも）」を確保してみましょう。', '環境的ストレス'),
+	(3, '意見が通らないことで無力感を感じているようです。', '同僚や上司と小さな話し合いから始めて、自信を取り戻しましょう。', '環境的ストレス'),
+	(4, '多忙で、仕事とプライベートの境界が曖昧になっているようです。', '就業後にスマホ通知をオフにして「自分の時間」を明確にしましょう。', '環境的ストレス'),
+	(5, '急な変更に振り回され、疲弊気味です。', '毎朝、今日の「コントロールできること／できないこと」を整理しましょう。', '環境的ストレス'),
+	(6, '仕事が次々押し寄せ、達成感を感じにくいようです。', '小さな達成を日記やチェックリストで可視化しましょう。', '環境的ストレス'),
+	(7, '決定権がなく、流されている感覚が強いようです。', '意見を伝える前に「提案＋理由」で伝える練習をしてみてください。', '環境的ストレス'),
+	(8, '自由度が少なく、ストレスが蓄積しているようです。', '昼休みに散歩や読書など、自分で選べる時間を取りましょう。', '環境的ストレス'),
+	(9, '成果が認められず、やる気が落ちているようです。', '自分の頑張りを記録し、「見える形」にしてみてください', '環境的ストレス'),
+	(10, '短期的なタスクに追われ、視野が狭くなっているようです。', '週1で中長期目標を見直す時間を作ると視野が広がります。', '環境的ストレス'),
+	(11, 'エネルギー切れを感じ、日中もぼーっとしているようです。', '昼食後に5分間の目を閉じる休息を取りましょう。', '身体的ストレス'),
+	(12, '緊張が取れず、常に体がこわばっているようです。', '深呼吸やストレッチを1日3回、意識的に取り入れてみてください。', '身体的ストレス'),
+	(13, '無気力になっており、些細なことも億劫に感じているようです。', 'あえて「小さな楽しみ」を1日1個作ってみましょう。', '身体的ストレス'),
+	(14, '心が晴れず、笑顔が減ってきているようです。', '気分が上がる音楽や香りを身近に取り入れましょう', '身体的ストレス'),
+	(15, '目の疲れや肩こりなど、体に不調が出ているようです。', '1時間ごとに画面から目を離し、姿勢も整えてください。', '身体的ストレス'),
+	(16, '朝起きるのがつらく、だるさが取れにくいようです。', '寝る1時間前はスマホを見ずに光と音を控えましょう。', '身体的ストレス'),
+	(17, '疲労が蓄積し、集中力が著しく低下しているようです。', 'タスクを「25分集中＋5分休憩」のポモドーロ法で分割してみては？', '身体的ストレス'),
+	(18, '眠っても疲れが抜けず、慢性的な不調が続いているようです。', '就寝リズムを整え、起床後は朝日を浴びて体内時計をリセット！', '身体的ストレス'),
+	(19, '身体的疲労と精神的疲労がリンクして悪循環のようです。', 'とにかく「何もしない時間」を週に30分でいいので取りましょう。', '身体的ストレス'),
+	(20, '内臓や肌の不調も感じ始めているようです。', '食生活を見直し、水分とビタミンの摂取を意識してください。', '身体的ストレス'),
+	(21, '誰にも頼れず、すべてを一人で抱えているようです。', '「少しだけ助けを求める練習」を。小さなことで大丈夫です。', '生活的ストレス'),
+	(22, '周囲と話す機会が減り、孤独感が強まっているようです。', '一言の雑談からでもいいので、会話の「入口」を増やしましょう。', '生活的ストレス'),
+	(23, '人に気を遣いすぎて疲れているようです。', '自分が無理していないかを確認し、「断る勇気」も意識してみましょう。', '生活的ストレス'),
+	(24, '他人と比べてしまい、自信を失っているようです。', '過去の「自分の成長」に注目し、自分軸で考える時間を作りましょう。', '生活的ストレス'),
+	(25, '自分ばかり気を使い、対等な関係に感じられないようです。', '「お願い」や「感謝」を言葉にして、やりとりのバランスを整えていきましょう。', '生活的ストレス'),
+	(26, '周囲からの評価が曖昧で、不安を感じやすいようです。', '自分の行動や成果を記録し、客観的に振り返ってみましょう。', '生活的ストレス'),
+	(27, 'どこにも「安心できる場所」がないように感じているようです。', '信頼できる人との「他愛ない会話」で心に緩みをつくりましょう。', '生活的ストレス'),
+	(28, '疲れていても、周囲に「元気な自分」を演じているようです。', '疲れている時は無理せず、短い「沈黙」も怖がらなくて大丈夫です。', '生活的ストレス'),
+	(29, '人との関係に気を張りすぎて、休まる時間が少ないようです。', '「1人で安心できる空間と時間」を意識して生活に取り入れてください。', '生活的ストレス'),
+	(30, '本音を出せず、感情を押し込めているようです。', '素直な気持ちを紙やスマホメモに書き出してみてください。', '生活的ストレス');
 
 --  テーブル e5.pet_comments の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `pet_comments` (
   `pet_comments_id` int NOT NULL AUTO_INCREMENT,
-  `pet_comments` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `pet_comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`pet_comments_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.pet_comments: ~0 rows (約) のデータをダンプしています
+REPLACE INTO `pet_comments` (`pet_comments_id`, `pet_comments`) VALUES
+	(1, 'えらいね！ '),
+	(2, 'ゆっくりいこ〜 '),
+	(3, 'だいじょうぶだよ '),
+	(4, 'ひとやすみしよっか '),
+	(5, 'がんばってるね！'),
+	(6, 'いっしょだよ！ '),
+	(7, 'いいかんじ〜 '),
+	(8, 'まったりしよ〜 '),
+	(9, 'ずっと応援してるよ！ '),
+	(10, 'すごいよ〜！ ');
 
 --  テーブル e5.useritems の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `useritems` (
@@ -129,22 +236,24 @@ CREATE TABLE IF NOT EXISTS `useritems` (
   `petitems7` int NOT NULL DEFAULT '0',
   `petitems8` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.useritems: ~0 rows (約) のデータをダンプしています
+REPLACE INTO `useritems` (`userid`, `petitems1`, `petitems2`, `petitems3`, `petitems4`, `petitems5`, `petitems6`, `petitems7`, `petitems8`) VALUES
+	(13, 0, 0, 0, 0, 0, 0, 0, 0),
+	(14, 0, 0, 0, 0, 0, 0, 0, 0);
 
 --  テーブル e5.users の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ハッシュ化して利用する',
+  `username` text,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
 
--- テーブル e5.users: ~0 rows (約) のデータをダンプしています
-
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+-- テーブル e5.users: ~9 rows (約) のデータをダンプしています
+REPLACE INTO `users` (`id`, `username`, `password`) VALUES
+	(1, 'dojouser1', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
+	(11, 'dojouser2', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
+	(12, 'dojouser3', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
+	(14, 'e5test', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14');
