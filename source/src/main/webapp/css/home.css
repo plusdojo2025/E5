@@ -38,9 +38,9 @@ main {
 .home_comment img {
     position: absolute;
     top: 50px;
-    width: 400px;
-    max-width: 400px;
-    height: 150px;
+    width: 500px;
+    max-width: 500px;
+    height: 177px;
 }
 
 /*キャラクターのコメント*/
