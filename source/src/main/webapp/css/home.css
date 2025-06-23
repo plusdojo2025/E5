@@ -17,11 +17,6 @@ main {
   background-color: rgba(231, 208, 169, 0.065);
 }
 
-
-#logo {
-   width: 100px;
-}
-
 .container {
   max-width: 100%;
   margin: 0 auto;
@@ -34,7 +29,7 @@ main {
     position: relative;
     background-color: white;
     border: 1px solid #005751;
-    margin-top: 50px auto;
+    margin: 33px auto;
     width: 925px;
     height: 590px;
 }
@@ -131,6 +126,7 @@ main {
     top: 50px;*/
     width: 350px;
     height: 500px;
+    margin: 24px auto;
   }
   
   .home_comment img {

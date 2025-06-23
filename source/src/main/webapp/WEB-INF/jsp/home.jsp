@@ -104,8 +104,8 @@
     
     <script>
     window.shouldShowPrompt = "${showCheckPrompt}" === "true";  // true or false のまま渡す
-  console.log("shouldShowPrompt =", window.shouldShowPrompt);
-</script>
+    console.log("shouldShowPrompt =", window.shouldShowPrompt);
+	</script>
 
     <script src="<c:url value='/js/home.js'/>"></script>
     <script src="<c:url value='/js/common.js'/>"></script>
