@@ -228,9 +228,6 @@ main {
 
   #error-message, #error-area {
     font-size: 13px;
-    /*padding-left:10px;*/
-    background-color: rgba(255, 200, 200, 0.3); /* ← 仮の背景色 */
-  border: 1px dashed red; /* ← 枠線でエリアを可視化 */
-  padding: 10px; /* ← あえて余白を見せる */
+    padding-left:10px;
   }
 }
