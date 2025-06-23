@@ -158,7 +158,7 @@ public class HomeServlet extends HttpServlet {
 		
 		//挨拶・一言コメント(コメント取得)
 		Pet_CommentsDao pcDao = new Pet_CommentsDao();
-        int petComNumber = new Random().nextInt(8) + 1;
+        int petComNumber = new Random().nextInt(10) + 1;
         // 挨拶コメントをランダムで取得
         Pet_Comments petCom = pcDao.selectComments(petComNumber);
         request.setAttribute("petCom", petCom);

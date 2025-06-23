@@ -75,7 +75,20 @@
             <!-- コメントの枠div -->
             <div class="home_comment">
 				<img src="<c:url value='/images/hukidashi.png'/>" alt="吹き出し">
-				<div>happy</div>
+				<!-- キャラクターのコメント -->
+				<div>
+			        <c:choose>
+			            <c:when test="${not empty commentData}">
+			                ${commentData.comment}
+			            </c:when>
+			            <c:when test="${not empty petCom}">
+			                ${petCom.pet_comments}
+			            </c:when>
+			            <c:otherwise>
+			                コメントが取得できませんでした。
+			            </c:otherwise>
+			        </c:choose>
+			    </div>
             </div>
             <!-- キャラクターの枠 -->
             <div class="character">
