@@ -85,9 +85,9 @@
         	<h1 class="check_results">ストレスチェック結果 ${onedayresult[0].stress_score}点</h1>
         	<div class="radar-container">
 				<div class="label-column">
-	        	    <label>環境的ストレスがやや高いです。</label>
-	    	        <label>生活的ストレスがやや高いです。</label>
-		            <label>身体的ストレスがやや高いです。</label>
+	        	    <label>${comment1}</label>
+	    	        <label>${comment2}</label>
+		            <label>${comment3}</label>
 				</div>
 		    	<div class="radar-chart-1">
 			    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
@@ -129,13 +129,13 @@
 			</div>
 			<div class="check_comments">
 				<p class="check_item">コメント</p>
-				<p>・${onedaycomments.comments}サンプルテキスト</p>
+				<p class="check_ca">・${onedaycomments.comments}</p>
 			</div>
 			<div class="check_advice">
 				<p class="check_item">アドバイス</p>
-				<p>・${onedaycomments.advice}サンプルテキスト</p>
+				<p class="check_ca">・${onedaycomments.advice}</p>
 			</div>
-			<a href="/E5/HomeServlet">ホーム</a>
+			<a class="home" href="/E5/HomeServlet">ホーム</a>
 			</c:otherwise>
 			</c:choose>
         </div>
@@ -143,44 +143,71 @@
         <div class="tab-content content2">
             <h1 class="check_results">${startofweek}～${endofweek}の記録</h1>
             <dl class="bar-chart-1">
+            	<c:choose>
+            		  <c:when test="${empty oneweekresult}">
+					  <p>チェック結果がありません。</p>
+					  </c:when>
+					  <c:otherwise>
 					<c:forEach var="item" items="${oneweekresult}">
 					    <!-- データ表示 -->
 				    <div class="bar-item">
-				        <dt>${item.formattedDate}</dt>
+				        <dt class="bar-date">${item.formattedDate}</dt>
 				        <dd style="width: ${item.stress_score * 7.5}px">${item.stress_score}%</dd>
-				        <dt>${item.stress_score}</dt>
+				        <dt class="bar-score">${item.stress_score}</dt>
 				    </div>
 					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 			</dl>
             
-            <div class="week_comments">
-				<p>週の傾向</p>
-				<p>${oneweekcomments}</p>
-				<p>アドバイス</p>
-				<p>${oneweekcomments}</p>
-			</div>
-			<a href="/E5/HomeServlet">ホーム</a>
+            
+			<c:choose>
+          	  <c:when test="${empty oneweekresult}">
+			  </c:when>
+			    <c:otherwise>
+		            <div class="week_comments">
+						<p>週の傾向</p>
+						<p>${oneweekcomments.owt}</p>
+						<p>アドバイス</p>
+						<p>${oneweekcomments.owt_comments}</p>
+					</div>
+			    </c:otherwise>
+			</c:choose>
+			<a class="home" href="/E5/HomeServlet">ホーム</a>
         </div>
 		<!-- 月の結果 -->
         <div class="tab-content content3">
             <h1 class="check_results">${startofmonth}～${endofmonth}の記録</h1>
-            <dl class="bar-chart-2">
-			    <c:forEach var="item" items="${onemonthresult}">
+			
+            <dl class="bar-chart-2">	
+            	<c:choose>
+            		  <c:when test="${empty onemonthresult}">
+					  <p>チェック結果がありません。</p>
+					  </c:when>
+					  <c:otherwise>
+		    		<c:forEach var="item2" items="${onemonthresult}">
 					    <!-- データ表示 -->
 				    <div>
-				        <dt>${item.formattedDate}</dt>
-				        <dd style="width: ${item.stress_score * 7.5}px">${item.stress_score}%</dd>
-				        <dt>${item.stress_score}</dt>
+				        <dt class="bar-date">${item2.formattedDate}</dt>
+				        <dd style="width: ${item2.stress_score * 7.5}px">${item2.stress_score}%</dd>
+				        <dt id="bar-score2">${item2.stress_score}</dt>
 				    </div>
 					</c:forEach>
-			    
+    			</c:otherwise>
+			</c:choose>
 			</dl>
-            
-            <div class="week_comments">
-				<p>月の傾向</p>
-				<p>${onemonthcomments}</p>
-			</div>
-			<a href="<c:url value='/HomeServlet' />">ホーム</a>
+            <c:choose>
+          	  <c:when test="${empty onemonthresult}">
+			  </c:when>
+			    <c:otherwise>
+		            <div class="month_comments">
+						<p>月の傾向</p>
+						<p>${onemonthcomments.omt}</p>
+					</div>
+			    </c:otherwise>
+			</c:choose>
+
+			<a class="home" href="<c:url value='/HomeServlet' />">ホーム</a>
         </div>
 
     </div>

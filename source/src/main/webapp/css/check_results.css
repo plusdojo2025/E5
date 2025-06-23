@@ -143,11 +143,13 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
-	margin-top: 10px;
+	margin-top: 30px;
+	margin-left: 30px;
 }
 .label-column label {
-	margin-top: 10px;
-	font-size: 20px;
+	margin-top: 15px;
+	font-size: 25px;
+	margin-bottom: 15px;
 }
 .check_comments {
 	border-top: 2px solid black;
@@ -165,12 +167,43 @@ h2 {
 	text-align: center;
 }
 
+.check_ca {
+	font-size: 20px;
+	margin-top: 13px;
+	margin-bottom: 13px;
+}
+
 .bar-chart-1 {
     font-size: 16px;
     width: 950px
 }
 .bar-item {
 	
+}
+.bar-score {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  margin-left: 20px;
+  text-align: right;
+  margin-right: 30px;
+  font-size: 20px;
+}
+#bar-score2 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  margin-left: 20px;
+  text-align: right;
+  margin-right: 30px;
+  font-size: 20px;
+}
+.bar-date {
+  flex-shrink: 0;
+  width: 55px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
 }
 .bar-chart-1 > div {
 	display:flex;
@@ -179,10 +212,7 @@ h2 {
 }
 
 .bar-chart-1 dt {
-	flex-shrink: 0;
-    width: 55px;
-    margin-left: 20px;
-    margin-right: 20px;
+
 }
 
 .bar-chart-1 dd {
@@ -197,8 +227,23 @@ h2 {
     white-space: nowrap;
     animation: anima-bar-chart-1 1.2s ease;
 }
-
-
+.home {
+    text-transform: uppercase;
+    background: #daf7e1;
+    border: 1px solid;
+    width: 50%;
+    color: #2f514f;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin: 15px;
+    box-sizing: border-box;
+}
+.home:hover{
+	background    : rgba(47, 81, 79, 0.85);     /* 背景色     */
+  	color         : #def7e1;     /* 文字色     */
+}
 
 @keyframes anima-bar-chart-1 {
     from {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +25,8 @@ import dao.One_Month_TrendsDao;
 import dao.One_Week_TrendsDao;
 import model.Check_Comments;
 import model.Check_Results;
+import model.One_Month_Trends;
+import model.One_Week_Trends;
 
 /**
  * Servlet implementation class ResultServlet
@@ -89,6 +92,19 @@ public class ResultServlet extends HttpServlet {
         return sb.toString();
     }
 
+    public String getEvaluationComment(double score) {
+        if (score >= 8.4) {
+            return "かなり高いです。";
+        } else if (score >= 6.8) {
+            return "やや高いです。";
+        } else if (score >= 5.2) {
+            return "普通です。";
+        } else if (score >= 3.6) {
+            return "やや低いです。";
+        } else {
+            return "かなり低いです。";
+        }
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -196,12 +212,20 @@ public class ResultServlet extends HttpServlet {
 		    request.setAttribute("pointsJsArray", pointsJsArray.toString());
 		    request.setAttribute("scores", scores);
 			
-		    double newscore1 = score1/1.5;
-			double newscore2 = score2/1.5;
-			double newscore3 = score3/1.5;
+		    double newscore1 = Math.floor(score1 / 1.5 * 10) / 10.0;
+		    double newscore2 = Math.floor(score2 / 1.5 * 10) / 10.0;
+		    double newscore3 = Math.floor(score3 / 1.5 * 10) / 10.0;
 			request.setAttribute("score1", newscore1);
 			request.setAttribute("score2", newscore2);
 			request.setAttribute("score3", newscore3);
+			
+			String comment1 = ("環境的ストレス　" + getEvaluationComment(newscore3));
+			String comment2 = ("生活的ストレス　" + getEvaluationComment(newscore2));
+			String comment3 = ("身体的ストレス　" + getEvaluationComment(newscore1));
+
+			request.setAttribute("comment1", comment1);
+			request.setAttribute("comment2", comment2);
+			request.setAttribute("comment3", comment3);
 			
 			Check_CommentsDao ccdao = new Check_CommentsDao();
 			Check_Comments onedaycomments = ccdao.selectByScoreAndTrend(stress_score, stress_factor);
@@ -259,14 +283,19 @@ public class ResultServlet extends HttpServlet {
 			request.setAttribute("score1", newscore1);
 			request.setAttribute("score2", newscore2);
 			request.setAttribute("score3", newscore3);
+			String comment1 = "データがありません。" ;
+			String comment2 = "データがありません。" ;
+			String comment3 = "データがありません。" ;
+
+			request.setAttribute("comment1", comment1);
+			request.setAttribute("comment2", comment2);
+			request.setAttribute("comment3", comment3);
 			
 			Check_CommentsDao ccdao = new Check_CommentsDao();
 			Check_Comments onedaycomments = ccdao.selectByScoreAndTrend(stress_score, stress_factor);
 			request.setAttribute("onedaycomments", onedaycomments);
 		}
-		System.out.println(resultbool);
-		System.out.println(1);
-		
+
 		// jspに表示されるように型を変換しています
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
 
@@ -290,39 +319,53 @@ public class ResultServlet extends HttpServlet {
 		
 
 		// 週、月のチェック結果で一番高いストレス傾向を求める
-		Map<String, Integer> weekcountmap = new HashMap<>();
-		for (Check_Results result : oneweekresult) {
-		    String type = result.getStress_factor();
-		    weekcountmap.put(type, weekcountmap.getOrDefault(type, 0) + 1);
-		}
 		// 週の一番高いストレス傾向
+
+		Map<String, Integer> weekcountmap = new HashMap<>();
 		String weekmaxtrend = null;
 		int weekmaxCount = 0;
-
+		List<String> maxTrends = new ArrayList<>();
+		
 		for (Map.Entry<String, Integer> entry : weekcountmap.entrySet()) {
-		    if (entry.getValue() > weekmaxCount) {
-		        weekmaxtrend = entry.getKey();
-		        weekmaxCount = entry.getValue();
+		    int count = entry.getValue();
+		    if (count > weekmaxCount) {
+		        weekmaxCount = count;
+		        maxTrends.clear(); // それまでの候補を捨てる
+		        maxTrends.add(entry.getKey());
+		    } else if (count == weekmaxCount) {
+		        maxTrends.add(entry.getKey()); // 同じカウントの候補を追加
 		    }
 		}
 		
-		Map<String, Integer> monthcountmap = new HashMap<>();
-		for (Check_Results result : onemonthresult) {
-		    String type = result.getStress_factor();
-		    monthcountmap.put(type, monthcountmap.getOrDefault(type, 0) + 1);
+		// ランダムに1つ選ぶ（同数がある場合）
+		if (!maxTrends.isEmpty()) {
+		    Random rand = new Random();
+		    weekmaxtrend = maxTrends.get(rand.nextInt(maxTrends.size()));
 		}
-		// 月の一番高いストレス傾向
+		
 		String monthmaxtrend = null;
-		int monthmaxcount = 0;
-
+		int monthmaxCount = 0;
+		List<String> monthmaxTrends = new ArrayList<>();
+		Map<String, Integer> monthcountmap = new HashMap<>();
+		
 		for (Map.Entry<String, Integer> entry : monthcountmap.entrySet()) {
-		    if (entry.getValue() > monthmaxcount) {
-		        monthmaxtrend = entry.getKey();
-		        monthmaxcount = entry.getValue();
+		    int count = entry.getValue();
+		    if (count > monthmaxCount) {
+		        monthmaxCount = count;
+		        monthmaxTrends.clear(); // それまでの候補を捨てる
+		        monthmaxTrends.add(entry.getKey());
+		    } else if (count == monthmaxCount) {
+		        monthmaxTrends.add(entry.getKey()); // 同じカウントの候補を追加
 		    }
 		}
 		
+		// ランダムに1つ選ぶ（同数がある場合）
+		if (!maxTrends.isEmpty()) {
+		    Random rand = new Random();
+		    monthmaxtrend = maxTrends.get(rand.nextInt(maxTrends.size()));
+		}
 		
+		int stress_score = 1;
 		
 		// daoのインスタンス化
 //		Check_CommentsDao ccdao = new Check_CommentsDao();
@@ -330,8 +373,8 @@ public class ResultServlet extends HttpServlet {
 		One_Month_TrendsDao omdao = new One_Month_TrendsDao();
 		// 日、週、月のコメントと、アドバイスを取得する
 //		Check_Comments onedaycomments = ccdao.selectByScoreAndTrend(stress_score, stress_factor);
-//		One_Week_Trends oneweekcomments = owdao.selectByScoreAndTrend(stress_score, weekmaxTrend);
-		// One_Month_Trends onemonthcomments = omdao.selectByScoreAndTrend(stress_score, monthmaxtrend);
+		One_Week_Trends oneweekcomments = owdao.selectByScoreAndTrend(stress_score, weekmaxtrend);
+		 One_Month_Trends onemonthcomments = omdao.selectByScoreAndTrend(stress_score, monthmaxtrend);
 		
 		// チェック結果に応じたペットコメントを一度だけ表示する場合、前回のログイン時間を記録し、今回のログイン時間と比べる
 //		session.setAttribute("pet_check_comments", onedaycomments.getPet_check_comments());
@@ -351,8 +394,10 @@ public class ResultServlet extends HttpServlet {
 		request.setAttribute("oneweekresult", oneweekresult);
 		request.setAttribute("onemonthresult", onemonthresult);
 //		request.setAttribute("onedaycomments", onedaycomments);
-//		 request.setAttribute("oneweekcomments", oneweekcomments);
-//		 request.setAttribute("onemonthcomments", onemonthcomments);
+		System.out.println(oneweekcomments);
+		System.out.println(onemonthcomments);
+		 request.setAttribute("oneweekcomments", oneweekcomments);
+		 request.setAttribute("onemonthcomments", onemonthcomments);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/check_results.jsp");
 		dispatcher.forward(request, response);
