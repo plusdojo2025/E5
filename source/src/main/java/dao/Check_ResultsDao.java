@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -183,8 +184,9 @@ public class Check_ResultsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO check_results userid, stress_score,question1, question2, question3, question4, "
-					+ "question5,question6, question7, question8, question9, question10,created_at, stress_factor) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  NOW(), ? )";
+			String sql =  "INSERT INTO check_results (userid, stress_score, question1, question2, question3, question4, "
+			        + "question5, question6, question7, question8, question9, question10, created_at, stress_factor) "
+			        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, card.getUserid());
@@ -434,8 +436,8 @@ public class Check_ResultsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, userid);
-			pStmt.setDate(2,  java.sql.Date.valueOf(today));
-			pStmt.setDate(3,  java.sql.Date.valueOf(today.plusDays(1)));
+			pStmt.setTimestamp(2, Timestamp.valueOf(today.atStartOfDay()));
+			pStmt.setTimestamp(3, Timestamp.valueOf(today.plusDays(1).atStartOfDay()));
 
 
 			// SELECT文を実行し、結果表を取得する
@@ -489,8 +491,8 @@ public class Check_ResultsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, userid);
-			pStmt.setDate(2,  java.sql.Date.valueOf(today));
-			pStmt.setDate(3,  java.sql.Date.valueOf(today.plusDays(1)));
+			pStmt.setTimestamp(2, Timestamp.valueOf(today.atStartOfDay()));
+			pStmt.setTimestamp(3, Timestamp.valueOf(today.plusDays(1).atStartOfDay()));
 			
 //			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();

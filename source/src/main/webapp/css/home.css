@@ -10,10 +10,9 @@ html, body {
 
 main {
   width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 20px;
-  min-height: 80vh;
+  max-width: 1521px;
+  margin: 0;
+  padding: 1px;
   box-sizing: border-box;
   background-color: rgba(231, 208, 169, 0.065);
 }
@@ -30,6 +29,15 @@ main {
   box-sizing: border-box;
 }
 
+/* 背景の設定 */
+.haikei {
+    position: relative;
+    background-color: white;
+    border: 1px solid #005751;
+    margin-top: 50px auto;
+    width: 925px;
+    height: 590px;
+}
 
 /*キャラクターの吹き出し*/
 .home_comment img {
@@ -110,17 +118,6 @@ main {
     text-decoration: none;
     color: #005751;
     transform: translateX(-18px);
-}
-
-/* 背景の設定 */
-.haikei {
-    position: relative;
-    background-color: white;
-    border: 1px solid #005751;
-    margin-top: 50px;
-    /*width: 925px;*/
-    height: 590px;
-    /*transform: translate(185px, -40px);*/
 }
 
 /* スマホ用のサイズ調整 */
