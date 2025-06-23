@@ -5,16 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.One_Week_Trends;
 
 public class One_Week_TrendsDao {
-	public List<One_Week_Trends> selectByScoreAndTrend(int stressScore, String weekmaxtrend) {
+	public One_Week_Trends selectByScoreAndTrend(int stressScore, String weekmaxtrend) {
 		Connection conn = null;
-		List<One_Week_Trends> cardList = new ArrayList<One_Week_Trends>();
+		One_Week_Trends trendComment = null;
 		
 		try {
 			// データベースに接続する
@@ -24,23 +21,26 @@ public class One_Week_TrendsDao {
 			
 			
 			// 一番大きいストレス項目の週の傾向と週のコメントを取得する
-			String sql2 = "SELECT owt, owt_comments FROM check_results "
-					+ "WHERE owt_stress_factor = ?";
+			String sql = "SELECT owt, owt_comments FROM one_week_trends "
+					+ "WHERE owt_stress_factor = ? ORDER BY RAND() LIMIT 1";
 			// 接続する情報とSQLの情報をまとめてpStmtに入れている
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//選択された日付を?に入れてSQL文を完成させる
-			pStmt2.setString(1, weekmaxtrend);
+			pStmt.setString(1, weekmaxtrend);
 
-			ResultSet rs2 = pStmt2.executeQuery();
+			ResultSet rs = pStmt.executeQuery();
 			
-			while (rs2.next()) {
-				One_Week_Trends owt = new One_Week_Trends(rs2.getOwt(''))
+
+			if (rs.next()) {
+				trendComment = new One_Week_Trends();
+				trendComment.setOwt(rs.getString("owt"));
+				trendComment.setOwt_comments(rs.getString("owt_comment"));
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			cardList = null;
+			trendComment = null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -49,11 +49,11 @@ public class One_Week_TrendsDao {
 				} catch (SQLException e) {
 					e.printStackTrace(); // // デバッグ情報としてコンソールに詳細を出力
 					System.out.println("エラーが起きました！！"); // ユーザー向けのメッセージ
-					cardList = null;
+					trendComment = null;
 				}
 			}
 		}
 		//結果を返す
-		return cardList;
+		return trendComment;
 	}
 }

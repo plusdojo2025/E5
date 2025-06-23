@@ -15,16 +15,11 @@ import javax.servlet.http.HttpSession;
 
 import dao.Check_CommentsDao;
 import dao.Check_ResultsDao;
-import dao.Login_Bonus_HistoryDao;
-import dao.Login_RewardsDao;
 import dao.Pet_CommentsDao;
 import dao.UserItemsDao;
 import model.Check_Comments;
 import model.Check_Results;
-import model.Login_Bonus_History;
-import model.Login_Rewards;
 import model.Pet_Comments;
-import model.UserItems;
 
 /**
  * Servlet implementation class MenuServlet
@@ -49,12 +44,13 @@ public class HomeServlet extends HttpServlet {
 		// ログイン中ユーザーの取得(ユーザーごとのデータを扱うため)
 		int userId = (int) session.getAttribute("id");
 		
+		/* 一旦無くす（余裕があれば再度取り組む）
 		//アイテムの所持数を表示
 		UserItemsDao uiDao = new UserItemsDao();
 		// ユーザーのアイテム所持数の取得
 		UserItems itemData = uiDao.findByUserId(userId);
 		request.setAttribute("itemData", itemData);
-		
+		*/
 		
 		//表情判定（チェック結果を元に）
 		LocalDate today = LocalDate.now();
@@ -64,7 +60,7 @@ public class HomeServlet extends HttpServlet {
 		List<Check_Results> todayResults = crDao.findByUserIdAndDate(userId, today);
 		Check_Results todayResult = todayResults.isEmpty() ? null : todayResults.get(0); // 1件だけ取得
 		
-        String expression = "default";
+//        String expression = "default"; //　一旦無くす（余裕があれば再度取り組む）
         int stress_Score = -1;
         String stress_Factor = null;
         //　今日のストレスチェック結果があれば表情選択と、結果に応じたコメント選択を実行する
@@ -72,6 +68,7 @@ public class HomeServlet extends HttpServlet {
             stress_Score = todayResult.getStress_score();	// ストレス点数（0〜100）を取得
             stress_Factor = todayResult.getStress_factor();	// ストレスの傾向を取得
 
+            /*　一旦無くす（余裕があれば再度取り組む）
             // 点数に応じてキャラクターの表情を決定
             if (stress_Score < 30) {
                 expression = "genki";
@@ -84,6 +81,7 @@ public class HomeServlet extends HttpServlet {
             }
 
             request.setAttribute("expression", expression);
+            */
 
             // チェック結果に基づくコメント取得
             Check_CommentsDao ccDao = new Check_CommentsDao();
@@ -102,6 +100,7 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("showCheckPrompt", !hasCheckedToday); // モーダルを出すべきかどうか
 		
 		
+		/*　一旦無くす（余裕があれば再度取り組む）
 		// 継続ログインの管理
 		Login_RewardsDao streakDao = new Login_RewardsDao();
 		Login_Rewards streak = streakDao.findByUserId(userId);
@@ -155,6 +154,7 @@ public class HomeServlet extends HttpServlet {
 		    request.setAttribute("bonusItemId", itemNumber);
 		    request.setAttribute("showBonusModal", true);
 		}
+		*/
 		
 		
 		//挨拶・一言コメント(コメント取得)

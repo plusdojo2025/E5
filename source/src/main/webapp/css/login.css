@@ -136,8 +136,9 @@ main {
     transition: all 0.3 ease;
     cursor: pointer;
 }
-.loginButton:hover,.loginButton:active,.loginButton:focus {
-    background: #daf7e1;
+.loginButton:hover {
+	background    : rgba(47, 81, 79, 0.85);     /* 背景色     */
+  	color         : #def7e1;     /* 文字色     */
 }
 #error-message,#error-area {
 	color: red;
@@ -227,6 +228,9 @@ main {
 
   #error-message, #error-area {
     font-size: 13px;
-    padding-left:10px;
+    /*padding-left:10px;*/
+    background-color: rgba(255, 200, 200, 0.3); /* ← 仮の背景色 */
+  border: 1px dashed red; /* ← 枠線でエリアを可視化 */
+  padding: 10px; /* ← あえて余白を見せる */
   }
 }
