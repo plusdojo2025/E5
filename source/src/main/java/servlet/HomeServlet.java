@@ -158,10 +158,18 @@ public class HomeServlet extends HttpServlet {
 		
 		//挨拶・一言コメント(コメント取得)
 		Pet_CommentsDao pcDao = new Pet_CommentsDao();
-        int petComNumber = new Random().nextInt(8) + 1;
+        int petComNumber = new Random().nextInt(10) + 1;
         // 挨拶コメントをランダムで取得
         Pet_Comments petCom = pcDao.selectComments(petComNumber);
         request.setAttribute("petCom", petCom);
+        
+        // ★ここに追加！（チェック済みでもランダムにpetComを使うかどうか）
+        boolean useCheckComment = false;
+        if (todayResult != null) {
+            Random rand = new Random();
+            useCheckComment = rand.nextBoolean(); // true = checkコメント, false = petCom
+        }
+        request.setAttribute("useCheckComment", useCheckComment);
         
 		
 		// メニューページにフォワードする
