@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import dao.Check_CommentsDao;
 import dao.Check_ResultsDao;
 import dao.Pet_CommentsDao;
-import dao.UserItemsDao;
 import model.Check_Comments;
 import model.Check_Results;
 import model.Pet_Comments;
@@ -170,6 +169,7 @@ public class HomeServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
+	/* 一旦無くす（余裕があれば再度取り組む）
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
@@ -195,4 +195,5 @@ public class HomeServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 		dispatcher.forward(request, response);
 	}
+	*/
 }
