@@ -22,6 +22,7 @@ import dao.Check_CommentsDao;
 import dao.Check_ResultsDao;
 import dao.One_Month_TrendsDao;
 import dao.One_Week_TrendsDao;
+import model.Check_Comments;
 import model.Check_Results;
 
 /**
@@ -141,16 +142,130 @@ public class ResultServlet extends HttpServlet {
 		System.out.println(onedayresult);
 		System.out.println(oneweekresult);
 		System.out.println(onemonthresult);
-		// データがあるかどうか確認
+		
+		// 今日の分のデータがあるかどうか確認
 		boolean resultbool = onedayresult.get(0).getHasData();
 		if (resultbool)	{
+
+			Boolean noData = false;
+			request.setAttribute("noData", noData);
+			int stress_score = onedayresult.get(0).getStress_score();
+			String stress_factor = onedayresult.get(0).getStress_factor();
 			
+			// jsのレーダーチャート計算に渡すスコア
+			int score1 = onedayresult.get(0).getQuestion1() + onedayresult.get(0).getQuestion2() 
+					+ onedayresult.get(0).getQuestion3();
+			int score2 = onedayresult.get(0).getQuestion4() + onedayresult.get(0).getQuestion5() 
+					+ onedayresult.get(0).getQuestion6();
+			int score3 = onedayresult.get(0).getQuestion7() + onedayresult.get(0).getQuestion8() 
+					+ onedayresult.get(0).getQuestion9();
+			// レーダーチャートの座標計算
+			
+			List<Integer> scores = List.of(score3, score2, score1);
+		    // 座標計算
+		    List<Check_Results> check_results = calcPoints(scores);
+
+		    // d属性作成
+		    String polygonD = makePolygonD(check_results);
+
+		    if (check_results == null || polygonD == null) {
+		    	
+			} else {
+				try {
+			        
+			    } catch (DateTimeParseException e) {
+			        // 日付の形式がおかしいときも、今の日付にする or エラー返す
+			        day = LocalDate.now();
+			        e.printStackTrace(); // ログにも出す
+			    }
+			}
+
+		    // JSPに渡す用に座標を文字列化（例：JSON形式など）
+		    // ここはJSP側で使いやすいように加工する
+		    // 例として、JavaScript配列風の文字列を作成
+		    StringBuilder pointsJsArray = new StringBuilder("[");
+		    for (int i = 0; i < check_results.size(); i++) {
+		    	Check_Results p = check_results.get(i);
+		        pointsJsArray.append("{x:").append(p.getX()).append(", y:").append(p.getY()).append("}");
+		        if (i != check_results.size() -1) pointsJsArray.append(",");
+		    }
+		    pointsJsArray.append("]");
+		    // リクエスト属性にセット
+		    request.setAttribute("polygonD", polygonD);
+		    request.setAttribute("pointsJsArray", check_results);
+		    request.setAttribute("pointsJsArray", pointsJsArray.toString());
+		    request.setAttribute("scores", scores);
+			
+		    double newscore1 = score1/1.5;
+			double newscore2 = score2/1.5;
+			double newscore3 = score3/1.5;
+			request.setAttribute("score1", newscore1);
+			request.setAttribute("score2", newscore2);
+			request.setAttribute("score3", newscore3);
+			
+			Check_CommentsDao ccdao = new Check_CommentsDao();
+			Check_Comments onedaycomments = ccdao.selectByScoreAndTrend(stress_score, stress_factor);
+			request.setAttribute("onedaycomments", onedaycomments);
+			
+		} else {
+			Boolean noData = true;
+			request.setAttribute("noData", noData);
+			int stress_score = 0;
+			String stress_factor = "データなし";
+
+			// jsのレーダーチャート計算に渡すスコア
+			int score1 = 1;
+			int score2 = 1;
+			int score3 = 1;
+			
+			List<Integer> scores = List.of(score3, score2, score1);
+		    // 座標計算
+		    List<Check_Results> check_results = calcPoints(scores);
+
+		    // d属性作成
+		    String polygonD = makePolygonD(check_results);
+
+		    if (check_results == null || polygonD == null) {
+		    	
+			} else {
+				try {
+			        
+			    } catch (DateTimeParseException e) {
+			        // 日付の形式がおかしいときも、今の日付にする or エラー返す
+			        day = LocalDate.now();
+			        e.printStackTrace(); // ログにも出す
+			    }
+			}
+
+		    // JSPに渡す用に座標を文字列化（例：JSON形式など）
+		    // ここはJSP側で使いやすいように加工する
+		    // 例として、JavaScript配列風の文字列を作成
+		    StringBuilder pointsJsArray = new StringBuilder("[");
+		    for (int i = 0; i < check_results.size(); i++) {
+		    	Check_Results p = check_results.get(i);
+		        pointsJsArray.append("{x:").append(p.getX()).append(", y:").append(p.getY()).append("}");
+		        if (i != check_results.size() -1) pointsJsArray.append(",");
+		    }
+		    pointsJsArray.append("]");
+		    // リクエスト属性にセット
+		    request.setAttribute("polygonD", polygonD);
+		    request.setAttribute("pointsJsArray", check_results);
+		    request.setAttribute("pointsJsArray", pointsJsArray.toString());
+		    request.setAttribute("scores", scores);
+			
+		    double newscore1 = score1/1.5;
+			double newscore2 = score2/1.5;
+			double newscore3 = score3/1.5;
+			request.setAttribute("score1", newscore1);
+			request.setAttribute("score2", newscore2);
+			request.setAttribute("score3", newscore3);
+			
+			Check_CommentsDao ccdao = new Check_CommentsDao();
+			Check_Comments onedaycomments = ccdao.selectByScoreAndTrend(stress_score, stress_factor);
+			request.setAttribute("onedaycomments", onedaycomments);
 		}
 		System.out.println(resultbool);
 		System.out.println(1);
-		int stress_score = onedayresult.get(0).getStress_score();
-		String stress_factor = onedayresult.get(0).getStress_factor();
-
 		
 		// jspに表示されるように型を変換しています
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
@@ -173,51 +288,7 @@ public class ResultServlet extends HttpServlet {
 		    }
 		}
 		
-		// jsのレーダーチャート計算に渡すスコア
-		int score1 = onedayresult.get(0).getQuestion1() + onedayresult.get(0).getQuestion2() 
-				+ onedayresult.get(0).getQuestion3();
-		int score2 = onedayresult.get(0).getQuestion4() + onedayresult.get(0).getQuestion5() 
-				+ onedayresult.get(0).getQuestion6();
-		int score3 = onedayresult.get(0).getQuestion7() + onedayresult.get(0).getQuestion8() 
-				+ onedayresult.get(0).getQuestion9();
-		
-		// レーダーチャートの座標計算
-		
-		List<Integer> scores = List.of(score3, score2, score1);
-	    // 座標計算
-	    List<Check_Results> check_results = calcPoints(scores);
 
-	    // d属性作成
-	    String polygonD = makePolygonD(check_results);
-
-	    if (check_results == null || polygonD == null) {
-	    	
-		} else {
-			try {
-		        
-		    } catch (DateTimeParseException e) {
-		        // 日付の形式がおかしいときも、今の日付にする or エラー返す
-		        day = LocalDate.now();
-		        e.printStackTrace(); // ログにも出す
-		    }
-		}
-
-	    // JSPに渡す用に座標を文字列化（例：JSON形式など）
-	    // ここはJSP側で使いやすいように加工する
-	    // 例として、JavaScript配列風の文字列を作成
-	    StringBuilder pointsJsArray = new StringBuilder("[");
-	    for (int i = 0; i < check_results.size(); i++) {
-	    	Check_Results p = check_results.get(i);
-	        pointsJsArray.append("{x:").append(p.getX()).append(", y:").append(p.getY()).append("}");
-	        if (i != check_results.size() -1) pointsJsArray.append(",");
-	    }
-	    pointsJsArray.append("]");
-	    // リクエスト属性にセット
-	    request.setAttribute("polygonD", polygonD);
-	    request.setAttribute("pointsJsArray", check_results);
-	    request.setAttribute("pointsJsArray", pointsJsArray.toString());
-	    request.setAttribute("scores", scores);
-		
 		// 週、月のチェック結果で一番高いストレス傾向を求める
 		Map<String, Integer> weekcountmap = new HashMap<>();
 		for (Check_Results result : oneweekresult) {
@@ -254,7 +325,7 @@ public class ResultServlet extends HttpServlet {
 		
 		
 		// daoのインスタンス化
-		Check_CommentsDao ccdao = new Check_CommentsDao();
+//		Check_CommentsDao ccdao = new Check_CommentsDao();
 		One_Week_TrendsDao owdao = new One_Week_TrendsDao();
 		One_Month_TrendsDao omdao = new One_Month_TrendsDao();
 		// 日、週、月のコメントと、アドバイスを取得する
@@ -265,8 +336,7 @@ public class ResultServlet extends HttpServlet {
 		// チェック結果に応じたペットコメントを一度だけ表示する場合、前回のログイン時間を記録し、今回のログイン時間と比べる
 //		session.setAttribute("pet_check_comments", onedaycomments.getPet_check_comments());
 //		
-		boolean noData = onedayresult.isEmpty();
-		request.setAttribute("noData", noData);
+
 		
 		// 週、月の始めと終わりをリクエストスコープに格納する
 		request.setAttribute("startofweek", startofweek);
@@ -275,13 +345,7 @@ public class ResultServlet extends HttpServlet {
 		request.setAttribute("endofmonth", endofmonth);
 		
 		// スコアの傾向をリクエストスコープに格納する。
-		double newscore1 = score1/1.5;
-		double newscore2 = score2/1.5;
-		double newscore3 = score3/1.5;
-		request.setAttribute("score1", newscore1);
-		request.setAttribute("score2", newscore2);
-		request.setAttribute("score3", newscore3);
-		
+
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("onedayresult", onedayresult);
 		request.setAttribute("oneweekresult", oneweekresult);

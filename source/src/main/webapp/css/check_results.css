@@ -153,6 +153,17 @@ h2 {
 	border-top: 2px solid black;
 }
 
+.check_item {
+	border: 2px solid black;
+	background-color: #9fdfec;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 150px;
+	border-radius: 10px;
+	height: 40px;
+	font-size: 23px;
+	text-align: center;
+}
 
 .bar-chart-1 {
     font-size: 16px;

@@ -128,12 +128,12 @@
 			</div>
 			</div>
 			<div class="check_comments">
-				<p>コメント</p>
-				<p>${onedaycomments.comments}</p>
+				<p class="check_item">コメント</p>
+				<p>・${onedaycomments.comments}サンプルテキスト</p>
 			</div>
 			<div class="check_advice">
-				<p>アドバイス</p>
-				<p>${onedaycomments.advice}</p>
+				<p class="check_item">アドバイス</p>
+				<p>・${onedaycomments.advice}サンプルテキスト</p>
 			</div>
 			<a href="/E5/HomeServlet">ホーム</a>
 			</c:otherwise>
