@@ -163,6 +163,14 @@ public class HomeServlet extends HttpServlet {
         Pet_Comments petCom = pcDao.selectComments(petComNumber);
         request.setAttribute("petCom", petCom);
         
+        // ★ここに追加！（チェック済みでもランダムにpetComを使うかどうか）
+        boolean useCheckComment = false;
+        if (todayResult != null) {
+            Random rand = new Random();
+            useCheckComment = rand.nextBoolean(); // true = checkコメント, false = petCom
+        }
+        request.setAttribute("useCheckComment", useCheckComment);
+        
 		
 		// メニューページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");

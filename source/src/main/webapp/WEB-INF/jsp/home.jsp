@@ -78,16 +78,16 @@
 				<!-- キャラクターのコメント -->
 				<div>
 			        <c:choose>
-			            <c:when test="${not empty commentData}">
-			                ${commentData.pet_check_comments}
-			            </c:when>
-			            <c:when test="${not empty petCom}">
-			                ${petCom.pet_comments}
-			            </c:when>
-			            <c:otherwise>
-			                コメントが取得できませんでした。
-			            </c:otherwise>
-			        </c:choose>
+					  <c:when test="${not empty commentData and useCheckComment}">
+					    ${commentData.pet_check_comments}
+					  </c:when>
+					  <c:when test="${not empty petCom}">
+					    ${petCom.pet_comments}
+					  </c:when>
+					  <c:otherwise>
+					    コメントが取得できませんでした。
+					  </c:otherwise>
+					</c:choose>
 			    </div>
             </div>
             <!-- キャラクターの枠 -->
