@@ -60,7 +60,8 @@
     <!-- ヘッダー（ここまで） -->
 
     <main>
-        <!-- アイテムの枠 -->
+        <div class="container">
+        <!-- アイテムの枠 
         <nav class="items_waku">
             <div class="items_menu">アイテムを選択</div>
             <ul class="items">
@@ -80,6 +81,7 @@
             <div class="character">
 				<img src="<c:url value='/images/happy_character.gif'/>" alt="ハッピーなキャラ">
             </div>
+        </div>
         </div>
     </main>
     <!-- フッター（ここから） -->
