@@ -436,8 +436,8 @@ public class Check_ResultsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, userid);
-			pStmt.setTimestamp(1, Timestamp.valueOf(today.atStartOfDay()));
-			pStmt.setTimestamp(2, Timestamp.valueOf(today.plusDays(1).atStartOfDay()));
+			pStmt.setTimestamp(2, Timestamp.valueOf(today.atStartOfDay()));
+			pStmt.setTimestamp(3, Timestamp.valueOf(today.plusDays(1).atStartOfDay()));
 
 
 			// SELECT文を実行し、結果表を取得する
@@ -491,8 +491,8 @@ public class Check_ResultsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			pStmt.setInt(1, userid);
-			pStmt.setTimestamp(1, Timestamp.valueOf(today.atStartOfDay()));
-			pStmt.setTimestamp(2, Timestamp.valueOf(today.plusDays(1).atStartOfDay()));
+			pStmt.setTimestamp(2, Timestamp.valueOf(today.atStartOfDay()));
+			pStmt.setTimestamp(3, Timestamp.valueOf(today.plusDays(1).atStartOfDay()));
 			
 //			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
