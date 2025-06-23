@@ -82,6 +82,16 @@
 				<img src="<c:url value='/images/happy_character.gif'/>" alt="ハッピーなキャラ">
             </div>
         </div>
+        
+        <div id="confirmModal" class="modal">
+  　         <div class="modal-content">
+              <p id="text_top">本日はまだ行っていません。</p>
+              <p id="text_bottom">ストレスチェックを行いますか？</p>
+              <button id="confirmYes">はい</button>
+              <button id="confirmNo">いいえ</button>
+            </div>
+          </div>
+        
         </div>
     </main>
     <!-- フッター（ここから） -->
@@ -91,7 +101,14 @@
     </div>
     </footer>
     <!-- フッター（ここまで） -->
+    
+    <script>
+    window.shouldShowPrompt = "${showCheckPrompt}" === "true";  // true or false のまま渡す
+  console.log("shouldShowPrompt =", window.shouldShowPrompt);
+</script>
+
     <script src="<c:url value='/js/home.js'/>"></script>
     <script src="<c:url value='/js/common.js'/>"></script>
-</body>
+    
+
 </html>
