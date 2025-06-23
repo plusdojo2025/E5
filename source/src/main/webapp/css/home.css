@@ -46,9 +46,9 @@ main {
 /*キャラクターのコメント*/
 .home_comment div {
     position: absolute;
-    font-size: 80px;
-    top: 50px;
-    left: 70px;
+    font-size: 70px;
+    top: 60px;
+    left: 94px;
 }
 
 /*キャラクター画像*/
@@ -130,11 +130,12 @@ main {
   }
   
   .home_comment img {
-    top: 10px;
-    width: 100px;
-    max-width: 100px;
-    height: 50px;
-  }
+    top: 65px;
+        left: 6px;
+        width: 230px;
+        max-width: 230px;
+        height: 190px;
+    }
   
   .home_comment div {
     font-size: 20px;
@@ -160,14 +161,12 @@ main {
 
 @media screen and (max-width: 480px) {
   .character img {
-    position: relative;
     display: block;
-    margin: 0 auto;
     width: 200px;
     max-width: 200px;
     height: auto;
-    top: 180px;
-    left: 135px;
+    top: 262px;
+    left: 176px;
   }
 
   .home_comment {
@@ -177,19 +176,16 @@ main {
   }
 
   .home_comment img {
-        top: 20px;
-        left: 20px;
-        width: 200px;
-        max-width: 200px;
-        /* height: auto; */
-        height: 200px;
+        top: 65px;
+        left: 6px;
+        width: 230px;
+        max-width: 230px;
+        height: 194px;
   }
 
   .home_comment div {
-    font-size: 24px;
-    position: relative;
-    margin-top: 5px;
-    top: 50px;
-    left: -50px;
+    font-size: 32px;
+    top: 128px;
+    left: 72px;
   }
 }
