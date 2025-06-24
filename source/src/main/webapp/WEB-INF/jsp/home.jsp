@@ -74,37 +74,56 @@
         <div class="haikei">
             <!-- コメントの枠div -->
             <div class="home_comment">
-				<img src="<c:url value='/images/hukidashi.png'/>" alt="吹き出し">
-				<!-- キャラクターのコメント -->
-				<div>
-			        <c:choose>
-					  <c:when test="${not empty commentData and useCheckComment}">
-					    ${commentData.pet_check_comments}
-					  </c:when>
-					  <c:when test="${not empty petCom}">
-					    ${petCom.pet_comments}
-					  </c:when>
-					  <c:otherwise>
-					    コメントが取得できませんでした。
-					  </c:otherwise>
-					</c:choose>
-			    </div>
-            </div>
-            <!-- キャラクターの枠 -->
-            <div class="character">
+			<img src="<c:url value='/images/hukidashi.png'/>" alt="吹き出し">
+		
+			<div>
+				<c:choose>
+					<%-- 表情がセットされているとき（＝表情変化演出を表示） 
+					<c:when test="${isFirstDisplay eq true}">
+						<img src="<c:url value='/images/emotion/${expression}.png'/>" alt="感情アイコン" width="50">
+					</c:when>--%>
+		
+					<%-- 通常時：コメントを表示 --%>
+					<c:when test="${not empty commentData and useCheckComment}">
+						${commentData.pet_check_comments}
+					</c:when>
+					<c:when test="${not empty petCom}">
+						${petCom.pet_comments}
+						<%--<p>expressionの値: ${expression}</p>
+						<p>isFirstDisplayの値: ${isFirstDisplay}</p>--%>
+					</c:when>
+					<c:otherwise>
+						コメントが取得できませんでした。
+					</c:otherwise>
+				</c:choose>
+			</div>
+			</div>
+		
+			<div class="character">
 				<img src="<c:url value='/images/happy_character.gif'/>" alt="ハッピーなキャラ">
-            </div>
+				<%--<c:choose>
+					<%-- 表情が指定されていれば、表情に応じたキャラ画像を表示 
+					<c:when test="${isFirstDisplay}">
+						<img src="<c:url value='/images/character/${expression}_character.gif'/>" alt="${expression}なキャラ">
+					</c:when>
+			
+					<%-- 通常キャラ画像 
+					<c:otherwise>
+						<img src="<c:url value='/images/happy_character.gif'/>" alt="ハッピーなキャラ">
+					</c:otherwise>
+				</c:choose>--%>
+			</div>
+
+        
+	        <div id="confirmModal" class="modal">
+	  　         <div class="modal-content">
+	              <p id="text_top">本日はまだ行っていません。</p>
+	              <p id="text_bottom">ストレスチェックを行いますか？</p>
+	              <button id="confirmYes">はい</button>
+	              <button id="confirmNo">いいえ</button>
+	            </div>
+	         </div>
         </div>
-        
-        <div id="confirmModal" class="modal">
-  　         <div class="modal-content">
-              <p id="text_top">本日はまだ行っていません。</p>
-              <p id="text_bottom">ストレスチェックを行いますか？</p>
-              <button id="confirmYes">はい</button>
-              <button id="confirmNo">いいえ</button>
-            </div>
-          </div>
-        
         </div>
     </main>
     <!-- フッター（ここから） -->
