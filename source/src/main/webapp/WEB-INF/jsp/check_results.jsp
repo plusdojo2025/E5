@@ -72,8 +72,8 @@
 	            <label for="tab3" class="tab-label label3">月</label>
 	        </div>
             <div class="tab-group_right">
-           		<input type="date" name="day">
-           		<input type="submit" class="period_change" name="submit" value="期間変更">
+           		<input class="calender_input" type="date" name="day">
+           		<input class="calender_button" type="submit" class="period_change" name="submit" value="期間変更">
            	</div>
         </div>
 		<!-- 選択された期間の内容を個別に表示する。 -->
@@ -119,11 +119,11 @@
 			        </div>
 			        <div>
 			            <dt>身体的ストレス</dt>
-			            <dd><%= request.getAttribute("score2")%></dd>
+			            <dd><%= request.getAttribute("score1")%></dd>
 			        </div>
 			        <div>
 			            <dt>生活的ストレス</dt>
-			            <dd><%= request.getAttribute("score1")%></dd>
+			            <dd><%= request.getAttribute("score2")%></dd>
 			        </div>
 			    </dl>
 			</div>
@@ -154,7 +154,9 @@
 					    <!-- データ表示 -->
 				    <div class="bar-item">
 				        <dt class="bar-date">${item.formattedDate}</dt>
-				        <dd style="width: ${item.stress_score * 7.5}px">${item.stress_score}</dd>
+				        <div class="bar-graph-container">
+				        <dd class="bar-graph" style="width: ${item.stress_score}%">${item.stress_score}</dd>
+				        </div>
 				        <dt class="bar-score">${item.stress_score}</dt>
 				    </div>
 					</c:forEach>
@@ -191,7 +193,9 @@
 					    <!-- データ表示 -->
 				    <div>
 				        <dt class="bar-date">${item2.formattedDate}</dt>
-				        <dd style="width: ${item2.stress_score * 7.5}px">${item2.stress_score}</dd>
+				        <div class="bar-graph-container">
+				        <dd class="bar-graph" style="width: ${item2.stress_score}%">${item2.stress_score}</dd>
+				        </div>
 				        <dt id="bar-score2">${item2.stress_score}</dt>
 				    </div>
 					</c:forEach>

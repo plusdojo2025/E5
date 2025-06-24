@@ -379,7 +379,8 @@ public class ResultServlet extends HttpServlet {
 		// ランダムに1つ選ぶ（同数がある場合）
 		if (!monthmaxTrends.isEmpty()) {
 		    Random rand = new Random();
-		    monthmaxtrend = monthmaxTrends.get(rand.nextInt(maxTrends.size()));
+		    System.out.println(maxTrends.size());
+		    monthmaxtrend = monthmaxTrends.get(rand.nextInt(monthmaxTrends.size()));
 		}
 		
 		int stress_score = 1;
