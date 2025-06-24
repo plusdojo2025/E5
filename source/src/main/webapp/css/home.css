@@ -49,7 +49,7 @@ main {
   width: 500px;
   max-width: 500px;
   height: 193px;
-  z-index: 500;
+  z-index: 101;
 }
 
 /* キャラクターのコメント */
@@ -67,7 +67,7 @@ main {
   text-align: center;
   overflow-wrap: break-word;
   white-space: normal;
-  z-index: 500;
+  z-index: 101;
 }
 
 /* キャラクター画像 */
@@ -79,7 +79,7 @@ main {
   width: 300px;
   max-width: 90vw;
   height: auto;
-  z-index: 500;
+  z-index: 101;
 }
 
 /* アイテムメニューの枠 */

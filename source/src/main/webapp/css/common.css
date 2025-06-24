@@ -39,8 +39,8 @@ h1 {
   font-size: 35px;
   margin: 0;
 }
+
 #logo {
-  /* height: 40px; */
   position: relative;
   margin-right: 10px;
   max-width: 92px;
@@ -48,6 +48,7 @@ h1 {
   left: -15px;
   top: 6px;
 }
+
 @media screen and (max-width: 400px) {
   #h1 {
     font-size: 20px;
@@ -71,6 +72,11 @@ header {
   .name_img{
 	width:200px;
 }
+
+  .name_img.noLogin {
+  	position: relative;
+}
+
 /* ハンバーガーメニュー*/
 .menu_boxWrapBg{
     display:none;
@@ -82,7 +88,7 @@ header {
     right: 0;
     bottom:0;
     margin:auto;
-    z-index: 9;
+    z-index: 102;
 }
 .menu_boxWrapWrap.active .menu_boxWrapBg{
     display:block;
@@ -91,7 +97,7 @@ header {
     position: fixed;
     top: 0;
     right: -420px;
-    z-index: 99;
+    z-index: 103;
     width: 300px;
     height: auto;
     transition:0.3s;
