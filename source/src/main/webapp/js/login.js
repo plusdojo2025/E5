@@ -7,27 +7,27 @@ document.getElementById('login-form').onsubmit = function(event) {
 
 		// 入力チェック
 		if (username === '' && password === '') {
-			errorEl.textContent = '※ユーザーネームとパスワードを入力してください！';
+			errorEl.textContent = '※usernameとpasswordを入力してください！';
 			event.preventDefault();
 			return false;
 		}
 		if (username === '') {
-			errorEl.textContent = '※ユーザーネームを入力してください！';
+			errorEl.textContent = '※usernameを入力してください！';
 			event.preventDefault();
 			return false;
 		}
 		if (password === '') {
-			errorEl.textContent = '※パスワードを入力してください！';
+			errorEl.textContent = '※passwordを入力してください！';
 			event.preventDefault();
 			return false;
 		}
 		if (!/^[a-zA-Z0-9]{5,30}$/.test(username)) {
-			errorEl.textContent = '※ユーザーネームは5文字以上の半角英字で入力してください！';
+			errorEl.textContent = '※usernameは5文字以上の半角英字で入力してください！';
 			event.preventDefault();
 			return false;
 		}
 		if (!/^(?=.*[a-zA-Z])(?=.*\d)[ -~]{8,24}$/.test(password)) {
-    		errorEl.textContent = '※パスワードは8～24文字で、半角英数字混合で入力してください！';
+    		errorEl.textContent = '※passwordは8～24文字で、半角英数字混合で入力してください！';
     		event.preventDefault();
     		return false;
 		}

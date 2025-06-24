@@ -25,7 +25,7 @@
 	<div id="register">
 		<form id="registerForm" action="<c:url value='/RegisterServlet' />" method="POST">
 			<div class="register-item">
-			<label for="username" class="register-label">ユーザーネーム
+			<label for="username" class="register-label">username
 				<button class="tooltip">
 					<span class="tooltip-text">半角英数字5～30文字</span>
 				i</button>
