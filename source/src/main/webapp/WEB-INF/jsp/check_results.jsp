@@ -72,7 +72,7 @@
 	        </div>
             <div class="tab-group_right">
            		<input type="date" name="day">
-           		<input type="submit" class="period_change" name="submit">
+           		<input type="submit" class="period_change" name="submit" value="期間変更">
            	</div>
         </div>
 		<!-- 選択された期間の内容を個別に表示する。 -->
@@ -135,9 +135,10 @@
 				<p class="check_item">アドバイス</p>
 				<p class="check_ca">・${onedaycomments.advice}</p>
 			</div>
-			<a class="home" href="/E5/HomeServlet">ホーム</a>
+			
 			</c:otherwise>
 			</c:choose>
+			<a class="home" href="/E5/HomeServlet">ホーム</a>
         </div>
 		<!-- 週の結果 -->
         <div class="tab-content content2">
@@ -166,10 +167,10 @@
 			  </c:when>
 			    <c:otherwise>
 		            <div class="week_comments">
-						<p>週の傾向</p>
-						<p>${oneweekcomments.owt}</p>
-						<p>アドバイス</p>
-						<p>${oneweekcomments.owt_comments}</p>
+						<p class="week_item">週の傾向</p>
+						<p class="week_comment">・${oneweekcomments.owt}</p>
+						<p class="week_item">アドバイス</p>
+						<p class="week_comment">・${oneweekcomments.owt_comments}</p>
 					</div>
 			    </c:otherwise>
 			</c:choose>
@@ -201,8 +202,8 @@
 			  </c:when>
 			    <c:otherwise>
 		            <div class="month_comments">
-						<p>月の傾向</p>
-						<p>${onemonthcomments.omt}</p>
+						<p class="month_item">月の傾向</p>
+						<p class="month_comment">${onemonthcomments.omt}</p>
 					</div>
 			    </c:otherwise>
 			</c:choose>

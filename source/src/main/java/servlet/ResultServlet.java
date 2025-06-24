@@ -321,32 +321,49 @@ public class ResultServlet extends HttpServlet {
 		// 週、月のチェック結果で一番高いストレス傾向を求める
 		// 週の一番高いストレス傾向
 
+		// weekcountmap に「ストレス傾向名」と「出現回数」を入れていく
 		Map<String, Integer> weekcountmap = new HashMap<>();
+
+		for (Check_Results cr : oneweekresult) {
+		    String trend = cr.getStress_factor();  // 例えばストレス傾向名を取得
+		    if (trend != null) {
+		        weekcountmap.put(trend, weekcountmap.getOrDefault(trend, 0) + 1);
+		    }
+		}
+
 		String weekmaxtrend = null;
 		int weekmaxCount = 0;
 		List<String> maxTrends = new ArrayList<>();
-		
+
 		for (Map.Entry<String, Integer> entry : weekcountmap.entrySet()) {
 		    int count = entry.getValue();
 		    if (count > weekmaxCount) {
 		        weekmaxCount = count;
-		        maxTrends.clear(); // それまでの候補を捨てる
+		        maxTrends.clear();
 		        maxTrends.add(entry.getKey());
 		    } else if (count == weekmaxCount) {
-		        maxTrends.add(entry.getKey()); // 同じカウントの候補を追加
+		        maxTrends.add(entry.getKey());
 		    }
 		}
-		
-		// ランダムに1つ選ぶ（同数がある場合）
+
 		if (!maxTrends.isEmpty()) {
 		    Random rand = new Random();
 		    weekmaxtrend = maxTrends.get(rand.nextInt(maxTrends.size()));
 		}
+
+		// weekmaxtrend には最頻出のストレス傾向（最大カウントのものの中からランダム）が入る
 		
+		Map<String, Integer> monthcountmap = new HashMap<>();
+
+		for (Check_Results cr : onemonthresult) {
+		    String trend = cr.getStress_factor();  // 例えばストレス傾向名を取得
+		    if (trend != null) {
+		        monthcountmap.put(trend, monthcountmap.getOrDefault(trend, 0) + 1);
+		    }
+		}
 		String monthmaxtrend = null;
 		int monthmaxCount = 0;
 		List<String> monthmaxTrends = new ArrayList<>();
-		Map<String, Integer> monthcountmap = new HashMap<>();
 		
 		for (Map.Entry<String, Integer> entry : monthcountmap.entrySet()) {
 		    int count = entry.getValue();
@@ -362,7 +379,7 @@ public class ResultServlet extends HttpServlet {
 		// ランダムに1つ選ぶ（同数がある場合）
 		if (!maxTrends.isEmpty()) {
 		    Random rand = new Random();
-		    monthmaxtrend = maxTrends.get(rand.nextInt(maxTrends.size()));
+		    monthmaxtrend = monthmaxTrends.get(rand.nextInt(maxTrends.size()));
 		}
 		
 		int stress_score = 1;
@@ -373,6 +390,8 @@ public class ResultServlet extends HttpServlet {
 		One_Month_TrendsDao omdao = new One_Month_TrendsDao();
 		// 日、週、月のコメントと、アドバイスを取得する
 //		Check_Comments onedaycomments = ccdao.selectByScoreAndTrend(stress_score, stress_factor);
+		System.out.println(weekmaxtrend);
+		System.out.println(monthmaxtrend);
 		One_Week_Trends oneweekcomments = owdao.selectByScoreAndTrend(stress_score, weekmaxtrend);
 		 One_Month_Trends onemonthcomments = omdao.selectByScoreAndTrend(stress_score, monthmaxtrend);
 		
@@ -396,6 +415,7 @@ public class ResultServlet extends HttpServlet {
 //		request.setAttribute("onedaycomments", onedaycomments);
 		System.out.println(oneweekcomments);
 		System.out.println(onemonthcomments);
+		System.out.println("データは？");
 		 request.setAttribute("oneweekcomments", oneweekcomments);
 		 request.setAttribute("onemonthcomments", onemonthcomments);
 		
