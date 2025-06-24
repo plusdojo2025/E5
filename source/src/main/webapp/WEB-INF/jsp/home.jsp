@@ -98,6 +98,10 @@
 				</c:choose>
 			</div>
 			</div>
+			
+			<!-- 背景の壁 -->
+			<div class="haikei_kabe">
+			</div>
 		
 			<div class="character">
 				<img src="<c:url value='/images/happy_character_c.gif'/>" alt="ハッピーなキャラ">
@@ -124,6 +128,7 @@
 	            </div>
 	         </div>
 				
+        </div>
         </div>
     </main>
     <!-- フッター（ここから） -->
