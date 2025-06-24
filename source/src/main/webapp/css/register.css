@@ -154,7 +154,7 @@ main {
 }
 
 
-@media screen and (max-width: 844px) {
+@media screen and (max-width: 390px) {
   main {
     padding: 20px;
     padding-top: 60px;
@@ -174,7 +174,7 @@ main {
     padding-top:15px;
     display: flex;          /* 追加：flexで横並びに */
     align-items: center;    /* 追加：縦方向中央揃え */
-    justify-content: left; /* タイトル、ロゴ左寄せ */
+    justify-content: center; /* タイトル、ロゴ中央寄せ */
   }
 
   .logo {
