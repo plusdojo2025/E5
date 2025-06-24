@@ -153,7 +153,7 @@
 					    <!-- データ表示 -->
 				    <div class="bar-item">
 				        <dt class="bar-date">${item.formattedDate}</dt>
-				        <dd style="width: ${item.stress_score * 7.5}px">${item.stress_score}%</dd>
+				        <dd style="width: ${item.stress_score * 7.5}px">${item.stress_score}</dd>
 				        <dt class="bar-score">${item.stress_score}</dt>
 				    </div>
 					</c:forEach>
@@ -190,7 +190,7 @@
 					    <!-- データ表示 -->
 				    <div>
 				        <dt class="bar-date">${item2.formattedDate}</dt>
-				        <dd style="width: ${item2.stress_score * 7.5}px">${item2.stress_score}%</dd>
+				        <dd style="width: ${item2.stress_score * 7.5}px">${item2.stress_score}</dd>
 				        <dt id="bar-score2">${item2.stress_score}</dt>
 				    </div>
 					</c:forEach>

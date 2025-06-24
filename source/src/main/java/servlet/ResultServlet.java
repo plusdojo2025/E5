@@ -116,16 +116,16 @@ public class ResultServlet extends HttpServlet {
 		LocalDate day;
 
 		// ログインしていない時。
-//		if (session.getAttribute("id") == null) {
-//			
-//			response.sendRedirect(request.getContextPath() +"/LoginServlet");
-//			return;
-//		}
+		if (session.getAttribute("id") == null) {
+			
+			response.sendRedirect(request.getContextPath() +"/LoginServlet");
+			return;
+		}
 		
 		// ログインしていた時の処理
 		request.setCharacterEncoding("UTF-8");
-//		int id = (Integer) session.getAttribute("id");
-		int id = 1;
+		int id = (Integer) session.getAttribute("id");
+
 		// パラメータから日付取得（例：2025-06-17）
 		if (request.getParameter("day") == null || request.getParameter("day").isEmpty()) {
 			day = LocalDate.now(); 
