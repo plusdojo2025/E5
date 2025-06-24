@@ -11,56 +11,56 @@ html, body {
 main {
   width: 100%;
   max-width: 1521px;
-  margin: 0;
   padding: 1px;
+  margin: 0;
   box-sizing: border-box;
   background-color: rgba(231, 208, 169, 0.065);
 }
 
 .container {
   max-width: 100%;
-  margin: 0 auto;
   padding: 0 16px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 /* 背景の設定 */
 .haikei {
-    position: relative;
-    background-color: white;
-    border: 1px solid #005751;
-    margin: 33px auto;
-    width: 925px;
-    height: 590px;
+  position: relative;
+  width: 925px;
+  height: 590px;
+  margin: 33px auto;
+  background-color: white;
+  border: 1px solid #005751;
 }
 
-/*キャラクターの吹き出し*/
+/* キャラクターの吹き出し */
 .home_comment img {
-    position: absolute;
-    top: 50px;
-    max-width: 500px;
-    width: 500px;
-    height: 193px;
-    
+  position: absolute;
+  top: 50px;
+  width: 500px;
+  max-width: 500px;
+  height: 193px;
 }
 
-/*キャラクターのコメント*/
+/* キャラクターのコメント */
 .home_comment div {
-    position: absolute;
-    font-size: 31px;
-    top: 76px;
-    left: 82px;
-    max-width: 370px;
-    height: 134px;
-    max-height: 134px;
-    overflow-wrap: break-word;
-    white-space: normal;
-    display: flex;
-    align-items: center;
-    text-align: center;
+  position: absolute;
+  top: 76px;
+  left: 82px;
+  width: auto;
+  max-width: 370px;
+  height: 134px;
+  max-height: 134px;
+  display: flex;
+  align-items: center;
+  font-size: 31px;
+  text-align: center;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
-/*キャラクター画像*/
+/* キャラクター画像 */
 .character img {
   position: absolute;
   top: 240px;
@@ -73,109 +73,67 @@ main {
 
 /* アイテムメニューの枠 */
 .items_waku {
-    position: relative;
-    display: flex;
-    height: 100px;
-    width: 200px;
-    margin: 0;
-    text-align: center;
-    transform: translateX(1150px);
+  position: relative;
+  display: flex;
+  width: 200px;
+  height: 100px;
+  margin: 0;
+  text-align: center;
+  transform: translateX(1150px);
 }
 
 /* アイテムを選択とアイテムの枠 */
 .items_menu, .items {
-    box-sizing: border-box;
-    flex: 0 0 auto;
-    margin: 0;
-    height: 35px;
-    top: 60%;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  margin: 0;
+  height: 35px;
+  top: 60%;
 }
 
 /* アイテムを選択の設定 */
 .items_menu {
-    position: absolute;
-    cursor: pointer;
-    background-color: #daf7e1;
-    border: 1px solid #005751;
-    width: 185px;
-    height: 35px;
-    border-radius: 5px;
-    padding: 5px 0;
+  position: absolute;
+  width: 185px;
+  height: 35px;
+  border-radius: 5px;
+  padding: 5px 0;
+  background-color: #daf7e1;
+  border: 1px solid #005751;
+  cursor: pointer;
 }
 
 /* アイテムの枠の設定 */
 .items {
-    position: absolute;
-    display: none;
-    flex-direction: column;
-    list-style: none;
-    transform: translateY(145%);
-    padding: 0;
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  transform: translateY(145%);
 }
 
 /* アイテムの設定 */
 .items li {
-    background-color: white;
-    border: 1px solid #005751;
-    width: 220px;
-    padding: 5px 0;
-    text-decoration: none;
-    color: #005751;
-    transform: translateX(-18px);
+  width: 220px;
+  padding: 5px 0;
+  background-color: white;
+  border: 1px solid #005751;
+  color: #005751;
+  text-decoration: none;
+  transform: translateX(-18px);
 }
 
 /* スマホ用のサイズ調整 */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 400px) {
   h1 {
     font-size: 24px;
   }
-  
+
   .haikei {
-    /*left: -165px;
-    top: 50px;*/
     width: 350px;
     height: 500px;
     margin: 24px auto;
-  }
-  
-  .home_comment img {
-    top: 65px;
-        left: 6px;
-        width: 230px;
-        max-width: 230px;
-        height: 190px;
-    }
-  
-  .home_comment div {
-    font-size: 20px;
-    top: 15px;
-    left: 20px;
-  }
-  
-  .character img {
-        left: 95px;
-        top: 50px;
-        width: 90px;
-        max-width: 90px;
-        height: 90px;
-  }
-  
-  .items_waku {
-    transform: none; /* スマホでは中央や左寄せに */
-    justify-content: center;
-    width: 100%;        /* 幅を柔軟に */
-    overflow: hidden;   /* 内容がはみ出してもスクロールさせない */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .character img {
-    display: block;
-    width: 200px;
-    max-width: 200px;
-    height: auto;
-    top: 262px;
-    left: 176px;
   }
 
   .home_comment {
@@ -185,16 +143,33 @@ main {
   }
 
   .home_comment img {
-        top: 65px;
-        left: 6px;
-        width: 230px;
-        max-width: 230px;
-        height: 194px;
+    top: 65px;
+    left: 6px;
+    width: 230px;
+    max-width: 230px;
+    height: 194px;
   }
 
   .home_comment div {
-    font-size: 24px;
     top: 92px;
     left: 39px;
+    font-size: 20px;
+    max-width: 200px;
+  }
+
+  .character img {
+    display: block;
+    top: 262px;
+    left: 176px;
+    width: 200px;
+    max-width: 200px;
+    height: auto;
+  }
+
+  .items_waku {
+    width: 100%;
+    justify-content: center;
+    transform: none;
+    overflow: hidden;
   }
 }

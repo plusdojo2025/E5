@@ -10,11 +10,6 @@ main {
 	background: rgba(231, 208, 169, 0.065);
 	padding: 60px;
 }
-img {
-	/*width: 100px;*/
-	max-width: 100px;
-    height: auto;
-}
 
 header {
     height: 70px;
@@ -46,7 +41,12 @@ h1 {
 }
 #logo {
   /* height: 40px; */
+  position: relative;
   margin-right: 10px;
+  max-width: 92px;
+  height: auto;
+  left: -15px;
+  top: 6px;
 }
 @media screen and (max-width: 400px) {
   #h1 {
@@ -54,8 +54,8 @@ h1 {
   }
 
   #logo {
-    height: 70px;
-    margin-top: 12.7px;
+    max-width: 78px;
+    left: -15px;
   }
 }
 
@@ -88,8 +88,10 @@ h1 {
     right:0px;
     transition:0.3s;
 }
+
 #menu{
     cursor: default;
+    font-size: 22px;
 }
 .menu_box_close{
     display:flex;
@@ -131,4 +133,10 @@ h1 {
     background-color: #9fdfec;
     text-align: center;
  }
+ 
+ #menu{
+    cursor: default;
+    font-size: 16px;
  }
+ 
+}
