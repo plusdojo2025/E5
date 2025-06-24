@@ -12,10 +12,7 @@ h1 {
   font-size: 35px;
   margin: 0;
 }
-#logo {
-  /* height: 40px; */
-  margin-right: 10px;
-}
+
 @media screen and (max-width: 400px) {
   #h1 {
     font-size: 20px;
@@ -23,7 +20,6 @@ h1 {
 
   #logo {
     height: 70px;
-    margin-top: 12.7px;
   }
 }
 
