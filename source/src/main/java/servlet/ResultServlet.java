@@ -377,7 +377,7 @@ public class ResultServlet extends HttpServlet {
 		}
 		
 		// ランダムに1つ選ぶ（同数がある場合）
-		if (!maxTrends.isEmpty()) {
+		if (!monthmaxTrends.isEmpty()) {
 		    Random rand = new Random();
 		    monthmaxtrend = monthmaxTrends.get(rand.nextInt(maxTrends.size()));
 		}
