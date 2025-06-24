@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/HomeServlet");
 		} else {// ログイン失敗
 			// エラーメッセージ付きでlogin.jspへ戻す
-			request.setAttribute("errorMessage", "ユーザーネームもしくはパスワードが間違っています。");
+			request.setAttribute("errorMessage", "usernameもしくはpasswordが間違っています。");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 		}

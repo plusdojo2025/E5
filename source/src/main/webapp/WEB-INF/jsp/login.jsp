@@ -14,7 +14,7 @@
 	<!-- ヘッダー（ここから） -->
 	<header class="header">
 	<div class="title">
-		<h1 class="title-text">ストレッシュ</h1>
+		<img alt="" src="<c:url value='/images/name_w.png'/>" class="name_img">
 		<img alt="" src="<c:url value='/images/logo_w.png'/>" class="logo">
 	</div>
 	</header>
@@ -25,7 +25,7 @@
 	<div id="login">
 		<form id="login-form" method="POST"  action="<c:url value='/LoginServlet' />">
 			<div class="login-item">
-				<label for="username" class="login-label">ユーザーネーム
+				<label for="username" class="login-label">username
 					<button class="tooltip">
 						<span class="tooltip-text">半角英数字5～30文字</span>
 					i</button>

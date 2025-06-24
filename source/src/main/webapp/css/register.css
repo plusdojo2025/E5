@@ -183,6 +183,9 @@ main {
     max-width: 80px;
   }
   
+  .name_img{
+	width:200px;
+}
   .title-text {
     font-size: 5vw; /* 画面幅に応じて文字サイズを可変に */
     white-space: nowrap; /* 改行させない */

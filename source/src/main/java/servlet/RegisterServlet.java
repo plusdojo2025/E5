@@ -50,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 	        response.sendRedirect(request.getContextPath() + "/LoginServlet");
 	        return;
 		} else { // 登録失敗
-			request.setAttribute("error", "ユーザーネームが重複しています。");
+			request.setAttribute("error", "usernameが重複しています。");
 		}
 
 		// ログインページにフォワードする

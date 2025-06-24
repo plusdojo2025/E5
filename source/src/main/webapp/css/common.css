@@ -39,24 +39,44 @@ h1 {
   font-size: 35px;
   margin: 0;
 }
+
 #logo {
-  /* height: 40px; */
   position: relative;
   margin-right: 10px;
   max-width: 92px;
   height: auto;
-  left: -15px;
-  top: 6px;
+  left: -21px;
+  top: 4px;
 }
+
+.name_img.noLogin {
+  	position: relative;
+    top: -7px;
+    width: 260px;
+}
+
 @media screen and (max-width: 400px) {
   #h1 {
     font-size: 20px;
   }
 
+header {
+    height: 70px;
+    width: 100%;
+    background-color: #f2acac;
+    padding: 10px;
+    display: flex;          /* 追加：flexで横並びに */
+    align-items: center;    /* 追加：縦方向中央揃え */
+    /* flex-wrap: wrap; /* 画面幅が足りないとき折り返し */ 
+}
   #logo {
     max-width: 78px;
     left: -15px;
   }
+}
+/*アプリ名画像*/
+  .name_img{
+	width:200px;
 }
 
 /* ハンバーガーメニュー*/
@@ -70,7 +90,7 @@ h1 {
     right: 0;
     bottom:0;
     margin:auto;
-    z-index: 9;
+    z-index: 102;
 }
 .menu_boxWrapWrap.active .menu_boxWrapBg{
     display:block;
@@ -79,7 +99,7 @@ h1 {
     position: fixed;
     top: 0;
     right: -420px;
-    z-index: 99;
+    z-index: 103;
     width: 300px;
     height: auto;
     transition:0.3s;
