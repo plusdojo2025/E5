@@ -100,7 +100,7 @@
 			</div>
 		
 			<div class="character">
-				<img src="<c:url value='/images/happy_character.gif'/>" alt="ハッピーなキャラ">
+				<img src="<c:url value='/images/happy_character_c.gif'/>" alt="ハッピーなキャラ">
 				<%--<c:choose>
 					<%-- 表情が指定されていれば、表情に応じたキャラ画像を表示 
 					<c:when test="${isFirstDisplay}">
@@ -123,7 +123,7 @@
 	              <button id="confirmNo">いいえ</button>
 	            </div>
 	         </div>
-        </div>
+				
         </div>
     </main>
     <!-- フッター（ここから） -->
@@ -141,6 +141,9 @@
 
     <script src="<c:url value='/js/home.js'/>"></script>
     <script src="<c:url value='/js/common.js'/>"></script>
-    
+    <script>
+    	const hukidashi_PC = '<c:url value="/images/hukidashi.png"/>'
+    	const hukidashi_SP = '<c:url value="/images/hukidashi_mobile.png"/>'
+   </script>
 
 </html>
