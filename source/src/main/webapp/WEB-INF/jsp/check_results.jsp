@@ -16,7 +16,7 @@
 <header id="header">
       <div id="brand">
         <a href="<c:url value='/HomeServlet'/>">
-          <img alt="" src="<c:url value='/images/name_w.png'/>" class="name_img" class="noLogin">
+          <img alt="" src="<c:url value='/images/name_w.png'/>" class="name_img noLogin">
           <img src="<c:url value='/images/logo_w.png'/>" alt="ストレッシュロゴ" id="logo">
         </a>
       </div>
