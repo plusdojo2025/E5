@@ -14,7 +14,7 @@
 	<!-- ヘッダー（ここから） -->
 	<header class="header">
 	<div class="title">
-		<h1 class="title-text">ストレッシュ</h1>
+		<img alt="" src="<c:url value='/images/name_w.png'/>" class="name_img">
 		<img alt="" src="<c:url value='/images/logo_w.png'/>" class="logo">
 	</div>
 	</header>

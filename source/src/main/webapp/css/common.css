@@ -53,12 +53,24 @@ h1 {
     font-size: 20px;
   }
 
+header {
+    height: 70px;
+    width: 100%;
+    background-color: #f2acac;
+    padding: 10px;
+    display: flex;          /* 追加：flexで横並びに */
+    align-items: center;    /* 追加：縦方向中央揃え */
+    /* flex-wrap: wrap; /* 画面幅が足りないとき折り返し */ 
+}
   #logo {
     max-width: 78px;
     left: -15px;
   }
 }
-
+/*アプリ名画像*/
+  .name_img{
+	width:200px;
+}
 /* ハンバーガーメニュー*/
 .menu_boxWrapBg{
     display:none;
