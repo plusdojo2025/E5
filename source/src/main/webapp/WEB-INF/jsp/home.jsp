@@ -74,6 +74,7 @@
         <div class="haikei">
             <!-- コメントの枠div -->
             <div class="home_comment">
+<<<<<<< Updated upstream
 			<img src="<c:url value='/images/hukidashi.png'/>" alt="吹き出し">
 		
 			<div>
@@ -123,6 +124,32 @@
 	              <button id="confirmNo">いいえ</button>
 	            </div>
 	         </div>
+=======
+				<img src="<c:url value='/images/hukidashi.png'/>" alt="吹き出し">
+				<!-- キャラクターのコメント -->
+				<div>
+			        <c:choose>
+					  <c:when test="${not empty commentData and useCheckComment}">
+					    ${commentData.pet_check_comments}
+					  </c:when>
+					  <c:when test="${not empty petCom}">
+					    ${petCom.pet_comments}
+					  </c:when>
+					  <c:otherwise>
+					    コメントが取得できませんでした。
+					  </c:otherwise>
+					</c:choose>
+			    </div>
+            </div>
+            <!-- 背景の壁 -->
+			<div class="haikei_kabe">
+			    	
+			</div>
+            <!-- キャラクターの枠 -->
+            <div class="character">
+				<img src="<c:url value='/images/happy_character_c.gif'/>" alt="ハッピーなキャラ">
+            </div>
+>>>>>>> Stashed changes
         </div>
         </div>
     </main>
@@ -141,6 +168,9 @@
 
     <script src="<c:url value='/js/home.js'/>"></script>
     <script src="<c:url value='/js/common.js'/>"></script>
-    
+    <script>
+    	const hukidashi_PC = '<c:url value="/images/hukidashi.png"/>'
+    	const hukidashi_SP = '<c:url value="/images/hukidashi_mobile.png"/>'
+   </script>
 
 </html>
