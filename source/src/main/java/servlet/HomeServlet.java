@@ -53,34 +53,88 @@ public class HomeServlet extends HttpServlet {
 		
 		//表情判定（チェック結果を元に）
 		LocalDate today = LocalDate.now();
+//		String todayStr = today.toString();
+//		boolean alreadyShown = false;
 		Check_ResultsDao crDao = new Check_ResultsDao();
         // 今日のストレスチェック結果を取得（存在すれば1件）
 //        Check_Results todayResult = crDao.findByUserIdAndDate(userId, today);  // ←新たに用意したメソッドを想定
 		List<Check_Results> todayResults = crDao.findByUserIdAndDate(userId, today);
 		Check_Results todayResult = todayResults.isEmpty() ? null : todayResults.get(0); // 1件だけ取得
 		
+		/* 一旦無くす（余裕があれば再度取り組む）
+		// クッキーの確認
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+		    for (Cookie cookie : cookies) {
+		        if (cookie.getName().equals("expressionShownDate") && cookie.getValue().equals(todayStr)) {
+		            alreadyShown = true;
+		            break;
+		        }
+		    }
+		}
+		
+		System.out.println("【debug】クッキー読み込み開始");
+		if (cookies != null) {
+		    for (Cookie cookie : cookies) {
+		        System.out.println("【debug】cookie name: " + cookie.getName() + ", value: " + cookie.getValue());
+		        if (cookie.getName().equals("expressionShownDate") && cookie.getValue().equals(todayStr)) {
+		            alreadyShown = true;
+		            System.out.println("【debug】すでに表示済みと判定");
+		            break;
+		        }
+		    }
+		} else {
+		    System.out.println("【debug】クッキーは存在しません");
+		}
+		System.out.println("【debug】alreadyShown: " + alreadyShown);
+		*/
+		
 //        String expression = "default"; //　一旦無くす（余裕があれば再度取り組む）
         int stress_Score = -1;
         String stress_Factor = null;
-        //　今日のストレスチェック結果があれば表情選択と、結果に応じたコメント選択を実行する
+//        boolean isFirstDisplay = false;
+        //　今日のストレスチェック結果があれば表情選択と、結果に応じたコメント選択を実行する(すでに今日の表情が表示されていない場合のみ、実行)
         if (todayResult != null) {
             stress_Score = todayResult.getStress_score();	// ストレス点数（0〜100）を取得
             stress_Factor = todayResult.getStress_factor();	// ストレスの傾向を取得
-
-            /*　一旦無くす（余裕があれば再度取り組む）
+//            boolean isFirstDisplay = false;
+            /* 一旦無くす（余裕があれば再度取り組む）
             // 点数に応じてキャラクターの表情を決定
-            if (stress_Score < 30) {
-                expression = "genki";
-            } else if (stress_Score < 50) {
-                expression = "normal";
-            } else if (stress_Score < 70) {
-                expression = "tired";
-            } else {
-                expression = "shindoi";
-            }
+            if (!alreadyShown) {
+                // 表情設定
+                if (stress_Score < 30) {
+                    expression = "genki";
+                } else if (stress_Score < 50) {
+                    expression = "normal";
+                } else if (stress_Score < 70) {
+                    expression = "tired";
+                } else {
+                    expression = "shindoi";
+                }
+//                request.setAttribute("expression", expression);
+                
+                // フラグON
+                isFirstDisplay = true;
 
+                // クッキーで「表示済み」を記録
+                Cookie cookie = new Cookie("expressionShownDate", today.toString());
+                cookie.setMaxAge(60 * 60 * 24);
+                response.addCookie(cookie);
+            } else {
+                // 表情だけは表示用に設定（演出は不要でも）
+                if (stress_Score < 30) {
+                    expression = "genki";
+                } else if (stress_Score < 50) {
+                    expression = "normal";
+                } else if (stress_Score < 70) {
+                    expression = "tired";
+                } else {
+                    expression = "shindoi";
+                }
+            }
             request.setAttribute("expression", expression);
-            */
+            request.setAttribute("isFirstDisplay", isFirstDisplay);
+			*/
 
             // チェック結果に基づくコメント取得
             Check_CommentsDao ccDao = new Check_CommentsDao();
@@ -88,6 +142,11 @@ public class HomeServlet extends HttpServlet {
             if (commentData != null) {
                 request.setAttribute("commentData", commentData);
             }
+            /*
+            // クッキーに記録を残す（有効期限：24時間）
+            Cookie cookie = new Cookie("expressionShownDate", todayStr);
+            cookie.setMaxAge(60 * 60 * 24); // 1日
+            response.addCookie(cookie);*/
         }
 		
 		
@@ -165,6 +224,7 @@ public class HomeServlet extends HttpServlet {
         
         // ★ここに追加！（チェック済みでもランダムにpetComを使うかどうか）
         boolean useCheckComment = false;
+//        if (todayResult != null && !isFirstDisplay) {
         if (todayResult != null) {
             Random rand = new Random();
             useCheckComment = rand.nextBoolean(); // true = checkコメント, false = petCom
