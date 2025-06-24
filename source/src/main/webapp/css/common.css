@@ -45,8 +45,14 @@ h1 {
   margin-right: 10px;
   max-width: 92px;
   height: auto;
-  left: -15px;
-  top: 6px;
+  left: -21px;
+  top: 4px;
+}
+
+.name_img.noLogin {
+  	position: relative;
+    top: -7px;
+    width: 260px;
 }
 
 @media screen and (max-width: 400px) {
@@ -71,10 +77,6 @@ header {
 /*アプリ名画像*/
   .name_img{
 	width:200px;
-}
-
-  .name_img.noLogin {
-  	position: relative;
 }
 
 /* ハンバーガーメニュー*/
