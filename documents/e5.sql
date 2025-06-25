@@ -15,6 +15,9 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+-- e5 のデータベース構造をダンプしています
+CREATE DATABASE IF NOT EXISTS `e5` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `e5`;
 
 --  テーブル e5.check_comments の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `check_comments` (
@@ -26,9 +29,9 @@ CREATE TABLE IF NOT EXISTS `check_comments` (
   `min_score` int NOT NULL,
   `max_score` int NOT NULL,
   PRIMARY KEY (`comments_advice_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- テーブル e5.check_comments: ~0 rows (約) のデータをダンプしています
+-- テーブル e5.check_comments: ~30 rows (約) のデータをダンプしています
 REPLACE INTO `check_comments` (`comments_advice_id`, `comments`, `advice`, `pet_check_comments`, `trends`, `min_score`, `max_score`) VALUES
 	(1, '今日もよく頑張りましたね。ひとつひとつ、ちゃんと向き合っている姿が素敵です。 ', '頑張りすぎた日は、少し立ち止まって「よくやってるよ」と声をかけてあげてください。 ', 'おつかれさま。今日もちゃんと頑張ってえらいね！ぼくはいつでもそばにいるよ ', '環境的ストレス', 10, 100),
 	(2, '仕事に真剣だからこそ、いろんなことに気をつかって疲れちゃいますよね。 ', '抱えているものを紙に書き出すと、心の中が少し整ってきますよ。 ', 'なんにもできなくても、だいじょうぶ。ぼくは、きみの味方だよ', '環境的ストレス', 10, 100),
@@ -67,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `check_questions` (
   `questions1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `questions_category` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- テーブル e5.check_questions: ~0 rows (約) のデータをダンプしています
 
@@ -89,12 +92,43 @@ CREATE TABLE IF NOT EXISTS `check_results` (
   `created_at` datetime NOT NULL,
   `stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`check_results_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- テーブル e5.check_results: ~1 rows (約) のデータをダンプしています
+-- テーブル e5.check_results: ~33 rows (約) のデータをダンプしています
 REPLACE INTO `check_results` (`userid`, `check_results_id`, `stress_score`, `question1`, `question2`, `question3`, `question4`, `question5`, `question6`, `question7`, `question8`, `question9`, `question10`, `created_at`, `stress_factor`) VALUES
-	(11, 3, 38, 1, 1, 1, 1, 2, 2, 1, 4, 4, 2, '2025-06-20 13:40:18', '生活的ストレス'),
-	(14, 4, 50, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, '2025-06-22 13:00:00', '身体的ストレス');
+	(1, 3, 38, 1, 1, 1, 1, 2, 2, 1, 4, 4, 2, '2025-06-20 13:40:18', '生活的ストレス'),
+	(1, 4, 50, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, '2025-06-22 13:00:00', '身体的ストレス'),
+	(1, 5, 48, 4, 4, 1, 1, 1, 2, 2, 3, 3, 3, '2025-06-23 17:49:11', '環境的ストレス'),
+	(1, 6, 74, 4, 4, 4, 5, 5, 5, 4, 2, 2, 2, '2025-06-24 10:07:50', '身体的ストレス'),
+	(1, 7, 70, 5, 4, 4, 4, 4, 4, 4, 2, 2, 2, '2025-06-19 10:34:35', '環境的ストレス'),
+	(1, 8, 70, 5, 4, 4, 4, 4, 4, 4, 2, 2, 2, '2025-06-21 14:09:59', '環境的ストレス'),
+	(1, 9, 74, 4, 4, 4, 5, 5, 5, 4, 2, 2, 2, '2025-06-18 14:14:25', '身体的ストレス'),
+	(1, 10, 44, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, '2025-06-04 09:59:07', '生活的ストレス'),
+	(1, 11, 44, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, '2025-06-05 09:59:36', '生活的ストレス'),
+	(1, 12, 62, 2, 1, 2, 5, 4, 3, 2, 5, 4, 3, '2025-06-03 10:01:24', '身体的ストレス'),
+	(1, 13, 50, 3, 3, 3, 2, 2, 2, 1, 4, 3, 2, '2025-06-06 10:01:46', '環境的ストレス'),
+	(1, 14, 52, 4, 4, 3, 1, 1, 1, 3, 4, 3, 2, '2025-06-07 10:02:17', '環境的ストレス'),
+	(1, 15, 74, 4, 4, 4, 3, 1, 3, 3, 5, 5, 5, '2025-06-08 10:02:36', '生活的ストレス'),
+	(1, 16, 60, 3, 3, 3, 3, 3, 5, 3, 4, 1, 2, '2025-06-09 10:03:11', '身体的ストレス'),
+	(1, 17, 48, 2, 2, 2, 2, 3, 2, 3, 2, 3, 3, '2025-06-01 10:03:44', '生活的ストレス'),
+	(1, 18, 20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2025-06-10 10:04:14', '身体的ストレス'),
+	(1, 19, 38, 1, 2, 2, 3, 1, 3, 2, 2, 1, 2, '2025-06-11 10:07:15', '身体的ストレス'),
+	(1, 20, 50, 3, 3, 4, 3, 2, 3, 2, 2, 1, 2, '2025-06-12 10:07:31', '環境的ストレス'),
+	(1, 21, 58, 3, 3, 4, 3, 2, 3, 2, 3, 4, 2, '2025-06-13 10:07:41', '環境的ストレス'),
+	(1, 22, 66, 3, 3, 4, 3, 3, 4, 4, 3, 4, 2, '2025-06-14 10:07:53', '身体的ストレス'),
+	(1, 23, 68, 3, 3, 2, 3, 5, 5, 4, 3, 4, 2, '2025-06-15 10:08:26', '身体的ストレス'),
+	(1, 24, 68, 4, 4, 1, 2, 5, 5, 4, 3, 4, 2, '2025-06-16 10:08:37', '身体的ストレス'),
+	(1, 25, 66, 5, 5, 3, 4, 3, 2, 4, 3, 2, 2, '2025-06-17 10:08:54', '環境的ストレス'),
+	(1, 26, 100, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, '2025-05-29 10:14:18', '身体的ストレス'),
+	(1, 27, 86, 5, 5, 5, 4, 3, 3, 3, 5, 5, 5, '2025-05-31 10:15:03', '環境的ストレス'),
+	(1, 28, 70, 2, 3, 2, 4, 3, 3, 3, 5, 5, 5, '2025-05-25 10:15:11', '生活的ストレス'),
+	(1, 29, 92, 5, 5, 5, 4, 4, 4, 4, 5, 5, 5, '2025-05-26 10:20:00', '環境的ストレス'),
+	(1, 30, 96, 5, 5, 5, 4, 5, 5, 4, 5, 5, 5, '2025-05-28 10:20:12', '環境的ストレス'),
+	(1, 31, 94, 5, 4, 4, 4, 5, 5, 5, 5, 5, 5, '2025-05-27 10:20:27', '生活的ストレス'),
+	(1, 32, 60, 3, 3, 3, 3, 4, 4, 2, 3, 2, 3, '2025-05-30 10:26:44', '身体的ストレス'),
+	(1, 33, 54, 2, 4, 2, 4, 2, 4, 1, 3, 2, 3, '2025-06-02 10:27:08', '身体的ストレス'),
+	(1, 34, 68, 4, 4, 4, 3, 4, 3, 4, 3, 3, 2, '2025-06-25 10:30:57', '環境的ストレス'),
+	(1, 35, 70, 5, 4, 3, 2, 3, 2, 4, 2, 5, 5, '2025-05-24 10:31:35', '環境的ストレス');
 
 --  テーブル e5.login_bonus_history の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `login_bonus_history` (
@@ -104,22 +138,22 @@ CREATE TABLE IF NOT EXISTS `login_bonus_history` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_user_date` (`user_id`,`bonus_date`),
   CONSTRAINT `fk_login_bonus_history_userid` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- テーブル e5.login_bonus_history: ~1 rows (約) のデータをダンプしています
 REPLACE INTO `login_bonus_history` (`id`, `user_id`, `bonus_date`) VALUES
-	(1, 11, '2025-06-20');
+	(1, 1, '2025-06-20');
 
 --  テーブル e5.login_rewards の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `login_rewards` (
   `userid` int NOT NULL,
   `login_date` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- テーブル e5.login_rewards: ~1 rows (約) のデータをダンプしています
 REPLACE INTO `login_rewards` (`userid`, `login_date`) VALUES
-	(11, 1);
+	(1, 1);
 
 --  テーブル e5.one_month_trends の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `one_month_trends` (
@@ -127,9 +161,9 @@ CREATE TABLE IF NOT EXISTS `one_month_trends` (
   `omt` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `omt_stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`omt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- テーブル e5.one_month_trends: ~0 rows (約) のデータをダンプしています
+-- テーブル e5.one_month_trends: ~30 rows (約) のデータをダンプしています
 REPLACE INTO `one_month_trends` (`omt_id`, `omt`, `omt_stress_factor`) VALUES
 	(1, '今月は、ずっと走り続けてきたような日々でしたね。', '環境的ストレス'),
 	(2, '責任や期待を背負いながら、よく耐えてきました。 ', '環境的ストレス'),
@@ -169,9 +203,9 @@ CREATE TABLE IF NOT EXISTS `one_week_trends` (
   `owt_comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `owt_stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`owt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- テーブル e5.one_week_trends: ~0 rows (約) のデータをダンプしています
+-- テーブル e5.one_week_trends: ~30 rows (約) のデータをダンプしています
 REPLACE INTO `one_week_trends` (`owt_id`, `owt`, `owt_comments`, `owt_stress_factor`) VALUES
 	(1, '仕事量に追われ、自分を見失いかけているようです。', '優先順位をつけ、「今すぐでなくてもいい仕事」を明確にしましょう。', '環境的ストレス'),
 	(2, 'ペースを乱され、焦りが溜まっているようです。', '1日の中で「マイペース時間（10分でも）」を確保してみましょう。', '環境的ストレス'),
@@ -209,9 +243,9 @@ CREATE TABLE IF NOT EXISTS `pet_comments` (
   `pet_comments_id` int NOT NULL AUTO_INCREMENT,
   `pet_comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`pet_comments_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- テーブル e5.pet_comments: ~0 rows (約) のデータをダンプしています
+-- テーブル e5.pet_comments: ~10 rows (約) のデータをダンプしています
 REPLACE INTO `pet_comments` (`pet_comments_id`, `pet_comments`) VALUES
 	(1, 'えらいね！ '),
 	(2, 'ゆっくりいこ〜 '),
@@ -236,24 +270,34 @@ CREATE TABLE IF NOT EXISTS `useritems` (
   `petitems7` int NOT NULL DEFAULT '0',
   `petitems8` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- テーブル e5.useritems: ~0 rows (約) のデータをダンプしています
+-- テーブル e5.useritems: ~6 rows (約) のデータをダンプしています
 REPLACE INTO `useritems` (`userid`, `petitems1`, `petitems2`, `petitems3`, `petitems4`, `petitems5`, `petitems6`, `petitems7`, `petitems8`) VALUES
 	(13, 0, 0, 0, 0, 0, 0, 0, 0),
-	(14, 0, 0, 0, 0, 0, 0, 0, 0);
+	(14, 0, 0, 0, 0, 0, 0, 0, 0),
+	(15, 0, 0, 0, 0, 0, 0, 0, 0),
+	(16, 0, 0, 0, 0, 0, 0, 0, 0),
+	(17, 0, 0, 0, 0, 0, 0, 0, 0),
+	(18, 0, 0, 0, 0, 0, 0, 0, 0);
 
 --  テーブル e5.users の構造をダンプしています
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` text,
+  `username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
 
--- テーブル e5.users: ~9 rows (約) のデータをダンプしています
+-- テーブル e5.users: ~4 rows (約) のデータをダンプしています
 REPLACE INTO `users` (`id`, `username`, `password`) VALUES
 	(1, 'dojouser1', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
-	(11, 'dojouser2', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
-	(12, 'dojouser3', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
-	(14, 'e5test', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14');
+	(2, 'dojouser2', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
+	(3, 'dojouser3', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
+	(4, 'e5test', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14');
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
