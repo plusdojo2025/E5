@@ -44,14 +44,15 @@ window.addEventListener("DOMContentLoaded", function () {
         if (!img) return;
 
         const isMobile = window.innerWidth <= 400;
-
-        if (isMobile) {
-            img.src = isMobile ? hukidashi_SP : hukidashi_PC;
-        }
+        img.src = isMobile ? hukidashi_SP : hukidashi_PC;
     }
-
+    
+     // 初回表示時にも呼び出す
+    updatehukidashiImage();
+	 
+	 // 画面サイズ変化時にも適用
     window.addEventListener("resize", () => {
         // resizeで毎回正しく反映されるように、少し遅延させる
-        setTimeout(updatehukidashiImage, 100);
+        setTimeout(updatehukidashiImage, 50);
     });
 });

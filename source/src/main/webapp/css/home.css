@@ -155,7 +155,7 @@ main {
 /* スマホ用のサイズ調整 */
 @media screen and (max-width: 400px) {
   main {
-  min-height: 0;
+    min-height: 0;
   }
 	
   h1 {
@@ -200,31 +200,35 @@ main {
     width: 210px;
     max-height: 120px;
     height: 100px;
-        
   }
 
+  /* キャラクター画像の修正 */
   .character img {
     display: block;
+    position: absolute;
     top: 262px;
-    left: 173px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 200px;
     max-width: 200px;
     height: auto;
+    z-index: 101;
   }
   
-  /* キャラクターの影 */
+  /* キャラクターの影の修正 */
   .character_shadow{
-	width: 130px;
-        height: 69px;
-        border-radius: 100px / 50px;
-        position: absolute;
-        top: 405px;
-        left: 31.9%;
-        background: radial-gradient(ellipse at center, 
-        	rgba(128, 128, 128, 0.5) 31%, 
-        	rgba(128, 128, 128, 0.16) 75%, 
-        	rgba(128, 128, 128, 0) 100%
-        );
+    width: 130px;
+    height: 69px;
+    border-radius: 100px / 50px;
+    position: absolute;
+    top: 405px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, 
+      rgba(128, 128, 128, 0.5) 31%, 
+      rgba(128, 128, 128, 0.16) 75%, 
+      rgba(128, 128, 128, 0) 100%
+    );
   }
 
   .items_waku {
@@ -233,5 +237,36 @@ main {
     transform: none;
     overflow: hidden;
   }
- 
+}
+
+/* タブレット用の追加調整（401px〜768px） */
+@media screen and (min-width: 401px) and (max-width: 768px) {
+  .haikei {
+    width: 90%;
+    max-width: 600px;
+    height: 500px;
+  }
+
+  .home_comment img {
+    width: 400px;
+    max-width: 80%;
+    left: 10%;
+  }
+
+  .home_comment div {
+    font-size: 24px;
+    left: 15%;
+    max-width: 70%;
+  }
+
+  .character img {
+    width: 250px;
+    top: 260px;
+  }
+
+  .character_shadow {
+    width: 160px;
+    height: 80px;
+    top: 420px;
+  }
 }
