@@ -40,7 +40,6 @@ main {
 }
 /* ヘッダー&フッター（ユーザー登録画面） */
 .header {
-    height: 100px;
     background-color: #f2acac;
 }
 .footer {
@@ -202,10 +201,6 @@ main {
     text-align: center;
   }
 
-  /*.footer {
-    padding: 8px;
-    font-size: 14px;
-  }*/
   
   .footer {
 	padding: 10px;
@@ -254,5 +249,32 @@ main {
   #errorMessage, #error-area {
     font-size: 13px;
     padding-left:10px;
+  }
+}
+@media screen and (min-width: 401px) and (max-width: 768px) {
+  #register {
+    width: 90%;
+    border-radius: 15px;
+  }
+
+  main {
+    padding: 20vw 5vw;
+  }
+
+  .title,
+  .logo,
+  .name_img {
+    position: static;
+    text-align: center;
+  }
+
+  .logo {
+    width: 20vw;
+    min-width: 40px;
+    max-width: 80px;
+  }
+
+  .name_img {
+    width: 200px;
   }
 }
