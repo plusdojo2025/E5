@@ -19,7 +19,9 @@ h1 {
   }
 
   #logo {
-    height: 70px;
+    height: 65px;
+    left: -28px;
+    top: 5px;
   }
 }
 

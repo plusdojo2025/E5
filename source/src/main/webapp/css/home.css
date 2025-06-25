@@ -10,7 +10,8 @@ html, body {
 
 main {
   width: 100%;
-  max-width: 1521px;
+  /*max-width: 1521px;*/
+  min-height: calc(100vh - 130px);
   padding: 1px;
   margin: 0;
   box-sizing: border-box;
@@ -19,7 +20,7 @@ main {
 
 .container {
   max-width: 100%;
-  padding: 0 16px;
+  /*padding: 0 16px;*/
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -40,6 +41,7 @@ main {
   height:70%;
   background-color: #e7dda957;
   z-index: 100;
+  border-bottom: 2px solid #e7dda9;
 }
 
 /* キャラクターの吹き出し */
@@ -137,6 +139,10 @@ main {
 
 /* スマホ用のサイズ調整 */
 @media screen and (max-width: 400px) {
+  main {
+  min-height: 0;
+  }
+	
   h1 {
     font-size: 24px;
   }

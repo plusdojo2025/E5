@@ -31,7 +31,7 @@ document.getElementById("registerForm").addEventListener("submit", function(even
     }
 
     // passwordの英数混合チェック（8文字以上24文字以内）
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+[\]{}|;:,.<>?`~\\-]{8,24}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d!@#$%&*_\.\?\-]{8,24}$/;
     if (password !== "" && !passwordRegex.test(password)) {
       messages.push("※passwordは英数字混合で8文字以上24文字以内で入力してください。");
     }

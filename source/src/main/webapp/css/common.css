@@ -5,6 +5,7 @@ html,body {
     padding: 0;
     background: rgba(231, 208, 169, 0.01);
     color: #2f514f;
+    
 }
 main {
 	background: rgba(231, 208, 169, 0.065);
@@ -27,6 +28,7 @@ footer {
     background-color: #9fdfec;
     text-align: center;
 }
+
 #brand {
   display: flex;
   flex-wrap: nowrap;       /* 折り返さない */
@@ -34,6 +36,11 @@ footer {
   gap: 10px;               /* ロゴとタイトルの間にスペース */
   /* flex-shrink: 1; /* 幅が狭くても潰れすぎない */
 }
+
+#brand a {
+	color: #f2acac;
+}
+
 h1 {
   margin: auto;
   font-size: 35px;
@@ -43,37 +50,39 @@ h1 {
 #logo {
   position: relative;
   margin-right: 10px;
-  max-width: 92px;
+  max-width: 78px;
   height: auto;
-  left: -21px;
-  top: 4px;
+  left: -17px;
+  top: 7px;
 }
 
 .name_img.noLogin {
   	position: relative;
-    top: -7px;
     width: 260px;
 }
 
 @media screen and (max-width: 400px) {
-  #h1 {
-    font-size: 20px;
-  }
+    #h1 {
+      font-size: 20px;
+    }
 
-header {
-    height: 70px;
-    width: 100%;
-    background-color: #f2acac;
-    padding: 10px;
-    display: flex;          /* 追加：flexで横並びに */
-    align-items: center;    /* 追加：縦方向中央揃え */
-    /* flex-wrap: wrap; /* 画面幅が足りないとき折り返し */ 
+	header {
+	    height: 70px;
+	    width: 100%;
+	    background-color: #f2acac;
+	    padding: 10px;
+	    display: flex;          /* 追加：flexで横並びに */
+	    align-items: center;    /* 追加：縦方向中央揃え */
+	    /* flex-wrap: wrap; /* 画面幅が足りないとき折り返し */ 
+		}
+		
+	.name_img.noLogin {
+	    top: -9px;
+	    width: 157px;
+	    right: 8px;
+	}
 }
-  #logo {
-    max-width: 78px;
-    left: -15px;
-  }
-}
+
 /*アプリ名画像*/
   .name_img{
 	width:200px;
@@ -110,8 +119,9 @@ header {
 }
 
 #menu{
-    cursor: default;
+    cursor: pointer;
     font-size: 22px;
+    padding: 10px 5px;
 }
 .menu_box_close{
     display:flex;
@@ -141,6 +151,7 @@ header {
   text-align: center;
   cursor:default;
 }
+
 .menu_box_list_items_link:hover {
   background: #eee;
 }
