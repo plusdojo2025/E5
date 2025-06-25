@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ストレッシュ</title>
-  <link rel="stylesheet" href="<c:url value='/css/check_results.css' />"  />
   <link rel="stylesheet" href="<c:url value='/css/common.css' />"  />
+  <link rel="stylesheet" href="<c:url value='/css/check_results.css' />"  />
   <script src="<c:url value='/js/check_results.js' />"></script>
 </head>
 
@@ -183,7 +183,7 @@
         <div class="tab-content content3">
             <h1 class="check_results">${startofmonth}～${endofmonth}の記録</h1>
 			
-            <dl class="bar-chart-2">	
+            <dl class="bar-chart-1">	
             	<c:choose>
             		  <c:when test="${empty onemonthresult}">
 					  <p>チェック結果がありません。</p>
@@ -191,12 +191,12 @@
 					  <c:otherwise>
 		    		<c:forEach var="item2" items="${onemonthresult}">
 					    <!-- データ表示 -->
-				    <div>
+				    <div class="bar-item">
 				        <dt class="bar-date">${item2.formattedDate}</dt>
 				        <div class="bar-graph-container">
 				        <dd class="bar-graph" style="width: ${item2.stress_score}%">${item2.stress_score}</dd>
 				        </div>
-				        <dt id="bar-score2">${item2.stress_score}</dt>
+				        <dt id="bar-score">${item2.stress_score}</dt>
 				    </div>
 					</c:forEach>
     			</c:otherwise>
@@ -208,7 +208,7 @@
 			    <c:otherwise>
 		            <div class="month_comments">
 						<p class="month_item">月の傾向</p>
-						<p class="month_comment">${onemonthcomments.omt}</p>
+						<p class="month_comment">・${onemonthcomments.omt}</p>
 					</div>
 			    </c:otherwise>
 			</c:choose>

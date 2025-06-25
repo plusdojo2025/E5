@@ -200,13 +200,21 @@ h2 {
 .bar-graph {
   height: 35px;
   background-color: #7cdedc;
-  margin: 0 10px;
+  margin: 0px;
   flex-grow: 1;
   transition: width 0.3s;
 }
-
+.bar-graph-container{
+    flex-grow: 1;
+    width: 100%;
+    height: 30px;
+    border-radius: 3px;
+    overflow: hidden;
+}
 .bar-item {
-	
+  max-width: 100%;
+  margin-bottom: 10px;
+  
 }
 .bar-score {
   flex-grow: 1;
@@ -240,12 +248,10 @@ h2 {
 }
 
 .bar-chart-1 dt {
-
+	margin-left: 10px;
 }
 
 .bar-chart-1 dd {
-    margin: 0;
-    padding-right: 15px;
     border-radius: 3px;
     background-color: #2589d0;
     color: #fff;
@@ -253,6 +259,7 @@ h2 {
     line-height: 30px;
     text-align: right;
     white-space: nowrap;
+    padding-right: 15px;
     animation: anima-bar-chart-1 1.2s ease;
 }
 .home {
@@ -579,7 +586,7 @@ h2 {
   display: flex;
   align-items: center;
   max-width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .bar-graph {
   height: 10px;
@@ -589,7 +596,7 @@ h2 {
 .bar-graph-container{
     flex-grow: 1;
     width: 100%;
-    height: 20px;
+    height: 10px;
     margin-top:1px;
     margin: 0 8px;
     border-radius: 3px;
@@ -627,18 +634,19 @@ h2 {
 }
 
 .bar-chart-1 dt {
-
+	margin-left: 0px;
+	font-size:12px;
 }
 
 
 .bar-chart-1 dd {
     margin: 0;
-    padding-right: 0px;
+    padding-right: 5px;
     border-radius: 3px;
     background-color: #2589d0;
     color: #fff;
     font-weight: 600;
-    line-height: 30px;
+    line-height: 10px;
     text-align: right;
     white-space: nowrap;
     font-size: 10px;
@@ -706,32 +714,32 @@ h2 {
     animation: anima-bar-chart-1 1.2s ease;
 }
 .week_comments {
-	font-size: 20px;
+	font-size: 15px;
 	border-radius: 20px;
 	border: 2px solid black;
 	background-color: white;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .week_item {
-	margin-left:20px;
-	font-size:23px;
+	margin-left:10px;
+	font-size:15px;
 }
 .week_comment {
-	margin-left:20px;
+	margin-left:10px;
 }
 .month_comments {
-	font-size: 20px;
+	font-size: 15px;
 	border-radius: 20px;
 	border: 2px solid black;
 	background-color: white;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .month_item {
-	margin-left:20px;
-	font-size:23px;
+	margin-left:10px;
+	font-size:15px;
 }
 .month_comment {
-	margin-left:20px;
+	margin-left:10px;
 }
 /* 月結果の棒グラフ 
 .labels div,
@@ -762,7 +770,7 @@ footer {
     /* width: 100%; */
     padding: 0px;
     padding-top:10px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     background-color: #9fdfec;
     text-align: center;
 }
@@ -771,6 +779,8 @@ header {
     /* width: 100%; */
     background-color: #f2acac;
     padding: 0px;
+    padding-top:10px;
+    padding-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
