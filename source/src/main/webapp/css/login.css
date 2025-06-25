@@ -16,7 +16,6 @@ main {
 	flex: 1;
 }
 .title {
-    padding: 0 0 25px 0;
     color: #2f514f;
     display: flex;
     justify-content: center;
