@@ -15,18 +15,23 @@ main {
 	flex: 1;
 }
 .title {
-    padding: 0 0 25px 0;
-    color:#2f514f;
-   	display: flex; 
-	justify-content: center;
-	align-items: center;
-	gap: 16px; /* ロゴとテキストの間のスペース */
-  	flex-wrap: nowrap; /* はみ出す場合に折り返さずスクロールするか、スマホ用で調整する */
+        padding: 0 0 25px 0;
+    color: #2f514f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 16px; */
+    flex-wrap: nowrap;
+    position: relative;
+    left: 5px;
+
 }
 .logo {
 	width: 100px;
-	height: auto;
-	object-fit: contain;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    left: -17px;
 }
 /* ヘッダー&フッター（ログイン画面） */
 .header {
@@ -145,7 +150,7 @@ main {
 	font-size: 14px;
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 400px) {
   main {
     padding: 20px;
     padding-top: 60px;
@@ -169,12 +174,16 @@ main {
   }
 
   .logo {
-    width: 20vw; /* 画面幅の20%に比例させる */
+    width: 20vw;
     min-width: 40px;
     max-width: 80px;
+    position: relative;
+    left: -10px;
   }
     .name_img{
-	width:200px;
+	width: 200px;
+    position: relative;
+    left: 10px;
 }
   .title-text {
     font-size: 5vw; /* 画面幅に応じて文字サイズを可変に */

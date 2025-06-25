@@ -84,6 +84,21 @@ main {
   z-index: 101;
 }
 
+/* キャラクターの影 */
+.character_shadow{
+	width: 188px;
+    height: 89px;
+    border-radius: 100px / 50px;
+    position: absolute;
+    top: 464px;
+    left: 40.08%;
+    background: radial-gradient(ellipse at center, 
+    	rgba(128, 128, 128, 0.5) 31%, 
+    	rgba(128, 128, 128, 0.16) 75%, 
+    	rgba(128, 128, 128, 0) 100%
+    );
+}
+
 /* アイテムメニューの枠 */
 .items_waku {
   position: relative;
@@ -170,10 +185,10 @@ main {
 
   .home_comment img {
     top: 78px;
-    left: 40px;
-    width: 270px;
-    max-width: 270px;
-    height: 194px;
+    left: 34px;
+    width: 285px;
+    max-width: 285px;
+    height: 204px;
     background-color: transparent;
   }
 
@@ -195,6 +210,21 @@ main {
     width: 200px;
     max-width: 200px;
     height: auto;
+  }
+  
+  /* キャラクターの影 */
+  .character_shadow{
+	width: 130px;
+        height: 69px;
+        border-radius: 100px / 50px;
+        position: absolute;
+        top: 405px;
+        left: 31.9%;
+        background: radial-gradient(ellipse at center, 
+        	rgba(128, 128, 128, 0.5) 31%, 
+        	rgba(128, 128, 128, 0.16) 75%, 
+        	rgba(128, 128, 128, 0) 100%
+        );
   }
 
   .items_waku {

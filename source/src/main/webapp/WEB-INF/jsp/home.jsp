@@ -102,7 +102,7 @@
 			<!-- 背景の壁 -->
 			<div class="haikei_kabe">
 			</div>
-		
+			<!-- キャラクターの画像 -->
 			<div class="character">
 				<img src="<c:url value='/images/happy_character_c.gif'/>" alt="ハッピーなキャラ">
 				<%--<c:choose>
@@ -117,6 +117,8 @@
 					</c:otherwise>
 				</c:choose>--%>
 			</div>
+			<!-- キャラクターの影 -->
+			<div class="character_shadow"></div>
 
         
 	        <div id="confirmModal" class="modal">

@@ -5,7 +5,7 @@ html,body {
     padding: 0;
     background: rgba(231, 208, 169, 0.01);
     color: #2f514f;
-    
+    overflow-y: scroll;
 }
 main {
 	background: rgba(231, 208, 169, 0.065);
