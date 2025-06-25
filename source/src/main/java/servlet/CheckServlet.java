@@ -101,7 +101,7 @@ public class CheckServlet extends HttpServlet {
 				stress_Factor
 		);
 //		crDao.check_insert(resultData); // 成功・失敗に関係なく進む
-		boolean result = crDao.check_insert(resultData);
+		boolean result = crDao.check_insertOrUpdate(resultData);
 //		System.out.println("check_insert result: " + result);
 		if (result) {
 			//ストレスチェック結果ページ用Servletにリダイレクトする
