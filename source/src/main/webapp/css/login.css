@@ -145,7 +145,7 @@ main {
 	font-size: 14px;
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 400px) {
   main {
     padding: 20px;
     padding-top: 60px;
