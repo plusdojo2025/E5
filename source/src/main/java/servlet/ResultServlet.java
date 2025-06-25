@@ -219,9 +219,9 @@ public class ResultServlet extends HttpServlet {
 			request.setAttribute("score2", newscore2);
 			request.setAttribute("score3", newscore3);
 			
-			String comment1 = ("環境的ストレス　" + getEvaluationComment(newscore3));
-			String comment2 = ("生活的ストレス　" + getEvaluationComment(newscore2));
-			String comment3 = ("身体的ストレス　" + getEvaluationComment(newscore1));
+			String comment1 = ("環境的ストレス　" + getEvaluationComment(newscore1));
+			String comment2 = ("身体的ストレス　" + getEvaluationComment(newscore2));
+			String comment3 = ("生活的ストレス　" + getEvaluationComment(newscore3));
 
 			request.setAttribute("comment1", comment1);
 			request.setAttribute("comment2", comment2);

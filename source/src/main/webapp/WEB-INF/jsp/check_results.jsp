@@ -86,11 +86,11 @@
         	<h1 class="check_results">ストレスチェック結果 ${onedayresult[0].stress_score}点</h1>
         	<div class="radar-container">
 				<div class="label-column">
-	        	    <label>${comment1}</label>
-	    	        <label>${comment2}</label>
-		            <label>${comment3}</label>
+	        	    <label>${comment3}</label>
+	    	        <label>${comment1}</label>
+		            <label>${comment2}</label>
 				</div>
-		    	<div class="radar-chart-1">
+		    	<div class="radar-chart-1" >
 			    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
 			        <g stroke="#dce5eb">
 			            <path d="M 100 100 L 100.0 0.0"/>
@@ -113,17 +113,17 @@
 			    </svg>
 			    
 			    <dl>
-			        <div>
-			            <dt>環境的ストレス</dt>
+			        <div class="stress1">
+			            <dt>生活的ストレス</dt>
 			            <dd><%= request.getAttribute("score3")%></dd>
 			        </div>
-			        <div>
+			        <div class="stress2">
 			            <dt>身体的ストレス</dt>
-			            <dd><%= request.getAttribute("score1")%></dd>
-			        </div>
-			        <div>
-			            <dt>生活的ストレス</dt>
 			            <dd><%= request.getAttribute("score2")%></dd>
+			        </div>
+			        <div class="stress3">
+			            <dt>環境的ストレス</dt>
+			            <dd><%= request.getAttribute("score1")%></dd>
 			        </div>
 			    </dl>
 			</div>
@@ -139,7 +139,7 @@
 			
 			</c:otherwise>
 			</c:choose>
-			<a class="home" href="/E5/HomeServlet">ホーム</a>
+			<a class="home" href="<c:url value='/HomeServlet'/>">ホーム</a>
         </div>
 		<!-- 週の結果 -->
         <div class="tab-content content2">
@@ -177,7 +177,7 @@
 					</div>
 			    </c:otherwise>
 			</c:choose>
-			<a class="home" href="/E5/HomeServlet">ホーム</a>
+			<a class="home" href="<c:url value='/HomeServlet'/>">ホーム</a>
         </div>
 		<!-- 月の結果 -->
         <div class="tab-content content3">
@@ -213,7 +213,7 @@
 			    </c:otherwise>
 			</c:choose>
 
-			<a class="home" href="<c:url value='/HomeServlet' />">ホーム</a>
+			<a class="home" href="<c:url value='/HomeServlet'/>">ホーム</a>
         </div>
 
     </div>
