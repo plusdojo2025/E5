@@ -2,12 +2,13 @@
 
 html, body {
     margin: 0 0 0 0; /* ページ全体の四隅のスペースをなくす */
-    
     height: 100%;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 main {
 	background: rgba(231, 208, 169, 0.1);
@@ -15,7 +16,7 @@ main {
 	flex: 1;
 }
 .title {
-        padding: 0 0 25px 0;
+    padding: 0 0 25px 0;
     color: #2f514f;
     display: flex;
     justify-content: center;
@@ -33,6 +34,7 @@ main {
     position: relative;
     left: -17px;
 }
+
 /* ヘッダー&フッター（ログイン画面） */
 .header {
     height: 100px;

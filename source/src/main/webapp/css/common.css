@@ -6,6 +6,7 @@ html,body {
     background: rgba(231, 208, 169, 0.01);
     color: #2f514f;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 main {
 	background: rgba(231, 208, 169, 0.065);
