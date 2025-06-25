@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `check_comments` (
   `min_score` int NOT NULL,
   `max_score` int NOT NULL,
   PRIMARY KEY (`comments_advice_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.check_comments: ~30 rows (約) のデータをダンプしています
 REPLACE INTO `check_comments` (`comments_advice_id`, `comments`, `advice`, `pet_check_comments`, `trends`, `min_score`, `max_score`) VALUES
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `check_questions` (
   `questions1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `questions_category` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.check_questions: ~0 rows (約) のデータをダンプしています
 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `check_results` (
   `created_at` datetime NOT NULL,
   `stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`check_results_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.check_results: ~33 rows (約) のデータをダンプしています
 REPLACE INTO `check_results` (`userid`, `check_results_id`, `stress_score`, `question1`, `question2`, `question3`, `question4`, `question5`, `question6`, `question7`, `question8`, `question9`, `question10`, `created_at`, `stress_factor`) VALUES
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `login_bonus_history` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_user_date` (`user_id`,`bonus_date`),
   CONSTRAINT `fk_login_bonus_history_userid` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.login_bonus_history: ~1 rows (約) のデータをダンプしています
 REPLACE INTO `login_bonus_history` (`id`, `user_id`, `bonus_date`) VALUES
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `login_rewards` (
   `userid` int NOT NULL,
   `login_date` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.login_rewards: ~1 rows (約) のデータをダンプしています
 REPLACE INTO `login_rewards` (`userid`, `login_date`) VALUES
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `one_month_trends` (
   `omt` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `omt_stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`omt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.one_month_trends: ~30 rows (約) のデータをダンプしています
 REPLACE INTO `one_month_trends` (`omt_id`, `omt`, `omt_stress_factor`) VALUES
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `one_week_trends` (
   `owt_comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `owt_stress_factor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`owt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.one_week_trends: ~30 rows (約) のデータをダンプしています
 REPLACE INTO `one_week_trends` (`owt_id`, `owt`, `owt_comments`, `owt_stress_factor`) VALUES
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `pet_comments` (
   `pet_comments_id` int NOT NULL AUTO_INCREMENT,
   `pet_comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`pet_comments_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.pet_comments: ~10 rows (約) のデータをダンプしています
 REPLACE INTO `pet_comments` (`pet_comments_id`, `pet_comments`) VALUES
@@ -270,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `useritems` (
   `petitems7` int NOT NULL DEFAULT '0',
   `petitems8` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- テーブル e5.useritems: ~6 rows (約) のデータをダンプしています
 REPLACE INTO `useritems` (`userid`, `petitems1`, `petitems2`, `petitems3`, `petitems4`, `petitems5`, `petitems6`, `petitems7`, `petitems8`) VALUES
@@ -295,9 +295,3 @@ REPLACE INTO `users` (`id`, `username`, `password`) VALUES
 	(2, 'dojouser2', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
 	(3, 'dojouser3', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14'),
 	(4, 'e5test', '5d1a82dba8cefa593f1f9ad97bf98050816e147543ce31f3ca5b15ac3905ca14');
-
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
