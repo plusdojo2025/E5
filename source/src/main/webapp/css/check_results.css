@@ -564,17 +564,17 @@ h2 {
 	background-color: #9fdfec;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 150px;
+	width: 100px;
 	border-radius: 10px;
-	height: 40px;
-	font-size: 23px;
+	height: 30px;
+	font-size: 15px;
 	text-align: center;
 }
 
 .check_ca {
-	font-size: 20px;
-	margin-top: 13px;
-	margin-bottom: 13px;
+	font-size: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .bar-chart-1 {
