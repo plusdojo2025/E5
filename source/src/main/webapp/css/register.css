@@ -6,6 +6,8 @@ html, body {
     padding: 0;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 body {
@@ -20,21 +22,24 @@ main {
 }
 .title {
     padding: 0 0 25px 0;
-    color:#2f514f;
-   	display: flex; 
-	justify-content: center;
-	align-items: center;
-	gap: 16px; /* ロゴとテキストの間のスペース */
-  	flex-wrap: nowrap; /* はみ出す場合に折り返さずスクロールするか、スマホ用で調整する */
+    color: #2f514f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 16px; */
+    flex-wrap: nowrap;
+    position: relative;
+    left: 5px;
 }
 .logo {
 	width: 100px;
-	height: auto;
-	object-fit: contain;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    left: -17px;
 }
 /* ヘッダー&フッター（ユーザー登録画面） */
 .header {
-    height: 100px;
     background-color: #f2acac;
 }
 .footer {
@@ -178,13 +183,17 @@ main {
   }
 
   .logo {
-    width: 20vw; /* 画面幅の20%に比例させる */
+    width: 20vw;
     min-width: 40px;
     max-width: 80px;
+    position: relative;
+    left: -10px;
   }
   
   .name_img{
-	width:200px;
+	width: 200px;
+    position: relative;
+    left: 10px;
 }
   .title-text {
     font-size: 5vw; /* 画面幅に応じて文字サイズを可変に */
@@ -192,10 +201,6 @@ main {
     text-align: center;
   }
 
-  /*.footer {
-    padding: 8px;
-    font-size: 14px;
-  }*/
   
   .footer {
 	padding: 10px;
@@ -244,5 +249,32 @@ main {
   #errorMessage, #error-area {
     font-size: 13px;
     padding-left:10px;
+  }
+}
+@media screen and (min-width: 401px) and (max-width: 768px) {
+  #register {
+    width: 90%;
+    border-radius: 15px;
+  }
+
+  main {
+    padding: 20vw 5vw;
+  }
+
+  .title,
+  .logo,
+  .name_img {
+    position: static;
+    text-align: center;
+  }
+
+  .logo {
+    width: 20vw;
+    min-width: 40px;
+    max-width: 80px;
+  }
+
+  .name_img {
+    width: 200px;
   }
 }
