@@ -170,9 +170,12 @@ public class Check_ResultsDao {
 	
 	
 	
-	public boolean check_insert(Check_Results card) {
+	public boolean check_insertOrUpdate(Check_Results card) {
 		Connection conn = null;
 		boolean result = false;
+		
+		PreparedStatement pstmt = null;
+	    ResultSet rs = null;
 		
 		try {
 			// JDBCドライバを読み込む
@@ -182,34 +185,77 @@ public class Check_ResultsDao {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e5?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
-
-			// SQL文を準備する
-			String sql =  "INSERT INTO check_results (userid, stress_score, question1, question2, question3, question4, "
-			        + "question5, question6, question7, question8, question9, question10, created_at, stress_factor) "
-			        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			pStmt.setInt(1, card.getUserid());
-	        pStmt.setInt(2, card.getStress_score());
-	        pStmt.setInt(3, card.getQuestion1());
-	        pStmt.setInt(4, card.getQuestion2());
-	        pStmt.setInt(5, card.getQuestion3());
-	        pStmt.setInt(6, card.getQuestion4());
-	        pStmt.setInt(7, card.getQuestion5());
-	        pStmt.setInt(8, card.getQuestion6());
-	        pStmt.setInt(9, card.getQuestion7());
-	        pStmt.setInt(10, card.getQuestion8());
-	        pStmt.setInt(11, card.getQuestion9());
-	        pStmt.setInt(12, card.getQuestion10());
-	        pStmt.setString(13, card.getStress_factor());
-			
-//			// SELECT文を実行し、結果表を取得する
-//			ResultSet rs = pStmt.executeQuery();
+			// まず今日のデータが存在するかを確認
+	        String checkSql = "SELECT check_results_id FROM check_results "
+	        		+ "WHERE userid = ? AND DATE(created_at) = CURDATE()";
+	        pstmt = conn.prepareStatement(checkSql);
+	        pstmt.setInt(1, card.getUserid());
+	        rs = pstmt.executeQuery();
+	        
+	        if (rs.next()) {
+	        	// 既存のIDを取得
+	        	int existingId = rs.getInt("check_results_id");
+	        	
+	        	// SQL文を準備する
+				String sql =  "UPDATE check_results SET "
+						+ "stress_score = ?, question1 = ?, question2 = ?, question3 = ?, question4 = ?, "
+						+ "question5 = ?, question6 = ?, question7 = ?, question8 = ?, question9 = ?, question10 = ?, "
+						+ "stress_factor = ?, created_at = NOW() "
+						+ "WHERE check_results_id = ?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				pStmt.setInt(1, card.getStress_score());
+				pStmt.setInt(2, card.getQuestion1());
+				pStmt.setInt(3, card.getQuestion2());
+				pStmt.setInt(4, card.getQuestion3());
+				pStmt.setInt(5, card.getQuestion4());
+				pStmt.setInt(6, card.getQuestion5());
+				pStmt.setInt(7, card.getQuestion6());
+				pStmt.setInt(8, card.getQuestion7());
+				pStmt.setInt(9, card.getQuestion8());
+				pStmt.setInt(10, card.getQuestion9());
+				pStmt.setInt(11, card.getQuestion10());
+				pStmt.setString(12, card.getStress_factor());
+				pStmt.setInt(13, existingId); // ★これが必要（WHERE条件のID）
+				
+//				// SELECT文を実行し、結果表を取得する
+//				ResultSet rs = pStmt.executeQuery();
 
-			// 結果表をコレクションにコピーする
-	        if (pStmt.executeUpdate() == 1) {
-	            result = true;
+				// 結果表をコレクションにコピーする
+		        if (pStmt.executeUpdate() == 1) {
+		            result = true;
+		        }
+	        } else {
+	        	// SQL文を準備する
+				String sql =  "INSERT INTO check_results (userid, stress_score, question1, question2, question3, question4, "
+				        + "question5, question6, question7, question8, question9, question10, created_at, stress_factor) "
+				        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				pStmt.setInt(1, card.getUserid());
+		        pStmt.setInt(2, card.getStress_score());
+		        pStmt.setInt(3, card.getQuestion1());
+		        pStmt.setInt(4, card.getQuestion2());
+		        pStmt.setInt(5, card.getQuestion3());
+		        pStmt.setInt(6, card.getQuestion4());
+		        pStmt.setInt(7, card.getQuestion5());
+		        pStmt.setInt(8, card.getQuestion6());
+		        pStmt.setInt(9, card.getQuestion7());
+		        pStmt.setInt(10, card.getQuestion8());
+		        pStmt.setInt(11, card.getQuestion9());
+		        pStmt.setInt(12, card.getQuestion10());
+		        pStmt.setString(13, card.getStress_factor());
+				
+//				// SELECT文を実行し、結果表を取得する
+//				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする
+		        if (pStmt.executeUpdate() == 1) {
+		            result = true;
+		        }
 	        }
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
