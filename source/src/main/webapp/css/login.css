@@ -15,12 +15,11 @@ main {
 	flex: 1;
 }
 .title {
-        padding: 0 0 25px 0;
+	padding:10px;
     color: #2f514f;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* gap: 16px; */
     flex-wrap: nowrap;
     position: relative;
     left: 5px;
@@ -35,7 +34,6 @@ main {
 }
 /* ヘッダー&フッター（ログイン画面） */
 .header {
-    height: 100px;
     background-color: #f2acac;
 }
 .footer {
@@ -191,15 +189,6 @@ main {
     text-align: center;
   }
 
- /*.header {
-    height: 70px;
-  }
-
-  .footer {
-    padding: 8px;
-    font-size: 14px;
-  }*/
-
   #login {
     width: 90%;
     padding: 5% 0;
@@ -240,5 +229,33 @@ main {
   #error-message, #error-area {
     font-size: 13px;
     padding-left:10px;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 768px) {
+  #login {
+    width: 90%;
+    border-radius: 15px;
+  }
+
+  main {
+    padding: 20vw 5vw;
+  }
+
+  .title,
+  .logo,
+  .name_img {
+    position: static;
+    text-align: center;
+  }
+
+  .logo {
+    width: 20vw;
+    min-width: 40px;
+    max-width: 80px;
+  }
+
+  .name_img {
+    width: 200px;
   }
 }
