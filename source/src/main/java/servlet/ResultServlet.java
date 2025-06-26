@@ -67,7 +67,7 @@ public class ResultServlet extends HttpServlet {
                 score = currentScore;
             }
 
-            double ratio = (score-3.0) / (15-3);  // scoreが3〜15の範囲を想定
+            double ratio = (score-0.0) / (15-0);  // scoreが3〜15の範囲を想定
             double angle = angleStep * i - Math.PI / 2;
             double x = centerX + radius * ratio * Math.cos(angle);
             double y = centerY + radius * ratio * Math.sin(angle);
