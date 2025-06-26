@@ -787,8 +787,8 @@ h2 {
     white-space: nowrap;
     animation: anima-bar-chart-1 1.2s ease;
 } */
-footer {
-    /* width: 100%; */
+/*footer {
+    width: 100%;
     padding: 0px;
     padding-top:10px;
     padding-bottom: 30px;
@@ -797,7 +797,7 @@ footer {
 }
 header {
     height: 70px;
-    /* width: 100%; */
+     width: 100%;
     background-color: #f2acac;
     padding: 0px;
     padding-top:10px;
@@ -805,7 +805,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
+}*/
 @keyframes anima-bar-chart-2 {
     from {
         width: 0;

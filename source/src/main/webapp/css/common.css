@@ -62,28 +62,6 @@ h1 {
     width: 260px;
 }
 
-@media screen and (max-width: 400px) {
-    #h1 {
-      font-size: 20px;
-    }
-
-	header {
-	    height: 70px;
-	    width: 100%;
-	    background-color: #f2acac;
-	    padding: 10px;
-	    display: flex;          /* 追加：flexで横並びに */
-	    align-items: center;    /* 追加：縦方向中央揃え */
-	    /* flex-wrap: wrap; /* 画面幅が足りないとき折り返し */ 
-		}
-		
-	.name_img.noLogin {
-	    top: -9px;
-	    width: 157px;
-	    right: 8px;
-	}
-}
-
 /*アプリ名画像*/
   .name_img{
 	width:200px;
@@ -156,7 +134,75 @@ h1 {
 .menu_box_list_items_link:hover {
   background: #eee;
 }
+@media screen and (max-width: 400px) {
+    #h1 {
+      font-size: 20px;
+    }
 
+	header {
+	    height: 70px;
+	    width: 100%;
+	    background-color: #f2acac;
+	    padding: 10px;
+	    display: flex;          /* 追加：flexで横並びに */
+	    align-items: center;    /* 追加：縦方向中央揃え */
+	    /* flex-wrap: wrap; /* 画面幅が足りないとき折り返し */ 
+	}
+
+	.name_img.noLogin {
+	    top: -9px;
+	    width: 157px;
+	    right: 8px;
+	}
+}
+@media screen and (min-width: 401px) and (max-width: 768px) {
+  header {
+    height: 70px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f2acac;
+  }
+
+  #logo {
+    max-width: 60px;
+    top: 5px;
+    left: -10px;
+  }
+
+  .name_img {
+    width: 200px;
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+
+  .name_img.noLogin {
+    width: 200px;
+    top: 0;
+    right: 0;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  #menu {
+    font-size: 18px;
+    padding: 8px;
+  }
+
+  .menu_boxWrap {
+    width: 260px;
+  }
+
+  .menu_box_list_items_link {
+    padding: 20px;
+    font-size: 16px;
+  }
+}
 @media screen and (max-width: 844px) {
 
  footer {

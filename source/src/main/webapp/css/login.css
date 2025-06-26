@@ -16,7 +16,8 @@ main {
 	flex: 1;
 }
 .title {
-    padding: 0 0 25px 0;
+
+    padding: 10px;
     color: #2f514f;
     display: flex;
     justify-content: center;
@@ -162,11 +163,8 @@ main {
     font-size: 18px;
     text-align: center;
     gap: 5px;
-    
     height: 70px;
     background-color: #f2acac;
-    padding: 10px;
-    padding-top:15px;
     display: flex;          /* 追加：flexで横並びに */
     align-items: center;    /* 追加：縦方向中央揃え */
     justify-content: center; /* タイトル、ロゴ中央寄せ */
