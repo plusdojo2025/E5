@@ -73,17 +73,19 @@
 	        </div>
             <div class="tab-group_right">
            		<input class="calender_input" type="date" name="day">
-           		<input class="calender_button" type="submit" class="period_change" name="submit" value="期間変更">
+           		<input class="calender_button" type="submit" class="period_change" name="submit" value="変更">
            	</div>
         </div>
 		<!-- 選択された期間の内容を個別に表示する。 -->
         <div class="tab-content content1">
         <c:choose>
           <c:when test="${noData}">
+          <h1 class="check_results">${select_day}の結果</h1>
 		  <p>チェック結果がありません。</p>
 		  </c:when>
 		  <c:otherwise>
-        	<h1 class="check_results">ストレスチェック結果 ${onedayresult[0].stress_score}点</h1>
+        	<h1 class="check_results">${select_day}の結果 ${onedayresult[0].stress_score}点</h1>
+        	
         	<div class="radar-container">
 				<div class="label-column">
 	        	    <label>${comment3}</label>

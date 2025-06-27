@@ -139,7 +139,8 @@ public class ResultServlet extends HttpServlet {
 		        e.printStackTrace(); // ログにも出す
 		    }
 		}
-		
+		System.out.println(day + "god");
+		request.setAttribute("select_day", day);
         // 指定日の週の月曜日（週の開始）と日曜日（週の終了）を求める
         LocalDate startofweek = day.with(DayOfWeek.MONDAY);
         LocalDate endofweek = day.with(DayOfWeek.SUNDAY);
